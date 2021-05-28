@@ -1,4 +1,4 @@
-Team Expectations Agreement
+Team Contract
 
 Methods of communication (email, phone, messenger, text, ...)
     - Discord (main)
