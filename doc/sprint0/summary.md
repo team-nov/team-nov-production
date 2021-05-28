@@ -33,12 +33,12 @@ Thirty-five year-old Jackson is a founder of a respected corporation in the spor
 
 
 
-*   Joanna wants to meet other entrepreneurs and wants to communicate on a daily basis with her mentor.
-*   Joanna wants to apply her knowledge with exercises and assignments and receive feedback.
-*   Joanna wants to promote her startup.
-*   Onyankopon wants to share his experience with new mentees through virtual learning
-*   Onyankopon wants to quickly provide information on new opportunities to his students.
-*   Jackson wants to find out more about emerging startups so that he can make a more informed investment.
+*   Joanna has just thought of a new idea for her startup as she wakes up and gets out of bed. She wants to quickly meet other entrepreneurs to discuss her new ideas along with her mentor so that they can guide her in the right direction through video conferencing.
+*   Joanna has a business idea and is searching for workshops or courses to learn the specific steps and processes of how to turn this into a successful startup.
+*   Joanna has finished her e-learning courses and needs a way to apply her learning with exercises and assignments that will give her feedback on what to improve on.
+*   Onyankopon has given some thought to a question asked by a mentee after class, and has arrived at an answer. He needs a way to quickly and easily communicate with them individually.
+*   Onyankopon has an announcement that he needs to make to his students, so he would like to have a method of communication to deliver it to them.
+*   Jackson is searching for an under-represented but aspiring group of entrepreneurs whose startups he wants to invest in. He wants an easy way to discover these startups and get in touch with their founders.
 
 **Part 4: The Key Principles**
 
