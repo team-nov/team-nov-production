@@ -1,12 +1,9 @@
-[The Magical Short-Form Creative Brief — UX Articles by UIE](https://articles.uie.com/short_form_creative_brief/)
 
-[https://cmsweb.utsc.utoronto.ca/cscc01s21/project/AfricanImpactChallenge.pdf](https://cmsweb.utsc.utoronto.ca/cscc01s21/project/AfricanImpactChallenge.pdf)
-
-**Part 1: The Project Objective—**
+**Part 1: The Project Objective**
 
 Build a user-friendly e-learning web-app to assist startups during the incubation phase. Our app will include key virtual classroom features such as video conferencing tools, calendars, and discussion boards. In addition, users will also have quick access to any new information and guidance.
 
-Part 2: The Key Personas
+**Part 2: The Key Personas**
 
 **Person 1:**
 
@@ -32,7 +29,7 @@ Age: 35
 
 Thirty-five year-old Jackson is a founder of a respected corporation in the sports entertainment industry. He is passionate about applying his learning of building successful organizations, and willing to invest his capital and share his experiences with others. He loves to stay productive, and helping other people achieve their best performance. He is an avid sports fan as well and watches a variety of sports such as basketball and soccer.
 
-**Part 3: The Key Scenarios— **
+**Part 3: The Key Scenarios**
 
 
 
@@ -43,7 +40,7 @@ Thirty-five year-old Jackson is a founder of a respected corporation in the spor
 *   Onyankopon wants to quickly provide information on new opportunities to his students.
 *   Jackson wants to find out more about emerging startups so that he can make a more informed investment.
 
-**Part 4: The Key Principles—**
+**Part 4: The Key Principles**
 
 Key Principle: Simple user interface/experience over performance - The application should provide an easy-to-navigate interface for all users even if it incurs a hit to performance
 
