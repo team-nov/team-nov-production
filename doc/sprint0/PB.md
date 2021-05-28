@@ -20,10 +20,11 @@
 5. As a registered user, I want to be able to share my company information so that I can promote it.
     *   Company information page is connected to founder’s profile
     *   founders can edit can customize the information they show 
-6. As a Mentee, I want to be able to view all the workshops
-    *   A mentee is able to sign up for a workshop
-7. As a registered user, I want to be able to talk live with other users.
-    *   A user can click a button and join a video call with other users.
+6. As a Mentee, I want to be able to view all the workshops I have signed up for in one place so that I can manage my time.
+    *   A Mentee is able to sign up for workshops and click a button to view all the workshops they have signed up for in one place.
+7. As a registered user, I want to be able to conduct a video call with other users so that I can have face-to-face conversations with other users.
+    *  A registered user can click a button and join a video call with other users.
+    *  They can specify with which user they want to join the video call.
 8. As a Mentee, I want to be able to ask and respond to questions regarding workshop content so that I can attain the clarification necessary to my learning
     *   Create an associated discussion forum when a workshop is created
     *   Allow students/mentees to post questions and replies
