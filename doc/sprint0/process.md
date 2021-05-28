@@ -1,3 +1,9 @@
+Roles:\
+Product owner: Efosa\
+Developers: Colin, Jahin, Shammo, Mitravasu, Ka Fai, Brandon, Simon\
+Testers: Ka Fai, Mitravasu, Simon\
+Scrum Master: TA
+
 Our team has two main communication channels, Discord (our primary one) and email (the secondary). On discord, we have four text channels: general, pull-requests, bugs, and due-dates. The purpose of the channels is to keep our team informed and facilitate communication within the team. We will be using Github for source control and Jira for project management.
 
 We used Figma to design our UI. Currently, the team meets every 2 days online through Discord. In these meetings we discuss work related to the sprint, such as what was done, blocks encountered, and tasks to be worked on next. Team members can bring up issues such as task dependencies and development blocks. 
