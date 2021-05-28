@@ -33,7 +33,7 @@
 9. As a mentee, I want a calendar so that I can keep track of workshops and events .
     *   Users will be able to view their personal calendar that records the lectures and events scheduled for them
     *   Users can customize their calendars by adding/removing events or reminders
-10. As a Mentee, I want to be able to see my feedback to track my progress.
+10. As a Mentee, I want to be able to see my feedback so that I can track my progress.
     *   Users can access their deliverables and it will display their feedback in details
 11. As a Mentor, I want to talk about my experiences so that I can guide aspiring entrepreneurs.
     *   Be able to display text on a post that aspiring entrepreneurs can view
