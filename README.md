@@ -1,10 +1,23 @@
 
 ## Installation
 
+To start frontend
+
 ```
+cd frontend
 npm install
 npm start
 ```
+starts on `http://localhost:3000/`
+
+To start backend
+```
+cd backend
+npm install
+npm start
+```
+starts on `http://localhost:5000/`
+
 
 ## Motivation
 Our objective is to build a user-friendly e-learning web-app to assist startups during the incubation phase. Our app will include key virtual classroom features such as video conferencing tools, calendars, and discussion boards. In addition, users will also have quick access to any new information and guidance.
