@@ -17,5 +17,5 @@ Please make sure to test your code thoroughly before merging.
 
 Please follow git flow practices for branching.
 
-Name feature branches using the feature name and hotfixes prefixed with "Hotfix"
+Name feature branches using the feature name and hotfixes prefixed with "Hotfix". 
 
