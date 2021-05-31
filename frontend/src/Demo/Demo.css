@@ -1,3 +1,12 @@
 /* Each component should have its own css file with the name as the component
    Note Css Styles of parent will apply to their child componentss
 */
+.users{
+   margin-top:2em;
+}
+.user{
+   display: inline-block;
+   margin-right: 1em;
+   border: 1px #000 solid;
+
+}

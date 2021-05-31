@@ -18,6 +18,8 @@ npm start
 ```
 starts on `http://localhost:5000/`
 
+You must have both fronend and backend running for the app to work
+
 
 ## Motivation
 Our objective is to build a user-friendly e-learning web-app to assist startups during the incubation phase. Our app will include key virtual classroom features such as video conferencing tools, calendars, and discussion boards. In addition, users will also have quick access to any new information and guidance.
