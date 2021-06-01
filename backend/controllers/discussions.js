@@ -16,7 +16,8 @@ exports.postDiscussions = (req,res,next) => {
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         picture: req.body.picture,
-        message: req.body.message
+        message: req.body.message,
+        postTime: new Date(Date.now)
     });
 
     user
