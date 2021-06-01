@@ -1,6 +1,7 @@
 // imports
 const express = require('express');
 const usersRoute = require('./routes/users');
+const discussionsRoute = require('./routes/discussions');
 const mongoose = require('mongoose');
 
 // create express app
@@ -10,7 +11,7 @@ const app = express();
 mongoose.connect(
     // change it back to mongodb+srv://teamnov:teamnov@manage.wwmlv.mongodb.net/TeamNov?retryWrites=true&w=majority
     // before you merge to develop
-    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovColin?retryWrites=true&w=majority',
+    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovJahin?retryWrites=true&w=majority',
     {useNewUrlParser:true, useUnifiedTopology:true})
     .then((res)=>{
         console.log("db Connected")
@@ -39,6 +40,10 @@ app.use((req,res,next) =>{
 
 // use usersRoute on '/api/users'
 app.use('/api/users',usersRoute);
+
+// use discussionsRoute on '/api/discussions'
+app.use('/api/discussions', discussionsRoute);
+
 // listen on PORT or 5000
 const port = process.env.PORT || 5000
 app.listen(port, console.log("server running on port "+port));
