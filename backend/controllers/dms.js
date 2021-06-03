@@ -14,8 +14,8 @@ exports.getDms = (req,res,next) => {
         })
 }
 
-exports.getDmsById = (req,res,next) => {
-    let id = req.params.dmId;
+exports.getDmById = (req,res,next) => {
+    const id = req.params.dmId;
     DM
         .findOne({_id:id})
         .populate('members','name')
@@ -27,7 +27,7 @@ exports.getDmsById = (req,res,next) => {
         })
 }
 
-exports.postDms = (req,res,next) => {
+exports.postDm = (req,res,next) => {
     const messages = req.body.messages.map((msg)=>{
         return new Message({
             _id: new mongoose.Types.ObjectId(),
@@ -51,6 +51,100 @@ exports.postDms = (req,res,next) => {
             })
         })
         .catch(err=>{
+            console.log(err);
+            res.status(500).json({
+                error:err
+            })
+        });
+}
+
+exports.patchDm = (req,res,next)=>{
+    // only used to modify dm props like memebers not messages
+    // req.body should have all the updated values
+    // like members:[userId1, userId2 ..]
+
+    // extract id from url
+    const id = req.params.dmId
+
+    DM
+        .updateOne({_id: id},{$set:req.body})
+        .exec()
+        .then(result=>{
+            res.status(200).json({
+                message:"Updated dm with id: "+id,
+                result:result
+
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error:err
+            })
+        });
+}
+
+exports.postDmMessage = (req,res,next)=>{
+    const id = req.body.dmId;
+
+    const msg = new Message({
+        _id: new mongoose.Types.ObjectId(),
+        from:req.body.from,
+        message:req.body.message
+    })
+
+    DM
+        .updateOne({_id: id},{$push:{messages:msg}})
+        .exec()
+        .then(result=>{
+            res.status(201).json({
+                message:"Added message to dm with id: "+id,
+                msg:msg
+
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error:err
+            })
+        });
+
+}
+
+
+exports.deleteDmMessage = (req,res,next)=>{
+    const dmId = req.body.dmId;
+    const messageId = req.body.messageId
+
+    DM
+        .updateOne({_id: dmId},{$pull: {messages: {_id: messageId} }})
+        .exec()
+        .then(result=>{
+            res.status(201).json({
+                message:"Deleted message with id "+messageId+" from dm with id: "+dmId,
+                itemsModified:result.nModified
+
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error:err
+            })
+        });
+
+ }
+
+exports.deleteDm = (req,res,next)=>{
+    const id = req.body.dmId;
+    DM
+        .remove({_id:id})
+        .exec()
+        .then(result =>{
+            res.status(200).json({
+                message:"Successfully Deleted Dm with id "+id,
+                itemsModified :result.deletedCount
+            });
+        })
+        .catch(err => {
             console.log(err);
             res.status(500).json({
                 error:err
