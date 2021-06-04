@@ -17,10 +17,9 @@ exports.postDiscussions = (req,res,next) => {
         name: req.body.name,
         picture: req.body.picture,
         message: req.body.message,
-        postTime: new Date(Date.now)
     });
 
-    user
+    discussion
         .save()
         .then((result)=>{
             console.log(result)

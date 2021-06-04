@@ -13,6 +13,24 @@ class UserPost extends Component{
         db:[]
     }
 
+    componentDidMount(){
+        this.showPosts()
+
+
+        // axios get request
+        axios.get('https://randomuser.me/api/').then(
+            (res)=>{
+                let user = res.data.results[0]
+                console.log(user.picture.large)
+                this.setState({
+                    name:user.name.first,
+                    picture:user.picture.large,
+                    message:'Hey my name is ' + user.name.first
+                })
+            }
+        )
+    }
+
     getFirstPerson=()=>{
         axios.get('http://localhost:5000/api/users').then(
             (res)=>{
@@ -30,29 +48,39 @@ class UserPost extends Component{
         this.setState({message:e.target.value});
     }
 
+    showPosts=()=>{
+        axios.get('http://localhost:5000/api/discussions')
+            .then(res=>this.setState({db:res.data}))
+    }
+
     addPost=()=>{
         axios.post('http://localhost:5000/api/discussions', {
             name: this.state.name,
-            message: this.state.messsage,
+            picture: this.state.picture,
+            message: this.state.message
             })
-            .then(res=> alert("Added a post"))
-        }
+            .then(()=> {
+                alert("Added a post")
+                this.showPosts();
+            })
+    }
+    
     
 
 
     render(){
         let dbPosts = this.state.db.map((post, index)=> {
             return <div className="post" key="index">
-                <p>Name: {post.name}</p>
-                <p>Message: {post.message}</p>
+                <p>{post.name}: {post.message}</p>
+                <img src = {post.picture}></img>
             </div>
         })
 
         return(
             <div className="UserPost">
-                <button onClick={this.getFirstPerson}>Get First Person</button>
                 <input type="text" onChange={(e)=>this.onInputChange(e)} value={this.state.message}></input>
                 <button onClick={this.addPost}>Add Post</button>
+                <button onClick={this.showPosts}>Show Posts</button>
                 <div className="posts">{dbPosts}</div>
 
 
