@@ -10,14 +10,6 @@ exports.getCommentsForDiscussion = (req,res,next) => {
     .then((data)=>{
         res.status(200).json(data)
     })
-    
-    // axios.get('/comments', {
-    //     params: {
-    //         discussionId: req.body.discussionId
-    //     }
-    // }).then(function (data) {
-    //     res.status(200).json(data)
-    // })
 }
 
 exports.postCommentForDiscussion = (req,res,next) => {
@@ -47,44 +39,5 @@ exports.postCommentForDiscussion = (req,res,next) => {
                 error:err
             })
         });
-
-    // const filter = { _id: req.body.discussionId };
-    // const update = {  }
-
-    // axios.post('/comments', {
-    //     userName: req.body.userName,
-    //     userPicture: req.body.userPicture,
-    //     userId: req.body.userId,
-    //     message: req.body.message,
-    //     postTime: new Date(Date.now()),
-    //     replies: []
-    // })
-    // .then(function (result) {
-    //     console.log(result)
-    //     res.status(201).json({
-    //         message_return:"Successfully added comment",
-    // })})
-    // .catch(function (err) {
-    //     console.log(err);
-    //     res.status(500).json({
-    //         error: err
-    //     })
-    // });
-
-    // axios.patch(`/discussions/${req.body.discussionId}`, {
-    //     comments: comments.push(req.body._id)
-    // })
-    // .then(function (result2) {
-    //     console.log(result2) 
-    //     res.status(201).json({
-    //         message_return: "Successfully posted comment",
-    //     })
-    // })
-    // .catch(function (err) {
-    //     console.log(err);
-    //     res.status(500).json({
-    //         error: err
-    //     })
-    // });
     
 }
