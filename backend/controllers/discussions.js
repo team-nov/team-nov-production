@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Discussion = require('../models/discussions');
+const Discussion = require('../models/discussion.model');
 
 exports.getDiscussions = (req,res,next) => {
     Discussion
@@ -14,9 +14,11 @@ exports.getDiscussions = (req,res,next) => {
 exports.postDiscussions = (req,res,next) => {
     const discussion = new Discussion({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        picture: req.body.picture,
+        userName: req.body.userName,
+        userPicture: req.body.userPicture,
         message: req.body.message,
+        userId: req.body.userId,
+        postTime: new Date(),
     });
 
     discussion

@@ -1,0 +1,90 @@
+const { default: axios } = require('axios');
+const mongoose = require('mongoose');
+const Comment = require('../models/comment.model');
+//const { getDiscussions } = require('./discussions');
+
+exports.getCommentsForDiscussion = (req,res,next) => {
+    Comment
+    .findById(mongoose.Types.ObjectId(req.body.commentId))   //NOT WHAT IT SHOULD DO, BUT JUST MESSING AROUND
+    .exec()
+    .then((data)=>{
+        res.status(200).json(data)
+    })
+    
+    // axios.get('/comments', {
+    //     params: {
+    //         discussionId: req.body.discussionId
+    //     }
+    // }).then(function (data) {
+    //     res.status(200).json(data)
+    // })
+}
+
+exports.postCommentForDiscussion = (req,res,next) => {
+    const comment = new Comment({
+        _id: new mongoose.Types.ObjectId(),
+        // commentId: req.body.commentId,
+        userName: req.body.userName,
+        userPicture: req.body.userPicture,
+        userId: req.body.userId,
+        discussionId: mongoose.Types.ObjectId(req.body.discussionId),
+        message: req.body.message,
+        postTime: new Date(),
+    });
+
+    comment
+        .save()
+        .then((result)=>{
+            console.log(result)
+            res.status(201).json({
+                message_return:"Successfully added comment",
+                comment: comment
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(500).json({
+                error:err
+            })
+        });
+
+    // const filter = { _id: req.body.discussionId };
+    // const update = {  }
+
+    // axios.post('/comments', {
+    //     userName: req.body.userName,
+    //     userPicture: req.body.userPicture,
+    //     userId: req.body.userId,
+    //     message: req.body.message,
+    //     postTime: new Date(Date.now()),
+    //     replies: []
+    // })
+    // .then(function (result) {
+    //     console.log(result)
+    //     res.status(201).json({
+    //         message_return:"Successfully added comment",
+    // })})
+    // .catch(function (err) {
+    //     console.log(err);
+    //     res.status(500).json({
+    //         error: err
+    //     })
+    // });
+
+    // axios.patch(`/discussions/${req.body.discussionId}`, {
+    //     comments: comments.push(req.body._id)
+    // })
+    // .then(function (result2) {
+    //     console.log(result2) 
+    //     res.status(201).json({
+    //         message_return: "Successfully posted comment",
+    //     })
+    // })
+    // .catch(function (err) {
+    //     console.log(err);
+    //     res.status(500).json({
+    //         error: err
+    //     })
+    // });
+    
+}
