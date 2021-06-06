@@ -11,6 +11,16 @@ exports.getUsers = (req,res,next) => {
         })
 }
 
+exports.getUserById = (req,res,next) => {
+    let id = req.params.userId
+    User
+        .findOne({_id:id})
+        .exec()
+        .then((data)=>{
+            res.status(200).json(data)
+        })
+}
+
 exports.postUsers = (req,res,next) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),

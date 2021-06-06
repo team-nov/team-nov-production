@@ -32,7 +32,8 @@ exports.postDm = (req,res,next) => {
         return new Message({
             _id: new mongoose.Types.ObjectId(),
             from:msg.from,
-            message:msg.message
+            message:msg.message,
+            date:Date.now()
         })
     })
     const dm = new DM({
@@ -89,7 +90,8 @@ exports.postDmMessage = (req,res,next)=>{
     const msg = new Message({
         _id: new mongoose.Types.ObjectId(),
         from:req.body.from,
-        message:req.body.message
+        message:req.body.message,
+        date:Date.now()
     })
 
     DM

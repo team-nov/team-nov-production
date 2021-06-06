@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const messageSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     from:{type:mongoose.Schema.Types.ObjectId, ref:'User', required:true},
-    message:{type:String, required:true}
+    message:{type:String, required:true},
+    date:{type:Date, required:true}
 })
 exports.Message =mongoose.model('Message',messageSchema)
 
