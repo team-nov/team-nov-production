@@ -1,7 +1,7 @@
 // imports
 const express = require('express');
-const usersRoute = require('./routes/users');
-const dmsRoute = require('./routes/dms');
+const usersRoute = require('./routes/user_routes');
+const dmsRoute = require('./routes/dm_routes');
 const mongoose = require('mongoose');
 const http = require('http');
 const dmSockets = require('./dmSockets/dmSockets')

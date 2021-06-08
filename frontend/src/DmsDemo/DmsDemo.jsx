@@ -1,88 +1,208 @@
-import React,{Component} from 'react';
-import {io} from 'socket.io-client'
+import React, { Component } from 'react';
+import { io } from 'socket.io-client'
+import axios from 'axios'
 import './DmsDemo.css'
+import { dateParser } from '../utils/DateParser'
 
+// connect to backend socket
 let socket = io("localhost:5000");
-        
-// import axios from 'axios'
-// see demo for how to use axios
 
-// class names must start with Capital letter
-class DmsDemo extends Component{
-    state={
-        message : '',
-        userId:'',
-        dmId:'',
-        user1:'',
-        user2:'',
-        liveMessages:[]
-
+class DmsDemo extends Component {
+    messagesEndRef = React.createRef()
+    state = {
+        message: '',
+        userId: '',
+        toId: '',
+        toMessage: '',
+        profilePic: '',
+        name: '',
+        dmId: '',
+        recipient: '',
+        messages: [],
+        dms: [],
+        showNewDM: false
     }
-    componentDidMount(){
-        socket.on('serverMessage',message=>{
-            let liveMessagesCopy = [...this.state.liveMessages]
-            liveMessagesCopy.push(message)
-            this.setState({liveMessages:liveMessagesCopy})
+
+    componentDidMount() {
+        socket.on('serverMessage', message => {
+            // get messages from server and save in state
+            if (message.dmId === this.state.dmId) {
+                let messagesCopy = [...this.state.messages]
+                messagesCopy.push(message)
+                this.setState({ messages: messagesCopy })
+            }
         })
     }
-    updateInput = (property,e) =>{
+
+    /**
+     * 
+     * @param {string} property The string property to update
+     * @param {Event} e Event object to extract value from
+     */
+    updateInput = (property, e) => {
         let msg = e.target.value;
-        this.setState({[property]:msg})
+        this.setState({ [property]: msg })
+    }
+
+    /**
+     * fetches dms from backend using userId
+     */
+    login = () => {
+        // get user's name
+        axios.get('http://localhost:5000/api/users/' + this.state.userId)
+            .then(res => {
+                this.setState({ name: res.data.name, profilePic: res.data.picture })
+            })
+
+        // get user's dms
+        axios.get('http://localhost:5000/api/dms/byUserId/' + this.state.userId)
+            .then(res => {
+                // want most recent messages on top
+                let reversedDms = res.data.reverse()
+                // init first dmId
+                let dmId = reversedDms[0]._id
+                console.log(dmId)
+                this.setState({ dms: reversedDms, dmId: dmId })
+            })
+            .then(() => {
+                // get old messages
+                this.getOldMessages()
+            })
 
     }
-    createDM= () =>{
-        socket.emit('clientMessage',{
-            members:[this.state.user1,this.state.user2],
+
+    /**
+     * Send message to server via socket
+     */
+    submitMessage = () => {
+        socket.emit('clientMessage', {
+            dmId: this.state.dmId,
+            from: this.state.userId,
+            message: this.state.message
         })
-        // reset input
-        this.setState({user1:'',user2:''})
+    }
+
+    /**
+     * Get mesages saved in the DB for a Dm
+     */
+    getOldMessages = () => {
+        axios.get('http://localhost:5000/api/dms/' + this.state.dmId)
+            .then(res => {
+                console.log(res.data.messages)
+                this.setState({ messages: res.data.messages })
+            })
+    }
+
+    /**
+     * Create a new DM with a user
+     */
+    createDM = () => {
+        axios.post('http://localhost:5000/api/dms/', {
+            members: [this.state.userId, this.state.toId],
+            messages: [{
+                from: this.state.userId,
+                message: this.state.toMessage
+            }]
+        })
+            .then(res => {
+                alert(res.data.message)
+                this.login()
+            })
+    }
+
+    /**
+     * Update dmId with the dm that the user selects
+     * 
+     * @param {string} id id of the selected dm
+     */
+    selectDm = (id) => {
+        console.log(id)
+        this.setState({ dmId: id }, () => this.getOldMessages())
 
     }
-    submitMessage = () =>{
-        socket.emit('clientMessage',{
-            dmId:this.state.dmId,
-            from:this.state.userId,
-            message:this.state.message
-        })
-        // reset input
-        //this.setState({message:'',userId:''})
 
+    /**
+     * Scrolls to bottom of messages
+     */
+    scrollToBottom = () => {
+        this.messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    render(){
-        // must wrap everything in a one div
-        let liveMessages = this.state.liveMessages.map(msg=>{
-            return<div className="message">
-                <p>From: {msg.from}</p>
-                <p>On: {msg.date}</p>
-                <p>Message: {msg.message}</p>
-            </div>
-        })
-        return(
+
+    componentDidUpdate() {
+        // scroll everytime state changes
+        this.scrollToBottom()
+    }
+
+    render() {
+        let messages, dms;
+
+        // only update message and dms when userId is defined
+        if (this.state.userId) {
+            messages = this.state.messages.map((msg, index) => {
+                return <div className="message" key={index}>
+                    <p>From: {msg.from.name}</p>
+                    <p>On: {dateParser(msg.date, 'ddd h:mm a')}</p>
+                    <p>Message: {msg.message}</p>
+                </div>
+            })
+
+            dms = this.state.dms.map(dm => {
+                // filter out recipient
+                let recipient = dm.members.filter(member => member._id !== this.state.userId)
+                recipient = recipient[0];
+
+                // update classname of selected dm
+                let classname = dm._id === this.state.dmId ? "dmItem selectedDm" : "dmItem"
+
+                return <div className={classname} onClick={() => { this.selectDm(dm._id) }} key={dm._id} >
+                    <img src={recipient.picture} alt="dms profile pic" className="dmsProfilePic"></img>
+                    <div className="recipientName">
+                        <p >{recipient.name}</p>
+                    </div>
+                </div>
+            })
+        }
+        return (
             <div>
-                <h4>Create Dm</h4>
-                <p>User1's _id</p>
-                <input onChange={(e)=>this.updateInput('user1',e)} value={this.state.user1}></input>
-                <p>User2's _id</p>
-                <input onChange={(e)=>this.updateInput('user2',e)} value={this.state.user2}></input>
-                <button onClick={this.createDM}>Create DM</button>
-                <hr/>
-            
-                <h4>Send message</h4>
-                <p>Dm's _id</p>
-                <input onChange={(e)=>this.updateInput('dmId',e)} value={this.state.dmId}></input>
-                <p>User's _id</p>
-                <input onChange={(e)=>this.updateInput('userId',e)} value={this.state.userId}></input>
-                <p>Message</p>
-                <input onChange={(e)=>this.updateInput('message',e)} value={this.state.message}></input>
-                <button onClick={this.submitMessage}>Submit Message</button>
-                <hr/>
+                <div className="dmsWelcome">
+                    <div>
+                        <p className="welcomeText">Welcome {this.state.name}!</p>
+                        <img className="profilePic" src={this.state.profilePic} alt="profile pic"></img>
+                    </div>
+                    <label>User's _id </label>
+                    <input onChange={(e) => this.updateInput('userId', e)} value={this.state.userId}></input>
+                    <button onClick={this.login}>login</button>
+                </div>
 
-                <h4>Live Messages</h4>
-                {liveMessages}
+                <div className="dmsSidebar">
+                    <h4>Chats</h4>
+                    {dms}
+                </div>
 
+                <div className="dmsMessages">
+                    {messages}
+                    <div ref={this.messagesEndRef} />
+                </div>
 
-                
+                <p>Dm's _id: {this.state.dmId}</p>
+                <p> User's _id: {this.state.userId}</p>
+                <label>Message: </label>
+                <input onChange={(e) => this.updateInput('message', e)} value={this.state.message}></input>
+                <button onClick={this.submitMessage}> Submit Message</button>
 
+                <br />
+
+                <button onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>New DM</button>
+
+                <div className="newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
+                    <label>TO: (_id) </label>
+                    <input onChange={(e) => this.updateInput('toId', e)} value={this.state.toId}></input>
+                    <label>Message: </label>
+                    <input onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage}></input>
+                    <button onClick={this.createDM}> Submit Message</button>
+                </div>
+
+                <hr />
             </div>
 
         )

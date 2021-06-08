@@ -1,9 +1,9 @@
 const express =require('express');
 const mongoose = require('mongoose');
-const {DM} = require('../models/dm');
-const {Message} = require('../models/dm')
+const {DM,Message} = require('../models/dm_model');
 
 exports.getDms = (req,res,next) => {
+    // populate name fields using users table
     DM
         .find()
         .populate('members','name')
@@ -15,7 +15,9 @@ exports.getDms = (req,res,next) => {
 }
 
 exports.getDmById = (req,res,next) => {
+    // id extracted from url
     const id = req.params.dmId;
+    // populate name fields using users table
     DM
         .findOne({_id:id})
         .populate('members','name')
@@ -27,15 +29,34 @@ exports.getDmById = (req,res,next) => {
         })
 }
 
-exports.postDm = (req,res,next) => {
-    const messages = req.body.messages.map((msg)=>{
-        return new Message({
-            _id: new mongoose.Types.ObjectId(),
-            from:msg.from,
-            message:msg.message,
-            date:Date.now()
+exports.getDmsByUserId = (req,res,next) => {
+    const id = req.params.userId;
+    // populate fields with props from user model
+    DM
+        .find({members:id})
+        .populate('members')
+        .populate({path:'messages',populate:{path:'from',select:'name'}})
+        .exec()
+        .then((data)=>{
+            console.log(data)
+            res.status(200).json(data)
         })
-    })
+}
+
+exports.postDm = (req,res,next) => {
+    let messages
+    if(req.body.messages){
+        messages = req.body.messages.map((msg)=>{
+            return new Message({
+                _id: new mongoose.Types.ObjectId(),
+                from:msg.from,
+                message:msg.message,
+                date:Date.now()
+            })
+        })
+    }
+    else
+        messages=[]
     const dm = new DM({
         _id: new mongoose.Types.ObjectId(),
         members: req.body.members,
@@ -100,7 +121,13 @@ exports.postDmMessage = (req,res,next)=>{
         .then(result=>{
             res.status(201).json({
                 message:"Added message to dm with id: "+id,
-                msg:msg
+                msg:{
+                    _id:msg.id,
+                    from:msg.from,
+                    message:msg.message,
+                    date:msg.date,
+                    dmId:id
+                }
 
             })
         })
