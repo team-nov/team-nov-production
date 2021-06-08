@@ -1,11 +1,11 @@
 const { default: axios } = require('axios');
 const mongoose = require('mongoose');
-const Comment = require('../models/comment.model');
+const Comment = require('../models/comment_model');
 //const { getDiscussions } = require('./discussions');
 
-exports.getCommentsForDiscussion = (req,res,next) => {
+exports.getComments = (req,res,next) => {
     Comment
-    .findById(mongoose.Types.ObjectId(req.body.commentId))   //NOT WHAT IT SHOULD DO, BUT JUST MESSING AROUND
+    .find()   
     .exec()
     .then((data)=>{
         res.status(200).json(data)

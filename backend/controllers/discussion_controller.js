@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Discussion = require('../models/discussion.model');
+const Discussion = require('../models/discussion_model');
 
 exports.getDiscussions = (req,res,next) => {
     Discussion

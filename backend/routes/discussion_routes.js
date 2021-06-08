@@ -3,7 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const discussionsController = require('../controllers/discussions');
+const discussionsController = require('../controllers/discussion_controller');
 
 router.get('/', discussionsController.getDiscussions);
 router.post('/', discussionsController.postDiscussions);

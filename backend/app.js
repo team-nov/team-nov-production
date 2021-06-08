@@ -1,8 +1,8 @@
 // imports
 const express = require('express');
-const usersRoute = require('./routes/users');
-const discussionsRoute = require('./routes/discussions');
-const commentsRoute = require('./routes/comments');
+const usersRoute = require('./routes/user_routes');
+const discussionsRoute = require('./routes/discussion_routes');
+const commentsRoute = require('./routes/comment_routes');
 const mongoose = require('mongoose');
 
 // create express app
