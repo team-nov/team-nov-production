@@ -2,21 +2,24 @@ const express =require('express');
 const mongoose = require('mongoose');
 const User = require('../models/user');
 
-exports.getUsers = (req,res,next) => {
-    User
-        .find()
-        .exec()
-        .then((data)=>{
-            res.status(200).json(data)
-        })
-}
+// exports.getUsers = (req,res,next) => {
+//     User
+//         .find()
+//         .exec()
+//         .then((data)=>{
+//             res.status(200).json(data)
+//         })
+// }
 
 exports.postUsers = (req,res,next) => {
+    console.log("GOT HERE!");
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
-        age: req.body.age,
-        picture: req.body.picture
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+        typeOfUser: req.body.typeOfUser
     });
 
     user
