@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+.ChatHeader {
+  font-family: "Quicksand";
+  color: rgb(29, 29, 29);
+  padding: 10px;
+  margin: 10 auto;
+  display: flex;
+}
+
+.newConversation {
+  margin: 25 auto;
+  background-color: #374237;
+  border: 1px black;
+  color: white;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 12px;
+  transition-duration: 0.4s;
+}
+
+.newConversation:hover {
+  background-color: #a4aaa4;
+  color: black;
+}
