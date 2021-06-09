@@ -15,7 +15,7 @@ class Post extends Component{
       <div className="postContainer">
         <User/>
         <form className="postInput">
-          <textarea className="postTextEntry" rows="4" cols="80" placeholder="Start a Discussion..."></textarea>
+          <textarea className="postTextEntry" rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
           <button className="postButton"> Post </button>
         </form>
       </div>
