@@ -10,11 +10,11 @@ class User extends Component{
 
   render(){
     return (
-      <div className="user">
+      <div className="userContainer">
         <img className="profilePic" src={this.state.picture} alt=""/>
         <span className="userName"> {this.state.username} </span>
       </div>
     )
   }
 }
-export default User;
+export default User
