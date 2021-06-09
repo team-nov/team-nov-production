@@ -6,7 +6,7 @@
   padding: 1em;
   margin: auto;
   min-width: 400px;
-  max-width: 60%;
+  max-width: 50%;
 
   display: flex;
   flex-direction: column;
@@ -19,11 +19,32 @@
   background-color: rgb(243, 243, 243);
 }
 
-.text {
-  width: inherit;
-  margin: 1em 3em 0;
-  float: left;
+.inputContainer {
+  margin-top: 1em;
+  display: flex;
+  align-items: flex-end;
+}
+
+.inputTextEntry {
+  resize: none;
   font-size: 1.2em;
-  text-align: left;
-  word-break: break-word;
+  width: 100%;
+}
+
+.postButton {
+  margin-left: 1em;
+  height: 2em;
+  width: 4em;
+
+  font-size: 1.1em;
+  color: white;
+
+  border-color: crimson;
+  border-radius: 20px;
+  background-color: hotpink;
+}
+
+.postButton:hover {
+  cursor: pointer;
+  background-color: deeppink;
 }

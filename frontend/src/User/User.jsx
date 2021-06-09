@@ -4,7 +4,7 @@ import './User.css'
 
 class User extends Component{
   state = {
-    username: "calvin yuen",
+    name: "calvin yuen",
     picture: "https://picsum.photos/500"
   }
 
@@ -12,7 +12,7 @@ class User extends Component{
     return (
       <div className="userContainer">
         <img className="profilePic" src={this.state.picture} alt=""/>
-        <span className="userName"> {this.state.username} </span>
+        <span className="userName"> {this.state.name} </span>
       </div>
     )
   }

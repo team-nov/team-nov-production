@@ -6,18 +6,14 @@ import User from '../User/User'
 class Post extends Component{
   state = {
     user: null,
-    textInput: "",
-    attachment: null
+    caption: "Hello this is a caption."
   }
 
   render(){
     return (
       <div className="postContainer">
         <User/>
-        <form className="postInput">
-          <textarea className="postTextEntry" rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
-          <button className="postButton"> Post </button>
-        </form>
+        <div className="caption"> {this.state.caption} </div>
       </div>
     )
   }
