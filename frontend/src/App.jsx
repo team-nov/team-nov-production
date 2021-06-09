@@ -2,6 +2,8 @@ import React,{Component} from 'react'
 import './App.css'
 // import demo component
 import DmsDemo from './DmsDemo/DmsDemo'
+import Demo from './Demo/Demo'
+import UserPost from './UserPost/UserPost'
 
 class App extends Component{
   render(){
@@ -9,7 +11,13 @@ class App extends Component{
       <div className="App">
         <h1>This is App.js</h1>
         {/* use Demo component */}
-        <DmsDemo/>
+        {
+          /*
+          comment the frontend out when ur resolving conflicts
+          <DmsDemo/>
+          <UserPost/>
+          */
+        }
       </div>
     )
   }
