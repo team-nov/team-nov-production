@@ -1,6 +1,6 @@
 const express =require('express');
 const mongoose = require('mongoose');
-const User = require('../models/user');
+const User = require('../models/user_model');
 
 // exports.getUsers = (req,res,next) => {
 //     User
