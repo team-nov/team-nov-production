@@ -1,10 +1,20 @@
 const express =require('express');
 const mongoose = require('mongoose');
-const User = require('../models/user');
+const User = require('../models/user_model');
 
 exports.getUsers = (req,res,next) => {
     User
         .find()
+        .exec()
+        .then((data)=>{
+            res.status(200).json(data)
+        })
+}
+
+exports.getUserById = (req,res,next) => {
+    let id = req.params.userId
+    User
+        .findOne({_id:id})
         .exec()
         .then((data)=>{
             res.status(200).json(data)
