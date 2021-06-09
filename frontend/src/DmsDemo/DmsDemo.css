@@ -1,0 +1,48 @@
+.message{
+    border: 1px #000 solid;
+}
+
+.dmItem{
+    border: 1px #000 solid;
+}
+
+.dmsSidebar{
+    float: left;
+    width: 30%;
+    height: 50vh;
+    border: 1px #000 solid;
+}
+.dmsMessages{
+    float: right;
+    width: 69%;
+    height: 50vh;
+    background-color: aqua;
+    border: 1px #000 solid;
+    overflow: scroll;
+}
+.selectedDm{
+    background-color:red;
+}
+.profilePic{
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+
+}
+.welcomeText{
+    display: inline-block;
+}
+.dmsProfilePic{
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    position: relative;
+    top: 0.5em;
+    margin-left: 1em;
+
+}
+.recipientName{
+    width:7em;
+}

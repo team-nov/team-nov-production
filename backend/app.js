@@ -1,12 +1,19 @@
 // imports
 const express = require('express');
 const usersRoute = require('./routes/user_routes');
+const dmsRoute = require('./routes/dm_routes');
 const discussionsRoute = require('./routes/discussion_routes');
 const commentsRoute = require('./routes/comment_routes');
 const mongoose = require('mongoose');
+const http = require('http');
+const dmSockets = require('./dmSockets/dmSockets')
 
 // create express app
 const app = express();
+// socket io
+const server = http.createServer(app);
+dmSockets.io(server)
+
 
 // connect to mongodb
 mongoose.connect(
@@ -20,9 +27,6 @@ mongoose.connect(
     .catch((err)=>{
         console.log("Connection failed! \n", err)
     })
-
-// use json parsers
-app.use(express.json());
 
 // Pass CORS headers
 app.use((req,res,next) =>{
@@ -39,8 +43,12 @@ app.use((req,res,next) =>{
     next();
 })
 
+// use json parsers
+app.use(express.json());
+
 // use usersRoute on '/api/users'
 app.use('/api/users',usersRoute);
+app.use('/api/dms',dmsRoute);
 
 // use discussionsRoute on '/api/discussions'
 app.use('/api/discussions', discussionsRoute);
@@ -50,5 +58,5 @@ app.use('/api/comments', commentsRoute);
 
 // listen on PORT or 5000
 const port = process.env.PORT || 5000
-app.listen(port, console.log("server running on port "+port));
+server.listen(port, console.log("server running on port "+port));
 
