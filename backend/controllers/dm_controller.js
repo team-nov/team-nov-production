@@ -115,6 +115,14 @@ exports.postDmMessage = (req,res,next)=>{
         date:Date.now()
     })
 
+    const validatedModel = msg.validateSync();
+    if (!!validatedModel) {
+        res.status(400).json({
+            error: validatedModel
+        })
+        return;
+    }
+
     DM
         .updateOne({_id: id},{$push:{messages:msg}})
         .exec()

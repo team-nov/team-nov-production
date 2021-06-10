@@ -95,6 +95,14 @@ exports.postComment = (req, res, next) => {
         postTime: new Date(),
     })
 
+    const validatedModel = comment.validateSync();
+    if (!!validatedModel) {
+        res.status(400).json({
+            error: validatedModel
+        })
+        return;
+    }
+
     Video
         .updateOne({_id: videoId},{$push: {comments: comment}})
         .exec()
