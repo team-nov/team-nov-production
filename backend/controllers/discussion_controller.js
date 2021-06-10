@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Discussion = require('../models/discussion_model');
 
 exports.getDiscussions = (req,res,next) => {
-    console.log("we are here");
+    console.log("Getting all discussions");
     Discussion
         .find()
         .exec()
@@ -13,7 +13,7 @@ exports.getDiscussions = (req,res,next) => {
 }
 
 exports.getOneDiscussion = (req, res, next) => {
-    console.log("we are here");
+    console.log("Getting one discussion");
     console.log(req.params.discussionId);
 
     Discussion
