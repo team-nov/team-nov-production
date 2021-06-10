@@ -4,16 +4,18 @@ import './Discussion.css'
 import User from '../User/User'
 
 class Discussion extends Component{
-  state = {
-    user: null,
-    caption: "Hello this is a caption."
-  }
+  /*state = {
+    name: '',
+    picture: "https://picsum.photos/500",
+    caption: 'greaghrae',
+    postTime: null
+  }*/
 
   render(){
     return (
       <div className="discussionContainer">
-        <User/>
-        <div className="caption"> {this.state.caption} </div>
+        <User username={this.props.username} picture={this.props.picture}/>
+        <div className="caption"> {this.props.caption} </div>
       </div>
     )
   }

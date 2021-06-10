@@ -48,3 +48,7 @@
   cursor: pointer;
   background-color: deeppink;
 }
+
+.discussions {
+  flex-direction: column;
+}
