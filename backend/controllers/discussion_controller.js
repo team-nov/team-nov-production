@@ -86,8 +86,6 @@ exports.deleteDiscussion = (req, res, next) => {
 exports.postDiscussions = (req,res,next) => {
     const discussion = new Discussion({
         _id: new mongoose.Types.ObjectId(),
-        userName: req.body.userName,
-        userPicture: req.body.userPicture,
         message: req.body.message,
         userId: req.body.userId,
         postTime: new Date(),
