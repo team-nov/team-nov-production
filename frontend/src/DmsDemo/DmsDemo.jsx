@@ -163,46 +163,38 @@ class DmsDemo extends Component {
             })
         }
         return (
-            <div>
+            <div className='pageDMs'>
                 <div className="dmsWelcome">
                     <div>
-                        <p className="welcomeText">Welcome {this.state.name}!</p>
-                        <img className="profilePic" src={this.state.profilePic} alt="profile pic"></img>
+                        <p className="welcomeText">Welcome {this.state.name}</p>
+                        <img className="profilePic" src={this.state.profilePic} alt=""/>
                     </div>
-                    <label>User's _id </label>
-                    <input onChange={(e) => this.updateInput('userId', e)} value={this.state.userId}></input>
+                    <input onChange={(e) => this.updateInput('userId', e)} value={this.state.userId} placeholder="Please enter your ID..."/>
                     <button onClick={this.login}>login</button>
                 </div>
 
-                <div className="dmsSidebar">
+                <div className="dmsHeader">
                     <h4>Chats</h4>
+                    <button onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>Create new DM</button>
+                    <div className="newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
+                        <input onChange={(e) => this.updateInput('toId', e)} value={this.state.toId} placeholder="Enter recipient's ID here" required />
+                        <input onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage} placeholder="Enter message here" required />
+                        <button onClick={this.createDM}>Send Message</button>
+                    </div>
+                </div>
+                <div className="dmsSidebar">
                     {dms}
                 </div>
-
                 <div className="dmsMessages">
                     {messages}
                     <div ref={this.messagesEndRef} />
                 </div>
 
-                <p>Dm's _id: {this.state.dmId}</p>
-                <p> User's _id: {this.state.userId}</p>
-                <label>Message: </label>
-                <input onChange={(e) => this.updateInput('message', e)} value={this.state.message}></input>
-                <button onClick={this.submitMessage}> Submit Message</button>
-
-                <br />
-
-                <button onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>New DM</button>
-
-                <div className="newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
-                    <label>TO: (_id) </label>
-                    <input onChange={(e) => this.updateInput('toId', e)} value={this.state.toId}></input>
-                    <label>Message: </label>
-                    <input onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage}></input>
-                    <button onClick={this.createDM}> Submit Message</button>
+                <div className='enterDM'>
+                    <textarea onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." />
+                    {/* <input onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." /> */}
+                    <button onClick={this.submitMessage}>Submit Message</button>
                 </div>
-
-                <hr />
             </div>
 
         )

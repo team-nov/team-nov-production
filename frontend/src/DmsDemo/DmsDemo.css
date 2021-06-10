@@ -1,48 +1,158 @@
-.message{
-    border: 1px #000 solid;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+.pageDMs {
+  font-family: "Quicksand";
 }
 
-.dmItem{
-    border: 1px #000 solid;
+.message {
+  border: 1px #000 solid;
 }
 
-.dmsSidebar{
-    float: left;
-    width: 30%;
-    height: 50vh;
-    border: 1px #000 solid;
+.dmsWelcome .welcomeText {
+  font-size: 18px;
 }
-.dmsMessages{
-    float: right;
-    width: 69%;
-    height: 50vh;
-    background-color: aqua;
-    border: 1px #000 solid;
-    overflow: scroll;
-}
-.selectedDm{
-    background-color:red;
-}
-.profilePic{
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
 
+.dmsWelcome input {
+  border: none;
+  border-bottom: 3px solid rgb(0, 0, 0);
 }
-.welcomeText{
-    display: inline-block;
-}
-.dmsProfilePic{
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    display: block;
-    float: left;
-    position: relative;
-    top: 0.5em;
-    margin-left: 1em;
 
+.dmsWelcome button {
+  margin: 5px;
+  background-color: #b3b6b3;
+  border: 1px black;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+  transition-duration: 0.2s;
 }
-.recipientName{
-    width:7em;
+
+.dmItem {
+  background-color: #6d706d;
+  display: flex;
+  border-bottom: 1px solid #ebe7fb;
+  padding-bottom: 10px;
+  cursor: pointer;
+  padding: 10px 10px 10px 20px;
+}
+
+.dmsHeader h4 {
+  margin-top: -50px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-left: 150px;
+  font-size: 30px;
+  color: rgb(29, 29, 29);
+  display: flex;
+}
+
+.dmsHeader button {
+  margin: 5px;
+  background-color: #b3b6b3;
+  border: 1px black;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  text-align: center;
+  display: flex;
+  text-decoration: none;
+  font-size: 13px;
+  border-radius: 12px;
+  transition-duration: 0.5s;
+}
+
+.dmsHeader button:hover {
+  background-color: #5e5d5d;
+  color: rgb(0, 0, 0);
+}
+
+.dmsHeader .newDm input {
+  margin: 3px;
+  background-color: rgb(161, 161, 161);
+  width: 75%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.dmsSidebar {
+  float: left;
+  width: 30%;
+  height: 75vh;
+  background-color: #878d87;
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  font-size: 14px;
+  overflow: auto;
+  border: 1px rgb(0, 0, 0) solid;
+}
+
+.dmsMessages {
+  float: right;
+  width: 65%;
+  height: 65vh;
+  background-color: rgb(61, 61, 61);
+  border-radius: 12px;
+  overflow: auto;
+}
+
+.enterDM textarea {
+  background-color: rgb(161, 161, 161);
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 2px;
+  width: 50%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.enterDM button {
+  background-color: #b3b6b3;
+  border: 1px black;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  text-align: center;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: -30px;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 12px;
+  transition-duration: 0.5s;
+}
+
+.selectedDm {
+  background-color: #374237;
+  font-size: 17px;
+  border-radius: 10px;
+  transition-duration: 0.4s;
+}
+
+.profilePic {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+
+.welcomeText {
+  display: inline-block;
+}
+
+.dmsProfilePic {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  display: block;
+  float: left;
+  position: relative;
+  top: 0.5em;
+  margin-left: 1em;
+}
+
+.recipientName {
+  width: 7em;
 }
