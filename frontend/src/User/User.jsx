@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import axios from 'axios'
 import './User.css'
 
 class User extends Component{

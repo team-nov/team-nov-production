@@ -6,30 +6,44 @@ import User from '../User/User'
 
 class Forum extends Component{
   state = {
-    name: "",
-    picture: "",
-    caption: '',
-    postTime: null,
-    posts: []
+    name: '',
+    picture: '',
+    userId: '',
+    message: '',
+    postTime: '',
+    discussions: []
   }
 
   addDiscussion=()=>{
+    this.setState({
+      message: "hello",
+      postTime: "10"
+    })
+
     axios.post('https://localhost:5000/api/discussions', {
       userName: this.state.name,
       userPicture: this.state.picture,
-      message: this.state.caption
+      userId: this.state.userId,
+      message: this.state.message,
+      postTime: this.state.postTime
     })
     .then(res=>{
       console.log(res);
     })
   }
 
+  componentDidMount() {
+    axios.get('https://localhost:5000/api/discussions')
+      .then(res=>this.setState({discussions: res.data}))
+  }
+
   render(){
-    let discussion = this.state.posts.map((discussion)=>{
+    let discussion = this.state.discussions.map((discussion)=>{
       return <Discussion username={discussion.userName}
                          picture={discussion.userPicture} 
                          caption={discussion.message} 
-                         postTime={discussion.postTime}/>
+                         // postTime={discussion.postTime}/>
+                         />
     })
 
     return (

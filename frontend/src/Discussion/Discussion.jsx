@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import axios from 'axios'
 import './Discussion.css'
 import User from '../User/User'
 
@@ -15,7 +14,7 @@ class Discussion extends Component{
     return (
       <div className="discussionContainer">
         <User username={this.props.username} picture={this.props.picture}/>
-        <div className="caption"> {this.props.caption} </div>
+        <div className="caption"> {this.props.message} </div>
       </div>
     )
   }
