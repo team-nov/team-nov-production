@@ -173,7 +173,7 @@ exports.deleteDmMessage = (req,res,next)=>{
 exports.deleteDm = (req,res,next)=>{
     const id = req.body.dmId;
     DM
-        .updateOne({_id:id})
+        .removeOne({_id:id})
         .exec()
         .then(result =>{
             res.status(200).json({
