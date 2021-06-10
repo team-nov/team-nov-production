@@ -93,7 +93,7 @@
   float: right;
   width: 65%;
   height: 65vh;
-  background-color: rgb(61, 61, 61);
+  background-color: rgba(189, 189, 189, 0.726);
   border-radius: 12px;
   overflow: auto;
 }
