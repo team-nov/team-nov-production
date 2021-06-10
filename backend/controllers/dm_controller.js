@@ -115,6 +115,14 @@ exports.postDmMessage = (req,res,next)=>{
         date:Date.now()
     })
 
+    const validatedModel = msg.validateSync();
+    if (!!validatedModel) {
+        res.status(400).json({
+            error: validatedModel
+        })
+        return;
+    }
+
     DM
         .updateOne({_id: id},{$push:{messages:msg}})
         .exec()
@@ -165,7 +173,7 @@ exports.deleteDmMessage = (req,res,next)=>{
 exports.deleteDm = (req,res,next)=>{
     const id = req.body.dmId;
     DM
-        .remove({_id:id})
+        .removeOne({_id:id})
         .exec()
         .then(result =>{
             res.status(200).json({

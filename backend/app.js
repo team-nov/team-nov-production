@@ -4,6 +4,7 @@ const usersRoute = require('./routes/user_routes');
 const dmsRoute = require('./routes/dm_routes');
 const discussionsRoute = require('./routes/discussion_routes');
 const commentsRoute = require('./routes/comment_routes');
+const videosRoute = require('./routes/video_routes');
 const mongoose = require('mongoose');
 const http = require('http');
 const dmSockets = require('./dmSockets/dmSockets')
@@ -19,7 +20,7 @@ dmSockets.io(server)
 mongoose.connect(
     // change it back to mongodb+srv://teamnov:teamnov@manage.wwmlv.mongodb.net/TeamNov?retryWrites=true&w=majority
     // before you merge to develop
-    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovShammo?retryWrites=true&w=majority',
+    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovBrandon?retryWrites=true&w=majority',
     {useNewUrlParser:true, useUnifiedTopology:true})
     .then((res)=>{
         console.log("db Connected")
@@ -52,6 +53,9 @@ app.use('/api/dms',dmsRoute);
 
 // use discussionsRoute on '/api/discussions'
 app.use('/api/discussions', discussionsRoute);
+
+// use videosRoute on '/api/videos'
+app.use('/api/videos', videosRoute);
 
 // listen on PORT or 5000
 const port = process.env.PORT || 5000
