@@ -53,9 +53,6 @@ app.use('/api/dms',dmsRoute);
 // use discussionsRoute on '/api/discussions'
 app.use('/api/discussions', discussionsRoute);
 
-// use discussionsRoute on '/api/discussions'
-app.use('/api/comments', commentsRoute);
-
 // listen on PORT or 5000
 const port = process.env.PORT || 5000
 server.listen(port, console.log("server running on port "+port));

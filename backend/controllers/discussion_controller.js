@@ -24,7 +24,7 @@ exports.getOneDiscussion = (req, res, next) => {
         })
 }
 
-exports.updateDiscussion = (req, res, next) => {
+exports.patchDiscussion = (req, res, next) => {
     
     toUpdate = Discussion.findById(req.body.discussionId).exec().then((data)=>{
 

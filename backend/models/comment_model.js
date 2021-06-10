@@ -6,7 +6,6 @@ const commentSchema = mongoose.Schema({
     userName:{type:String, required:true},
     userPicture:{type:String, default: "s"},
     userId: {type: String, required:true, default:"nullID"},
-    discussionId: {type: mongoose.Schema.Types.ObjectId, required:true},
     message:{type:String, required:true},
     postTime: {type: String, required: true},
 });
