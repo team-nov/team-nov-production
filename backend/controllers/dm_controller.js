@@ -165,7 +165,7 @@ exports.deleteDmMessage = (req,res,next)=>{
 exports.deleteDm = (req,res,next)=>{
     const id = req.body.dmId;
     DM
-        .remove({_id:id})
+        .updateOne({_id:id})
         .exec()
         .then(result =>{
             res.status(200).json({
