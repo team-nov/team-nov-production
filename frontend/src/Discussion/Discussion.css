@@ -19,32 +19,11 @@
   background-color: rgb(243, 243, 243);
 }
 
-.inputContainer {
-  margin-top: 1em;
-  display: flex;
-  align-items: flex-end;
-}
-
-.inputTextEntry {
-  resize: none;
+.caption {
+  width: inherit;
+  margin: 1em 3em 0;
+  float: left;
   font-size: 1.2em;
-  width: 100%;
-}
-
-.postButton {
-  margin-left: 1em;
-  height: 2em;
-  width: 4em;
-
-  font-size: 1.1em;
-  color: white;
-
-  border-color: crimson;
-  border-radius: 20px;
-  background-color: hotpink;
-}
-
-.postButton:hover {
-  cursor: pointer;
-  background-color: deeppink;
+  text-align: left;
+  word-break: break-word;
 }
