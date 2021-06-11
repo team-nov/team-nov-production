@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user_model');
 
 exports.getUsers = (req,res,next) => {
-    User
-        .find()
+    User.findOne(req.body.username)
         .exec()
         .then((data)=>{
             res.status(200).json(data)
@@ -25,12 +24,14 @@ exports.postUsers = (req,res,next) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
-        age: req.body.age,
-        picture: req.body.picture
+        email: req.body.email,
+        picture: req.body.picture,
+        username: req.body.username,
+        password: req.body.password,
+        typeOfUser: req.body.typeOfUser
     });
 
-    user
-        .save()
+    user.save()
         .then((result)=>{
             console.log(result)
             res.status(201).json({
