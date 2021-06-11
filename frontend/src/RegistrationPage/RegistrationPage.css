@@ -1,0 +1,37 @@
+.RegistrationPage {
+    width: 50%;
+    margin:auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: coral;
+    font-family: 'Trebuchet MS';
+}
+
+.RegistrationForm, .LoginForm {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: min-content;
+    flex-direction: column;
+    text-align: left;
+}
+
+.RegistrationForm {
+    background-color: greenyellow;
+}
+
+.LoginForm {
+    background-color: turquoise;
+}
+
+.RegistrationForm ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    margin: 1em;
+}
