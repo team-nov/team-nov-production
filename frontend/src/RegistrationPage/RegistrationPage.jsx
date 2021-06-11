@@ -7,6 +7,7 @@ class RegistrationPage extends Component {
         this.state = {
             name:'',
             email:'',
+            picture:'',
             username:'',
             password:'',
             typeOfUser:''
@@ -24,9 +25,10 @@ class RegistrationPage extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        axios.post('http://localhost:5000/users', {
+        axios.post('http://localhost:5000/api/users', {
             name: this.state.name,
             email: this.state.email,
+            picture: this.state.picture,
             username: this.state.username,
             password:this.state.password,
             typeOfUser: this.state.typeOfUser
@@ -45,6 +47,8 @@ class RegistrationPage extends Component {
                     <input type='text' name='name' onChange={this.handleChange}></input>
                     <label>Email: </label>
                     <input type='text' name='email' onChange={this.handleChange}></input>
+                    <label>Picture: </label>
+                    <input type='text' name='picture' onChange={this.handleChange}></input>
                     <label>Username: </label>
                     <input type='text' name='username' onChange={this.handleChange}></input>
                     <label>Password: </label>

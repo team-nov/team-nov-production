@@ -38,7 +38,7 @@ app.use((req,res,next) =>{
 })
 
 // use usersRoute on '/users'
-app.use('/users',usersRoute);
+app.use('/api/users',usersRoute);
 // listen on PORT or 5000
 const port = process.env.PORT || 5000
 app.listen(port, console.log("server running on port "+port));

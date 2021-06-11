@@ -15,6 +15,7 @@ exports.postUsers = (req,res,next) => {
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         email: req.body.email,
+        picture: req.body.picture,
         username: req.body.username,
         password: req.body.password,
         typeOfUser: req.body.typeOfUser
