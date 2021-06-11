@@ -6,6 +6,7 @@ exports.getDiscussions = (req,res,next) => {
     console.log("Getting all discussions");
     Discussion
         .find()
+        .populate('userId')
         .exec()
         .then((data)=>{
             res.status(200).json(data)
