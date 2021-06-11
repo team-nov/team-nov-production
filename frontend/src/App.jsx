@@ -19,6 +19,7 @@ class App extends Component{
           <RegistrationPage/>
           */
         }
+        <RegistrationPage/>
       </div>
     )
   }

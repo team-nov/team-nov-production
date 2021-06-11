@@ -1,27 +1,65 @@
 .RegistrationPage {
-    width: 50%;
     margin:auto;
     display:flex;
     flex-direction: row;
     justify-content: center;
-    background-color: coral;
+    /* background-color: coral; */
     font-family: 'Trebuchet MS';
 }
 
-.RegistrationForm, .LoginForm {
+.RegistrationForm {
     display: flex;
     flex-wrap: wrap;
-    max-width: min-content;
+    width: 50%;
+    min-width: fit-content;
     flex-direction: column;
     text-align: left;
+    /* background-color: navajowhite; */
+    justify-content: center;
+    border-radius: 20px;
+    padding: 5%;
+    margin-top: 20px;
 }
 
-.RegistrationForm {
-    background-color: greenyellow;
+.field label {
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-top: 6px;
 }
 
-.LoginForm {
-    background-color: turquoise;
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.field input, .field select {
+    background-color: whitesmoke;
+    color: grey; 
+    padding: 0.75em;
+    border: none;
+    border-radius: 5px;    
+}
+
+.RegisterButton {
+    color: white;
+    background-color: navy;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.field select:hover {
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+}
+
+.RegisterButton:hover {
+    background-color: rgb(93, 93, 255);
+    cursor: pointer;
 }
 
 .RegistrationForm ul {
@@ -30,8 +68,4 @@
     flex-direction: column;
     margin: 0;
     padding: 0;
-}
-
-input {
-    margin: 1em;
 }

@@ -43,24 +43,39 @@ class RegistrationPage extends Component {
         return(
             <div className="RegistrationPage">
                 <form className='RegistrationForm' onSubmit={this.handleSubmit}>
-                    <label>Name: </label>
-                    <input type='text' name='name' onChange={this.handleChange}></input>
-                    <label>Email: </label>
-                    <input type='text' name='email' onChange={this.handleChange}></input>
-                    <label>Picture: </label>
-                    <input type='text' name='picture' onChange={this.handleChange}></input>
-                    <label>Username: </label>
-                    <input type='text' name='username' onChange={this.handleChange}></input>
-                    <label>Password: </label>
-                    <input type='password' name='password' onChange={this.handleChange}></input>
-                    <select name='typeOfUser' onChange={this.handleChange}>
-                        <option value=''>--</option>
-                        <option value='mentee'>Mentee</option>
-                        <option value='mentor'>Mentor</option>
-                        <option value='investor'>Investor</option>
-                        <option value='other'>Other</option>
-                    </select>
-                    <input type='submit'></input>
+                    <h2>Register</h2>
+                    <h3>Please fill in this form to register your account.</h3>
+                    <div className='field'>
+                        <label>Name: </label>
+                        <input type='text' name='name' placeholder='Enter name' onChange={this.handleChange}></input>
+                    </div>
+                    <div className='field'>
+                        <label>Email: </label>
+                        <input type='text' name='email' placeholder='Enter email' onChange={this.handleChange}></input>
+                    </div>
+                    <div className='field'>
+                        <label>Picture: </label>
+                        <input type='text' name='picture' placeholder='Enter picture url'onChange={this.handleChange}></input>
+                    </div>
+                    <div className='field'>
+                        <label>Username: </label>
+                        <input type='text' name='username' placeholder='Enter username' onChange={this.handleChange}></input>
+                    </div>
+                    <div className='field'>
+                        <label>Password: </label>
+                        <input type='password' name='password' placeholder='Enter password' onChange={this.handleChange}></input>
+                    </div>
+                    <div className='field'>
+                        <label>Type of User: </label>
+                        <select name='typeOfUser' onChange={this.handleChange}>
+                            <option value=''>--</option>
+                            <option value='mentee'>Mentee</option>
+                            <option value='mentor'>Mentor</option>
+                            <option value='investor'>Investor</option>
+                            <option value='other'>Other</option>
+                        </select>
+                    </div>
+                    <input className='RegisterButton' type='submit' value="Register"></input>
                 </form>
             </div>
         )
