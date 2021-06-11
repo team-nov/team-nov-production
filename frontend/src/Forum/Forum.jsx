@@ -6,45 +6,43 @@ import User from '../User/User'
 
 class Forum extends Component{
   state = {
-    name: '',
-    picture: '',
-    userId: '',
-    message: '',
-    postTime: '',
+    name: 'calvin',
+    picture: 'https://picsum.photos/500',
+    userId: '123',
+    message: 'okay',
     discussions: []
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/discussions')
+      .then(res=>this.setState({discussions: res.data}))
+  }
+  
   addDiscussion=()=>{
     this.setState({
-      message: "hello",
-      postTime: "10"
+      message: "hi",
     })
 
-    axios.post('https://localhost:5000/api/discussions', {
+    axios.post('http://localhost:5000/api/discussions', {
       userName: this.state.name,
       userPicture: this.state.picture,
       userId: this.state.userId,
       message: this.state.message,
-      postTime: this.state.postTime
     })
     .then(res=>{
       console.log(res);
     })
   }
 
-  componentDidMount() {
-    axios.get('https://localhost:5000/api/discussions')
-      .then(res=>this.setState({discussions: res.data}))
-  }
-
   render(){
-    let discussion = this.state.discussions.map((discussion)=>{
-      return <Discussion username={discussion.userName}
+    let discussion = this.state.discussions.map((discussion, index)=>{
+      return <Discussion key = {index}
+                         username={discussion.userName}
                          picture={discussion.userPicture} 
-                         caption={discussion.message} 
-                         // postTime={discussion.postTime}/>
+                         message={discussion.message} 
                          />
     })
+    discussion = discussion.reverse()
 
     return (
     <div>

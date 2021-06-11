@@ -4,7 +4,7 @@
 
 .discussionContainer {
   padding: 1em;
-  margin: auto;
+  margin: 1em auto;
   min-width: 400px;
   max-width: 50%;
 
@@ -19,7 +19,7 @@
   background-color: rgb(243, 243, 243);
 }
 
-.caption {
+.DiscussionMessage {
   width: inherit;
   margin: 1em 3em 0;
   float: left;
