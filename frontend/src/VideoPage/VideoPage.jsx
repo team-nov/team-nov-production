@@ -10,8 +10,8 @@ class VideoPage extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01').then(
-            (res)=>{
+        axios.get('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01')
+        .then(res => {
                 console.log(res.data.comments);
                 this.setState({
                     comments: res.data.comments
@@ -20,21 +20,25 @@ class VideoPage extends Component {
         )
     }
 
-    postComment = () => {
-        axios.post('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01', {
+    postComment = async () => {
+        await axios.post('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01', {
             userId: "60c27574bf5cbfadcf3b4f12",
             userName: "Brandon",
             message: this.state.msg
         })
-        .then(res => alert(res.data.message))
+        const res = await axios.get('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01')
+        this.setState({
+            msg: '',
+            comments: res.data.comments
+        })
     }
 
-    updateComment = (e) => {
+    updateComment = e => {
         this.setState({msg: e.target.value})
     }
 
     render(){
-        let commentsSection = this.state.comments.map((comment)=>{
+        let commentsSection = this.state.comments.map(comment => {
             return <li>
                 {comment.userName}: {comment.message}
             </li>
@@ -49,7 +53,7 @@ class VideoPage extends Component {
                     </ul>
                 </div>
                 <div className="container">
-                    <textarea onChange={(e) => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here"/>
+                    <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.msg}/>
                 </div>
                 <button onClick={this.postComment}>Post Comment</button>
                 <Link className="nav-link" to="/videos">Back</Link>
