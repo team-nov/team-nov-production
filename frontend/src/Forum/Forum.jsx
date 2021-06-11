@@ -7,7 +7,7 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60c27574bf5cbfadcf3b4f12',
+    userId: '60c3dd3ec7153f02239fb846',
     picture: '',
     name: '',
     message: '',
@@ -16,7 +16,8 @@ class Forum extends Component{
 
   componentDidMount() {
     axios.get('http://localhost:5000/api/users/' + this.state.userId)
-      .then(res=>this.setState({picture: res.picture, name: res.name}))
+      .then(res=>this.setState(
+        {picture: res.data.picture, name: res.data.name}))
 
     axios.get('http://localhost:5000/api/discussions')
       .then(res=>this.setState({discussions: res.data}))
