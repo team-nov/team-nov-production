@@ -88,10 +88,9 @@ exports.postComment = (req, res, next) => {
     const videoId = req.params.videoId;
     const comment = new Comment({
         _id: new mongoose.Types.ObjectId(),
-        userName: req.body.userName,
-        userPicture: req.body.userPicture,
-        message: req.body.message,
         userId: req.body.userId,
+        userName: req.body.userName,
+        message: req.body.message,
         postTime: new Date(),
     })
 
