@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mongoose": "^5.12.12",

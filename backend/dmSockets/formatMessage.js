@@ -19,7 +19,8 @@ exports.formatDmMessage = (message) => {
                 dmId: message.dmId,
                 from: {
                     _id:message.from,
-                    name:res.data.name
+                    name:res.data.name,
+                    picture:res.data.picture
                 },
                 message: message.message,
                 date: message.date,

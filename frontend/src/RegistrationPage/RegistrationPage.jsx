@@ -35,7 +35,7 @@ class RegistrationPage extends Component {
         })
         .then(res=> alert(res.data.message))
         .catch((error)=> {
-            console.log(error);
+            alert("invalid form");
         });
     }
 
