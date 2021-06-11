@@ -7,70 +7,50 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    name: 'calvin',
-    age: '18',
-    picture: 'https://picsum.photos/500',
-    userId: '123',
-    message: 'why',
-    discussions: [],
-    users: []
+    userId: '60c27574bf5cbfadcf3b4f12',
+    picture: '',
+    name: '',
+    message: '',
+    discussions: []
   }
 
   componentDidMount() {
+    axios.get('http://localhost:5000/api/users/' + this.state.userId)
+      .then(res=>this.setState({picture: res.picture, name: res.name}))
+
     axios.get('http://localhost:5000/api/discussions')
       .then(res=>this.setState({discussions: res.data}))
-    
-    let users = this.discussions.map(userId => (
-      axios.get('http://localhost:5000/api/users/' + this.state.userId)
-      .then(res=>{
-        
-      })
-    ))
-
-    this.setState({
-
-    })  
   }
   
-  addDiscussion=()=>{
-    this.setState({
-      message: "hi",
-    })
-    
-    axios.post('http://localhost:5000/api/users/' + this.state.userId, {
-      name: this.state.name,
-      age: this.state.age,
-      picture: this.state.picture
-    })
-    .then(res=>{
-      console.log(res);
-    })
+  updateInput=(e)=>{
+    this.setState({message:e.target.value});
+  }
 
+  addDiscussion=()=>{
     axios.post('http://localhost:5000/api/discussions', {
       userId: this.state.userId,
       message: this.state.message,
     })
-    .then(res=>{
-      console.log(res);
-    })
+    .then(res=>this.setState({discussions: res.data}))
   }
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
       return <Discussion key = {index}
-                         userId={discussion.userId} 
+                         picture={discussion.userId.picture} 
+                         username={discussion.userId.name}
                          message={discussion.message} 
                          postTime={dateParser(discussion.postTime, 'ddd h:mm a')}
                          />
     })
     discussion = discussion.reverse()
-
+      
     return (
     <div>
       <div className="forumContainer">
         <User username={this.state.name} picture={this.state.picture}/>
         <form className="postInput">
-          <textarea className="postTextEntry" rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
+          <textarea onChange={(e)=>this.updateInput(e)} value={this.state.message} className="postTextEntry" rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
           <button className="postButton" onClick={this.addDiscussion}> Post </button>
         </form>
       </div>
