@@ -72,7 +72,7 @@ class UserPost extends Component{
         let dbPosts = this.state.db.map((post, index)=> {
             return <div className="post" key="index">
                 <p>{post.name}: {post.message}</p>
-                <img src = {post.picture}></img>
+                <img src = {post.picture} alt="user pic"></img>
             </div>
         })
 
