@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user_model');
 
 exports.getUsers = (req,res,next) => {
-    User.findOne(req.body.username)
+    User.find()
         .exec()
         .then((data)=>{
             res.status(200).json(data)

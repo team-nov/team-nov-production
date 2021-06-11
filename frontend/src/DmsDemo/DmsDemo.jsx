@@ -32,6 +32,12 @@ class DmsDemo extends Component {
                 this.setState({ messages: messagesCopy })
             }
         })
+        socket.on('serverNewDm', message => {
+            console.log(message)
+            if(message.toId === this.state.userId){
+                this.login();
+            }
+        })
     }
 
     /**
@@ -106,6 +112,9 @@ class DmsDemo extends Component {
         })
             .then(res => {
                 alert(res.data.message)
+                socket.emit('clientNewDm', {
+                    toId: this.state.toId,
+                })
                 this.login()
             })
     }
@@ -140,9 +149,16 @@ class DmsDemo extends Component {
         if (this.state.userId) {
             messages = this.state.messages.map((msg, index) => {
                 return <div className="message" key={index}>
-                    <p>From: {msg.from.name}</p>
-                    <p>On: {dateParser(msg.date, 'ddd h:mm a')}</p>
-                    <p>Message: {msg.message}</p>
+                    <div className="messageProfilePicDiv">
+                        <img src={msg.from.picture} alt="msg profile pic" className="messageProfilePic"></img>
+                    </div>
+                    <div className="messageContent">
+                        <div className="messageHeader">
+                            <p className="messageName">{msg.from.name}</p>
+                            <p className="messageDate">{dateParser(msg.date, 'ddd h:mm a')}</p>
+                        </div>
+                        <p className="messageMessage">{msg.message}</p>
+                    </div>
                 </div>
             })
 
@@ -185,17 +201,17 @@ class DmsDemo extends Component {
                 <div className="dmsSidebar">
                     {dms}
                 </div>
-                <div className="dmsMessages">
-                    {messages}
-                    <div ref={this.messagesEndRef} />
-                </div>
+                    <div className="dmsMessages">
+                        {messages}
+                        <div ref={this.messagesEndRef} />
+                    </div>
 
-                <div className='enterDM'>
-                    <textarea onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." />
-                    {/* <input onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." /> */}
-                    <button onClick={this.submitMessage}>Submit Message</button>
+                    <div className='enterDM'>
+                        <textarea onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." />
+                        {/* <input onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." /> */}
+                        <button onClick={this.submitMessage}>Submit Message</button>
+                    </div>
                 </div>
-            </div>
 
         )
     }

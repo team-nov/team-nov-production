@@ -12,9 +12,10 @@ class App extends Component{
       <div className="App">
         {/* use Demo component */}
         {
+          <DmsDemo/>
           /*
           comment the frontend out when ur resolving conflicts
-          <DmsDemo/>
+          
           <UserPost/>
           <RegistrationPage/>
           */
