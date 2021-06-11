@@ -3,7 +3,6 @@ const express = require('express');
 const usersRoute = require('./routes/user_routes');
 const dmsRoute = require('./routes/dm_routes');
 const discussionsRoute = require('./routes/discussion_routes');
-const commentsRoute = require('./routes/comment_routes');
 const videosRoute = require('./routes/video_routes');
 const mongoose = require('mongoose');
 const http = require('http');
@@ -53,9 +52,6 @@ app.use('/api/dms',dmsRoute);
 
 // use discussionsRoute on '/api/discussions'
 app.use('/api/discussions', discussionsRoute);
-
-// use discussionsRoute on '/api/discussions'
-app.use('/api/comments', commentsRoute);
 
 // use videosRoute on '/api/videos'
 app.use('/api/videos', videosRoute);
