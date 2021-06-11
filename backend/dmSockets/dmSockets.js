@@ -22,6 +22,10 @@ exports.io = (server) => {
             socket.broadcast.emit('serverMessage', formatMessage(botname, 'a user has left the chat'))
         })
 
+        socket.on('clientNewDm', (message) => {
+            console.log('clientNewDm',message)
+            socket.broadcast.emit('serverNewDm',message);
+        })
         socket.on('clientMessage', (message) => {
             console.log(message)
             // create dm in db

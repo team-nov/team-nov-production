@@ -32,6 +32,12 @@ class DmsDemo extends Component {
                 this.setState({ messages: messagesCopy })
             }
         })
+        socket.on('serverNewDm', message => {
+            console.log(message)
+            if(message.toId === this.state.userId){
+                this.login();
+            }
+        })
     }
 
     /**
@@ -106,6 +112,9 @@ class DmsDemo extends Component {
         })
             .then(res => {
                 alert(res.data.message)
+                socket.emit('clientNewDm', {
+                    toId: this.state.toId,
+                })
                 this.login()
             })
     }
