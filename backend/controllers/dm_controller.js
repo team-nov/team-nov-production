@@ -7,7 +7,7 @@ exports.getDms = (req,res,next) => {
     DM
         .find()
         .populate('members','name')
-        .populate({path:'messages',populate:{path:'from',select:'name'}})
+        .populate({path:'messages',populate:{path:'from',select:'name picture'}})
         .exec()
         .then((data)=>{
             res.status(200).json(data)
@@ -21,7 +21,7 @@ exports.getDmById = (req,res,next) => {
     DM
         .findOne({_id:id})
         .populate('members','name')
-        .populate({path:'messages',populate:{path:'from',select:'name'}})
+        .populate({path:'messages',populate:{path:'from',select:'name picture'}})
         .exec()
         .then((data)=>{
             console.log(data)

@@ -5,7 +5,7 @@
 }
 
 .message {
-  border: 1px #000 solid;
+  text-align: left;
 }
 
 .dmsWelcome .welcomeText {
@@ -78,7 +78,7 @@
 
 .dmsSidebar {
   float: left;
-  width: 30%;
+  width: 25%;
   height: 75vh;
   background-color: #878d87;
   color: white;
@@ -90,8 +90,8 @@
 }
 
 .dmsMessages {
-  float: right;
-  width: 65%;
+  margin:auto;
+  width: 60%;
   height: 65vh;
   background-color: rgba(189, 189, 189, 0.726);
   border-radius: 12px;
@@ -142,9 +142,9 @@
   display: inline-block;
 }
 
-.dmsProfilePic {
-  width: 2em;
-  height: 2em;
+.dmsProfilePic, .messageProfilePic {
+  width: 2.5em;
+  height: 2.5em;
   border-radius: 50%;
   display: block;
   float: left;
@@ -155,4 +155,31 @@
 
 .recipientName {
   width: 7em;
+}
+.messageContent{
+  width: 20em;
+  display: inline-block;
+  padding: 0.3em 0;
+}
+.messageHeader{
+
+}
+.messageName{
+  display:inline;
+  font-weight: 600;
+
+}
+.messageDate{
+  display: inline;
+  margin-left: 0.5em;
+  font-size: 0.8em;
+  color: darkslategrey;
+}
+.messageMessage{
+  margin-top: 0.2em;
+}
+.messageProfilePicDiv{
+  height:100%;
+  float:left;
+  width: 4.5em;
 }

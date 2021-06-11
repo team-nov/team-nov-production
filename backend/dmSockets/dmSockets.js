@@ -34,6 +34,7 @@ exports.io = (server) => {
             })
                 .then(formattedMsg => {
                     // send message to other users
+                    console.log(formattedMsg)
                     io.emit('serverMessage', formattedMsg)
                 })
                 .catch(res => console.log(res.data.error))
