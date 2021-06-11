@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, {Component} from 'react';
 
 class VideoPage extends Component {
@@ -13,6 +14,7 @@ class VideoPage extends Component {
                 <div class="container">
                     <textarea type="text" className="form-control" placeholder="Comment here"/>
                 </div>
+                <Link className="nav-link" to="/videos">Back</Link>
             </div>
         )
     }
