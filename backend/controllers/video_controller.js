@@ -133,7 +133,7 @@ exports.patchComment =  async (req, res, next) => {
     const commentMsg = req.body.message;
 
     try {
-        const data = Video.findByIdAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
+        const data = await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
         res.status(200).json({
             message: "Updated comment with id: " + commentId,
             itemsModified: data.nModified
