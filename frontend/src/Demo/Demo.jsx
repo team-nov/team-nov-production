@@ -50,8 +50,8 @@ class Demo extends Component{
             .then(res=>this.setState({db:res.data}))
     }
     render(){
-        let dbUsers = this.state.db.map((user,index)=>{
-            return <div className="user" key="index">
+        let dbUsers = this.state.db.map((user, usersIndex)=>{
+            return <div className="user" key={usersIndex}>
                 <p>Name : {user.name}</p>
                 <p>Age : {user.age}</p>
                 <img src={user.picture} alt="randomPerson"></img>

@@ -7,7 +7,7 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60c3dd3ec7153f02239fb846',
+    userId: '60b59ba85a6d38aa91d77715',
     picture: '',
     name: '',
     message: '',
@@ -18,9 +18,11 @@ class Forum extends Component{
     axios.get('http://localhost:5000/api/users/' + this.state.userId)
       .then(res=>this.setState(
         {picture: res.data.picture, name: res.data.name}))
+      .catch((e)=>console.log(e))
 
     axios.get('http://localhost:5000/api/discussions')
       .then(res=>this.setState({discussions: res.data}))
+      .catch((e)=>console.log(e))
   }
   
   updateInput=(e)=>{
@@ -33,6 +35,7 @@ class Forum extends Component{
       message: this.state.message,
     })
     .then(res=>this.setState({discussions: res.data}))
+    .catch((e)=>console.log(e))
   }
 
   render(){

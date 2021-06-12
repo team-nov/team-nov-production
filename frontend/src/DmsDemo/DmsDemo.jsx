@@ -147,8 +147,8 @@ class DmsDemo extends Component {
 
         // only update message and dms when userId is defined
         if (this.state.userId) {
-            messages = this.state.messages.map((msg, index) => {
-                return <div className="message" key={index}>
+            messages = this.state.messages.map((msg, dmsIndex) => {
+                return <div className="message" key={dmsIndex}>
                     <div className="messageProfilePicDiv">
                         <img src={msg.from.picture} alt="msg profile pic" className="messageProfilePic"></img>
                     </div>
