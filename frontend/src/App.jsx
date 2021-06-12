@@ -6,6 +6,8 @@ import RegistrationPage from './RegistrationPage/RegistrationPage'
 import DmsDemo from './DmsDemo/DmsDemo'
 import Demo from './Demo/Demo'
 import UserPost from './UserPost/UserPost'
+import Forum from './Forum/Forum'
+import Discussion from './Discussion/Discussion'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 

@@ -1,0 +1,22 @@
+/* Each component should have its own css file with the name as the component
+   Note Css Styles of parent will apply to their child componentss
+*/
+
+.userContainer {
+  display: flex;
+  align-items: center;
+}
+
+.profilePic {
+  width: 7%; 
+  height: 7%;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 50%;
+}
+
+.userName {
+  margin: 0 1em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
