@@ -55,9 +55,10 @@ exports.deleteVideo = async (req, res, next) => {
 exports.patchVideo =  async (req, res, next) => {
 
     const videoId = req.body.videoId;
+    const titleMsg = req.body.title;
 
     try {
-        const data = await Video.findByIdAndUpdate(videoId, {$set: {title: req.body.title}}, { runValidators: true, new: true})
+        const data = await Video.findByIdAndUpdate(videoId, {$set: {title: titleMsg}}, { runValidators: true, new: true})
         res.status(200).json({
             message: "Updated title of video with id: " + videoId,
             itemsModified: data.nModified

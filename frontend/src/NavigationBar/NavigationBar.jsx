@@ -19,18 +19,21 @@ class NavigationBar extends Component {
                                 <Link className="nav-link" to="/register">Register</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/forum">Forum</Link>
+                            </li>
+                            {/* <li className="nav-item">
                                 <Link className="nav-link" to="/demo">Demo</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/users">Users</Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
                                 <Link className="nav-link" to="/dms">DMs</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/videos">Videos</Link>
                             </li>
-                            <li className="nav-item dropdown">
+                            {/* <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
                                 </Link>
@@ -43,12 +46,12 @@ class NavigationBar extends Component {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true">Disabled</Link>
-                            </li>
+                            </li> */}
                         </ul>
-                        <form className="d-flex">
+                        {/* <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                             <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        </form> */}
                     </div>
                 </div>
             </nav>

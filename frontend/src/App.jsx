@@ -7,10 +7,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css' 
 // import components
 import DmsDemo from './DmsDemo/DmsDemo'
-import Demo from './Demo/Demo'
-import UserPost from './UserPost/UserPost'
+// import Demo from './Demo/Demo'
+// import UserPost from './UserPost/UserPost'
 import Videos from './Videos/Videos'
 import VideoPage from './VideoPage/VideoPage'
+import Forum from './Forum/Forum'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 import RegistrationPage from "./RegistrationPage/RegistrationPage"
@@ -24,8 +25,9 @@ class App extends Component{
           <br />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
-            <Route path="/demo" component={Demo} />
-            <Route path="/users" component={UserPost} />
+            <Route path="/forum" component={Forum} />
+            {/* <Route path="/demo" component={Demo} />
+            <Route path="/users" component={UserPost} /> */}
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
             <Route path="/videos" component={Videos} />

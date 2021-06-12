@@ -5,14 +5,14 @@ import React, {Component} from 'react';
 class VideoPage extends Component {
 
     state = {
-        userId: "60c27574bf5cbfadcf3b4f12",
-        userName: "Brandon",
+        userId: "60b59ba85a6d38aa91d77715",
+        userName: "Aysha",
         message: '',
         comments: []
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01')
+        axios.get('http://localhost:5000/api/videos/60c41d5dc2ee4103efaa52c0')
         .then(res => {
             this.setState({
                 comments: res.data.comments
@@ -24,7 +24,7 @@ class VideoPage extends Component {
     }
 
     postComment = async () => {
-        const res = await axios.post('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01', {
+        const res = await axios.post('http://localhost:5000/api/videos/60c41d5dc2ee4103efaa52c0', {
             userId: this.state.userId,
             userName: this.state.userName,
             message: this.state.message
@@ -32,7 +32,7 @@ class VideoPage extends Component {
 
         try {
             this.setState({
-                msg: '',
+                message: '',
                 comments: res.data.comments
             })
         } catch (e) {
@@ -41,7 +41,7 @@ class VideoPage extends Component {
     }
 
     updateComment = (e) => {
-        this.setState({msg: e.target.value})
+        this.setState({message: e.target.value})
     }
 
     render(){
