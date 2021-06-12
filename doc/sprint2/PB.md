@@ -1,15 +1,6 @@
-**Participants**:
+# Product Backlog
 
-1. Colin Lin
-2. Mitravasu Prakash
-3. Shammo Talukder
-4. Simon Chau
-5. Ka Fai Yuen
-6. Brandon Lo
-7. Jahin Promit
-8. Efosa Obano
-
-**Release goals: **
+## Release goals:
 
 **We plan to complete 5-6 stories each sprint**
 
