@@ -17,7 +17,11 @@ exports.formatDmMessage = (message) => {
         .then(res => {
             return ({
                 dmId: message.dmId,
-                from: res.data.name,
+                from: {
+                    _id:message.from,
+                    name:res.data.name,
+                    picture:res.data.picture
+                },
                 message: message.message,
                 date: message.date,
                 picture: res.data.picture

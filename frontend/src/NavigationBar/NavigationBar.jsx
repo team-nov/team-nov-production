@@ -16,6 +16,9 @@ class NavigationBar extends Component {
                                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/register">Register</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/demo">Demo</Link>
                             </li>
                             <li className="nav-item">
@@ -39,7 +42,7 @@ class NavigationBar extends Component {
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link disabled" to="/" tabindex="-1" aria-disabled="true">Disabled</Link>
+                                <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true">Disabled</Link>
                             </li>
                         </ul>
                         <form className="d-flex">

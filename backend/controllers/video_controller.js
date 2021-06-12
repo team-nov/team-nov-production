@@ -3,89 +3,90 @@ const mongoose = require('mongoose');
 const Video = require('../models/video_model');
 const Comment = require('../models/comment_model');
 
-exports.getVideos = (req, res, next) => {
-    Video
-        .find()   
-        .exec()
-        .then(data => {
-            res.status(200).json(data)
+exports.getVideos = async (req, res, next) => {
+
+    try {
+        const data = await Video.find()
+        res.status(200).json(data)
+    } catch (e) {
+        res.status(500).json({
+            error: e
         })
+    }
 }
 
-exports.postVideo = (req, res, next) => {
+exports.postVideo = async (req, res, next) => {
+
     const video = new Video({
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title
     });
 
-    video
-        .save()
-        .then(result => {
-            console.log(result)
-            res.status(201).json({
-                message_return:"Successfully added video",
-                video: video
-            })
+    try {
+        await video.save()
+        res.status(201).json({
+            message: "Successfully added a new video",
+            video: video
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error:err
-            })
-        });
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
 }
 
-exports.deleteVideo = (req, res, next) => {
+exports.deleteVideo = async (req, res, next) => {
+
     const videoId = req.body.videoId;
 
-    Video
-        .deleteOne({_id: videoId})
-        .exec()
-        .then(result =>{
-            res.status(200).json({
-                message:"Successfully deleted video with id " + videoId,
-                itemsModified :result.deletedCount
-            });
+    try {
+        const data = await Video.findByIdAndDelete(videoId);
+        res.status(200).json({
+            message: "Successfully deleted video with id " + videoId,
+            itemsModified: data.deletedCount
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error:err
-            })
-        });
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
 }
 
-exports.patchVideo = (req, res, next)=>{
+exports.patchVideo =  async (req, res, next) => {
+
     const videoId = req.body.videoId;
 
-    Video
-        .updateOne({_id: videoId}, {$set: {title: req.body.title}})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: "Updated title of video with id: " + videoId,
-                itemsModified: result.nModified
-            })
+    try {
+        const data = await Video.findByIdAndUpdate(videoId, {$set: {title: req.body.title}}, { runValidators: true, new: true})
+        res.status(200).json({
+            message: "Updated title of video with id: " + videoId,
+            itemsModified: data.nModified
         })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        });
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
 }
 
-exports.getVideoById = (req, res, next) => {
+exports.getVideoById = async (req, res, next) => {
+
     const videoId = req.params.videoId
-    Video
-        .findOne({_id: videoId})
-        .exec()
-        .then(data => {
-            res.status(200).json(data)
+
+    try {
+        const data = await Video.findById(videoId)
+        res.status(200).json(data)
+    } catch (e) {
+        res.status(500).json({
+            error: e
         })
+    }
 }
 
-exports.postComment = (req, res, next) => {
+exports.postComment = async (req, res, next) => {
+
     const videoId = req.params.videoId;
+
     const comment = new Comment({
         _id: new mongoose.Types.ObjectId(),
         userId: req.body.userId,
@@ -94,66 +95,52 @@ exports.postComment = (req, res, next) => {
         postTime: new Date(),
     })
 
-    const validatedModel = comment.validateSync();
-    if (!!validatedModel) {
-        res.status(400).json({
-            error: validatedModel
+    try {
+        const data = await Video.findByIdAndUpdate(videoId, {$push: {comments: comment}}, {runValidators: true, new: true})
+        res.status(201).json({
+            message: "Added comment to video",
+            comments: data.comments
         })
-        return;
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
     }
-
-    Video
-        .updateOne({_id: videoId},{$push: {comments: comment}})
-        .exec()
-        .then(result => {
-            res.status(201).json({
-                message: "Added comment to video",
-                comment: comment
-            })
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        });
 }
 
-exports.deleteComment = (req, res, next) => {
+exports.deleteComment =  async (req, res, next) => {
+    
     const videoId = req.params.videoId;
     const commentId = req.body.commentId;
 
-    Video
-        .updateOne({_id: videoId}, {$pull: {comments: {_id: commentId} }})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: "Deleted message with id " + commentId + " from video with id: " + videoId,
-                itemsModified: result.nModified
-            })
+    try {
+        const data = await Video.findByIdAndUpdate(videoId, {$pull: {comments: {_id: commentId} }}, {runValidators: true, new: true})
+        res.status(200).json({
+            message: "Deleted message with id " + commentId + " from video with id: " + videoId,
+            itemsModified: data.nModified
         })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        });
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
 }
 
-exports.patchComment = (req, res, next)=>{
+exports.patchComment =  async (req, res, next) => {
+
     const videoId = req.params.videoId;
     const commentId = req.body.commentId;
+    const commentMsg = req.body.message;
 
-    Video
-        .updateOne({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": req.body.message}})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: "Updated comment with id: " + commentId,
-                itemsModified: result.nModified
-            })
+    try {
+        const data = Video.findByIdAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
+        res.status(200).json({
+            message: "Updated comment with id: " + commentId,
+            itemsModified: data.nModified
         })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
-        });
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
 }

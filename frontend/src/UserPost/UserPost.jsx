@@ -69,8 +69,8 @@ class UserPost extends Component{
 
 
     render(){
-        let dbPosts = this.state.db.map((post, index)=> {
-            return <div className="post" key="index">
+        let dbPosts = this.state.db.map((post, postsIndex)=> {
+            return <div className="post" key={postsIndex}>
                 <p>{post.name}: {post.message}</p>
                 <img src = {post.picture} alt="user pic"></img>
             </div>

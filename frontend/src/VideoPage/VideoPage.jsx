@@ -5,41 +5,48 @@ import React, {Component} from 'react';
 class VideoPage extends Component {
 
     state = {
-        msg: '',
+        userId: "60c27574bf5cbfadcf3b4f12",
+        userName: "Brandon",
+        message: '',
         comments: []
     }
 
     componentDidMount() {
         axios.get('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01')
         .then(res => {
-                console.log(res.data.comments);
-                this.setState({
-                    comments: res.data.comments
-                })
-            }
-        )
+            this.setState({
+                comments: res.data.comments
+            })
+        })
+        .catch((e) => {
+            console.log(e)
+        })
     }
 
     postComment = async () => {
-        await axios.post('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01', {
-            userId: "60c27574bf5cbfadcf3b4f12",
-            userName: "Brandon",
-            message: this.state.msg
+        const res = await axios.post('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01', {
+            userId: this.state.userId,
+            userName: this.state.userName,
+            message: this.state.message
         })
-        const res = await axios.get('http://localhost:5000/api/videos/60c2affa6d8ff3030fd4ea01')
-        this.setState({
-            msg: '',
-            comments: res.data.comments
-        })
+
+        try {
+            this.setState({
+                msg: '',
+                comments: res.data.comments
+            })
+        } catch (e) {
+            console.log(e)
+        }
     }
 
-    updateComment = e => {
+    updateComment = (e) => {
         this.setState({msg: e.target.value})
     }
 
     render(){
-        let commentsSection = this.state.comments.map(comment => {
-            return <li>
+        let commentsSection = this.state.comments.map((comment, commentIndex) => {
+            return <li key={commentIndex}>
                 {comment.userName}: {comment.message}
             </li>
         })
