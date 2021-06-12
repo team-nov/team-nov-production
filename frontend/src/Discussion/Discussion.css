@@ -1,0 +1,34 @@
+/* Each component should have its own css file with the name as the component
+   Note Css Styles of parent will apply to their child componentss
+*/
+
+.discussionContainer {
+  padding: 1em;
+  margin: 1em auto;
+  min-width: 400px;
+  max-width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border-width: 1px;
+  border-color: black;
+  border-style: solid; 
+  border-radius: 5px;
+  background-color: rgb(243, 243, 243);
+}
+
+.DiscussionMessage {
+  width: inherit;
+  margin: 1em 3em 0;
+  float: left;
+  font-size: 1.2em;
+  text-align: left;
+  word-break: break-word;
+}
+
+.postTime{
+  margin-top: 1em;
+  float: right;
+}
