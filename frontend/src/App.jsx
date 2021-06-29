@@ -15,6 +15,7 @@ import Forum from './Forum/Forum'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 import RegistrationPage from "./RegistrationPage/RegistrationPage"
+import Search from './Search/Search';
  
 class App extends Component{
   render(){
@@ -30,7 +31,9 @@ class App extends Component{
             <Route path="/users" component={UserPost} /> */}
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
-            <Route path="/videos" component={Videos} />
+            <Route path="/videos" component={Videos}/> 
+            <Route path="/search" component={Search}/>
+            
             <Route path="/" component={Home} />
           </Switch>
         </Router>

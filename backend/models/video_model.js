@@ -7,5 +7,6 @@ const videoSchema = mongoose.Schema({
     comments: {type: [Comment.schema], default: []}
 });
 
+
 module.exports = mongoose.model('Video', videoSchema);
 
