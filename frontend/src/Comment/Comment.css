@@ -1,0 +1,31 @@
+.commentContainer {
+    padding: 1em;
+    margin: 0 1em 1em 1em;
+    min-width: 400px;
+    max-width: 50%;
+    max-height: 100px;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  
+    border-width: 1px;
+    border-color: yellow;
+    border-style: solid; 
+    border-radius: 5px;
+    background-color: rgb(243, 243, 243);
+  }
+  
+.commentMessage {
+  width: inherit;
+  margin: 1em 2em 1em 2em;
+  float: right;
+  font-size: 12pt;
+  text-align: left;
+  word-break: break-word;
+}
+  
+.postTime{
+  margin-top: 1em;
+  float: left;
+}
