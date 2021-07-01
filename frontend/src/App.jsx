@@ -15,6 +15,7 @@ import Forum from './Forum/Forum'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 import RegistrationPage from "./RegistrationPage/RegistrationPage"
+import LoginPage from "./LoginPage/LoginPage"
  
 class App extends Component{
   render(){
@@ -25,6 +26,7 @@ class App extends Component{
           <br />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
+            <Route path="/login" component={LoginPage} />
             <Route path="/forum" component={Forum} />
             {/* <Route path="/demo" component={Demo} />
             <Route path="/users" component={UserPost} /> */}
