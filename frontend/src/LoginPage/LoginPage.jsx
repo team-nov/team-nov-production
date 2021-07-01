@@ -24,6 +24,7 @@ class LoginPage extends Component {
         .then(res=> {
             if(res.data.success) {
                 sessionStorage.setItem("_id", res.data._id);    
+                sessionStorage.setItem("name", res.data.name);
                 console.log(res.data)
                 window.location.href = '/';
             } else {
