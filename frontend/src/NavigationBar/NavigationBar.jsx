@@ -2,7 +2,26 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class NavigationBar extends Component {
+    // clears the session storage and refreshes the page.
+    handleLogOut() {
+        sessionStorage.clear();
+        window.location.href = '/';
+    }
+
     render() {
+        // conditional rendering
+        // if user isn't logged in, show Login link
+        // else show their name and logout option
+        var loginLink;
+        var logout;
+        if(sessionStorage.getItem("_id") != null) {
+            loginLink = <li className="nav-item"><Link className="nav-link" to="/profile">My Profile</Link></li>;
+            logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;       
+        } else {
+            loginLink = <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>;
+            logout = null;
+        }
+
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
@@ -36,6 +55,8 @@ class NavigationBar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/search">Search</Link>
                             </li>
+                            {loginLink}
+                            {logout}
                             {/* <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
