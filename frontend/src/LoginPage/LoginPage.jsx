@@ -20,7 +20,7 @@ class LoginPage extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        axios.get('http://localhost:5000/api/users/login/' + this.state.username + "," + this.state.password)
+        axios.post('http://localhost:5000/api/users/login/', {username: this.state.username, password: this.state.password})
         .then(res=> {
             if(res.data.success) {
                 sessionStorage.setItem("_id", res.data._id);    

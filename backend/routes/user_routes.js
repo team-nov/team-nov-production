@@ -6,7 +6,7 @@ const router = express.Router();
 const usersController = require('../controllers/user_controller');
 
 // Added user schema for registration
-router.get('/login/:username,:password', usersController.userLogin);
+router.post('/login/', usersController.userLogin);
 router.get('/:userId',usersController.getUserById);
 router.get('/',usersController.getUsers);
 router.get('/:userId', usersController.getUserById);

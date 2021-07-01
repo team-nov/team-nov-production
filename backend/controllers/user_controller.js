@@ -12,12 +12,12 @@ exports.getUsers = (req,res,next) => {
 }
 
 exports.userLogin = (req, res, next) => {
-    let username = req.params.username
+    let username = req.body.username
     console.log(username);
     User.findOne({username:username})
         .exec()
         .then((data)=>{
-            bcrypt.compare(req.params.password, data.password, function(err, isMatch) {
+            bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
                 if(err) {
                     res.status(200).json({"success": false})
                 }
