@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 const serverUrl = "http://localhost:5000/api";
+const viddeosPerRow = 4;
 
 class Videos extends Component {
 
@@ -19,7 +20,7 @@ class Videos extends Component {
     }
 
     render() {
-        return (this.state.videos.map((video, index)=>{
+        let videos = this.state.videos.map((video, index)=>{
             return (
             <div class="card col-3 m-3" style={{"width": "18rem"}}>
                 <img class="card-img-top" src="https://via.placeholder.com/150" alt="oops"/>
@@ -30,7 +31,25 @@ class Videos extends Component {
                 </div>
             </div>
         )
-        }))
+        })
+
+        let videosGrouped=[];
+        for(let i=0;i<videos.length/viddeosPerRow;i++){
+            if(i+viddeosPerRow-1<videos.length){
+                videosGrouped[i] = <div class="row ">
+                    {videos.slice(i,i+viddeosPerRow)}
+                </div>
+            }
+            else{
+                videosGrouped[i] = <div class="row ">
+                    {videos.slice(i,videos.length)}
+                </div>
+            }
+        }
+
+        return(
+            <div className="container-fluid"> {videosGrouped} </div>
+        );
     }
 }
 
