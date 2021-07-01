@@ -40,12 +40,19 @@ class Forum extends Component{
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
+      console.log("UserId: " + this.state.userId);
+      console.log("Discussion Id: " + discussion.userId._id);
+      console.log("Message: " + discussion.message);
+      let sameUser = this.state.userId == discussion.userId._id;
       return <Discussion key = {index}
+                         userId={discussion.userId}
                          picture={discussion.userId.picture} 
                          username={discussion.userId.name}
                          message={discussion.message} 
                          postTime={dateParser(discussion.postTime, 'ddd h:mm a')}
+                         ownDiscussion={sameUser}
                          />
+                         
     })
     discussion = discussion.reverse()
       

@@ -9,6 +9,11 @@ class Discussion extends Component{
         <User username={this.props.username} picture={this.props.picture}/>
         <div className="DiscussionMessage"> {this.props.message} </div>
         <div className="postTime">{this.props.postTime}</div>
+        <div className="modifyPost">
+          {this.props.ownDiscussion ? (<button>Edit</button>) : (<></>)}
+        </div>
+        
+        
       </div>
     )
   }
