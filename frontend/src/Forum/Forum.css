@@ -19,6 +19,11 @@
   background-color: rgb(243, 243, 243);
 }
 
+.forumContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .postInput {
   margin-top: 1em;
   display: flex;
@@ -51,4 +56,5 @@
 
 .discussions {
   flex-direction: column;
+  justify-items: center;
 }

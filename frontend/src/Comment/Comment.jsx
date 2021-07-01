@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
-import User from '../User/User'
+import UserComment from './UserComment'
+import './Comment.css'
 
 class Comment extends Component {
     constructor(props) {
@@ -14,9 +15,9 @@ class Comment extends Component {
     render() {
         return (
             <div className="commentContainer">
-                <User username={this.state.username} picture={this.state.picture}/>
-                <div className="commentMessage"> {"Hi"} </div>
-                <div className="postTime">{this.state.postTime}</div>
+                <UserComment username={this.state.username} picture={this.state.picture}/>
+                <div className="commentMessage"> {"Heljlowajer ;lasjdf ;asldkfj  asd;lfkj as;flk ;laksdj f;laskdf jsal;kfj a;sdlfk la;skdfj as;lk ;askdjf dsa;lkfj ;lk a;lksdf j;alsd f"} </div>
+                <div className="postTimeComment">{this.state.postTime}</div>
             </div>
         )
     }

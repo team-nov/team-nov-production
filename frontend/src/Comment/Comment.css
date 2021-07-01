@@ -3,14 +3,13 @@
     margin: 0 1em 1em 1em;
     min-width: 400px;
     max-width: 50%;
-    max-height: 100px;
+    max-height: 75px;
   
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row ltr;
   
     border-width: 1px;
-    border-color: yellow;
+    border-color: black;
     border-style: solid; 
     border-radius: 5px;
     background-color: rgb(243, 243, 243);
@@ -18,14 +17,16 @@
   
 .commentMessage {
   width: inherit;
-  margin: 1em 2em 1em 2em;
-  float: right;
+  margin: 0 0 1em 0.1em;
+  float: left;
   font-size: 12pt;
   text-align: left;
+  direction: ltr;
   word-break: break-word;
 }
   
-.postTime{
-  margin-top: 1em;
-  float: left;
+.postTimeComment{
+  margin-left: 78%;
+  align-self: flex-end;
+  float: right;
 }
