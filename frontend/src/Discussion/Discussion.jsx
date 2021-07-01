@@ -1,10 +1,13 @@
 import React,{Component} from 'react'
 import './Discussion.css'
 import User from '../User/User'
+import { dateParser } from '../utils/DateParser'
 
 class Discussion extends Component{
   state = {
     isHidden: false,
+    initialPostTime: this.props.postTime,
+    currentPostTime: this.props.postTime,
     initialMessage: this.props.message,
     currentMessage: this.props.message,
   }
@@ -14,11 +17,14 @@ class Discussion extends Component{
   }
 
   onDiscardClick=()=>{
+    this.setState({currentPostTime: this.state.initialPostTime})
     this.setState({currentMessage: this.state.initialMessage})
     this.setState({isHidden:!this.state.isHidden})
   }
 
   onSubmitClick=()=>{
+    this.setState({initialPostTime: dateParser(new Date(), 'ddd h:mm a')})
+    this.setState({currentPostTime: dateParser(new Date(), 'ddd h:mm a')})
     this.setState({initialMessage: this.state.currentMessage})
     this.setState({isHidden:!this.state.isHidden})
   }
@@ -50,7 +56,7 @@ class Discussion extends Component{
         
         <div className="DiscussionMessage" style={{display: this.state.isHidden?"none":"block"}}> {this.state.currentMessage} </div>
         <textarea  className="postTextEntry" onChange={(e)=>{this.edit(e)}} style={{display: !this.state.isHidden?"none":"block"}} value={this.state.currentMessage} rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
-        <div className="postTime">{this.props.postTime}</div>
+        <div className="postTime">{this.state.currentPostTime}</div>
         <div className="modifyPost">
           {this.props.ownDiscussion ? (<button className="editButton" onClick={this.onEditClick} style={{display: this.state.isHidden?"none":"block"}}>Edit</button>) : (<></>)}
           {this.props.ownDiscussion ? (<button className="discardButton" onClick={this.onDiscardClick} style={{display: !this.state.isHidden?"none":"block"}}>Discard</button>) : (<></>)}
