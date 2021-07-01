@@ -5,7 +5,6 @@ const discussionSchema = mongoose.Schema({
     userId: {type: String, ref:'User', required:true},
     message:{type:String, required:true},
     postTime: {type: String, required: true},
-    ownDiscussion:{type: Boolean, default: false},
     comments: {type: Array, default: []}
 });
 
