@@ -56,7 +56,7 @@ class LoginPage extends Component {
                     </div>
                     <div className='field'>
                         <label>Password: </label>
-                        <input type='password' name='password' placeholder='Enter name' onChange={this.handleChange}></input>
+                        <input type='password' name='password' placeholder='Enter password' onChange={this.handleChange}></input>
                     </div>
                     <input className='LoginButton' type='submit' value="Login"></input>
                 </form>

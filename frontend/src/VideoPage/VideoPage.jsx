@@ -56,7 +56,7 @@ class VideoPage extends Component {
         return(
             <div className="container text-start">
                 <h1>{this.state.title}</h1>
-                <img src="https://via.placeholder.com/350x150" alt="oops"/>
+                <img src="https://via.placeholder.com/960x480" class=" w-100"   alt="oops"/>
                 <h4>Comments Section:</h4>
                     <ul className="list-group">
                         {commentsSection}

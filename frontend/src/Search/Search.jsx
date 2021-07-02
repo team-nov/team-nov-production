@@ -56,15 +56,16 @@ class Search extends Component{
             : []
         let videos = this.state.results.map((video,index)=>{
             return (
-                <div class="col p-4">
-            <div class="card" >
-                <img class="card-img-top" src="https://via.placeholder.com/150" alt="oops"/>
+            <div class="col p-3">
+                <a href={"/videos/"+video._id} className="cardLink" >
+            <div class="card text-start" >
+                <img class="card-img-top" src="https://via.placeholder.com/267x150" alt="oops"/>
                 <div class="card-body">
                     <h5 class="card-title">{video.title}</h5>
                     <p class="card-text">Video Author</p>
-                    <a href={"/videos/"+video._id} class="btn btn-primary">Watch video</a>
                 </div>
             </div>
+            </a>
             </div>
           )
         })
