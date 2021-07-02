@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Discussion = require('../models/discussion_model');
+const Comment = require('../models/comment_model');
 
 exports.getDiscussions = (req,res,next) => {
     console.log("Getting all discussions");
@@ -109,3 +110,62 @@ exports.postDiscussions = (req,res,next) => {
             })
         });
 }	
+
+exports.postComment = async (req, res, next) => {
+    const discussionId = req.params.discussionId;
+
+    const comment = new Comment({
+        _id: new mongoose.Types.ObjectId(),
+        userId: req.body.userId,
+        userName: req.body.userName,
+        message: req.body.message,
+        postTime: new Date(),
+    })
+
+    try {
+        const data = await Discussion.findByIdAndUpdate(discussionId, {$push: {comments: comment}}, {runValidators: true, new: true})
+        res.status(201).json({
+            message: "Added comment to discussion",
+            comments: data.comments
+        })
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
+}
+
+exports.deleteComment = async (req, res, next) => {
+    const discussionId = req.params.discussionId;
+    const commentId = req.body.commentId;
+
+    try {
+        const data = await Discussion.findByIdAndUpdate(discussionId, {$pull: {comments: {_id: commentId} }}, {runValidators: true, new: true})
+        res.status(200).json({
+            message: "Deleted message with id " + commentId + " from discussion with id: " + discussionId,
+            itemsModified: data.nModified
+        })
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
+}
+
+exports.patchComment = async (req, res, next) => {
+    const discussionId = req.params.discussionId;
+    const commentId = req.body.commentId;
+    const commentMsg = req.body.message;
+
+    try {
+        const data = await Discussion.findOneAndUpdate({_id: discussionId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
+        res.status(200).json({
+            message: "Updated comment with id: " + commentId,
+            itemsModified: data.nModified
+        })
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
+}
