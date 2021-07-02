@@ -12,29 +12,23 @@ class VideoPage extends Component {
         videoId: this.props.match.params.id,
         message: '',
         comments: [],
-        title:""
+        title: ""
     }
 
     async componentDidMount() {
-        try{
+        try {
             let res = await axios.get('http://localhost:5000/api/videos/'+this.state.videoId);
             await this.setState({
                 title:res.data.title,
                 comments: res.data.comments
             })
 
-        }catch(e){
+        } catch(e){
             console.log(e)
         }
     }
 
     postComment = async () => {
-        const res = await axios.post('http://localhost:5000/api/videos/'+this.state.videoId, {
-            userId: this.state.userId,
-            userName: this.state.userName,
-            message: this.state.message
-        })
-
         try {
             const res = await axios.post('http://localhost:5000/api/videos/' + this.state.videoId, {
                 userId: this.state.userId,
@@ -62,7 +56,8 @@ class VideoPage extends Component {
                                  username={comment.userId.name}
                                  picture={comment.userId.picture}
                                  message={comment.message}
-                                 postTime={dateParser(comment.postTime, 'ddd h:mm a')}/>
+                                 postTime={dateParser(comment.postTime, 'ddd h:mm a')}
+                                 edited={comment.edited}/>
         }).reverse();
         let userComment;
         if (sessionStorage.getItem("_id") != null) {
