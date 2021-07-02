@@ -15,6 +15,20 @@ exports.getVideos = async (req, res, next) => {
     }
 }
 
+// search should be a get request
+exports.searchVideos = async (req,res,next) =>{
+    try{
+        console.log("\/"+req.params.query+"\/");
+        const myRegex = new RegExp(req.params.query)
+        const data = await Video.find({title:{$regex:myRegex}})
+        res.status(200).json(data)
+    } catch(e){
+        res.status(500).json({
+            error: e
+        })
+    }
+}
+
 exports.postVideo = async (req, res, next) => {
 
     const video = new Video({
