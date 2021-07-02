@@ -40,11 +40,8 @@ class Forum extends Component{
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
-      // console.log("UserId: " + this.state.userId);
-      // console.log("Discussion Id: " + discussion.userId._id);
-      // console.log("Message: " + discussion.message);
       let sameUser = this.state.userId === discussion.userId._id;
-      return <Discussion key = {index}
+      return <Discussion key = {discussion._id}
                          discussionId={discussion._id}
                          userId={discussion.userId}
                          picture={discussion.userId.picture} 

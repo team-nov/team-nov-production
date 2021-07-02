@@ -45,7 +45,6 @@ class Discussion extends Component{
   }
 
   onDeleteClick=()=>{
-    console.log("Inputting discussion ID: " + this.state.discussionId);
     axios.delete('http://localhost:5000/api/discussions', {
       data: {
         discussionId: this.state.discussionId,
@@ -81,6 +80,7 @@ class Discussion extends Component{
           {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onSubmitClick} style={{display: !this.state.isHidden?"none":"block"}}>Submit</button>) : (<></>)}
           {this.props.ownDiscussion ? (<button className="btn btn-outline-danger me-sm-2" onClick={this.onDeleteClick} style={{display: this.state.isHidden?"none":"block"}}>Delete</button>) : (<></>)}
         </div>
+        
         
         
       </div>
