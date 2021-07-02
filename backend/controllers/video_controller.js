@@ -106,7 +106,7 @@ exports.postComment = async (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         userId: req.body.userId,
         message: req.body.message,
-        postTime: new Date(),
+        postTime: new Date()
     })
 
     try {
@@ -147,7 +147,8 @@ exports.patchComment = async (req, res, next) => {
     const commentMsg = req.body.message;
 
     try {
-        let data = await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true}).populate('comments.userId')
+        await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
+        await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.edited": true}}, {runValidators: true, new: true})
         data = await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.postTime": new Date()}}, {runValidators: true, new: true}).populate('comments.userId')
         res.status(200).json({
             message: "Updated comment with id: " + commentId,

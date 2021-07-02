@@ -7,22 +7,25 @@ import VideoComment from './VideoComment'
 class VideoPage extends Component {
 
     state = {
-        videoId: '60de9a931b43c60542810555',
         userId: sessionStorage.getItem("_id"),
+        userName: sessionStorage.getItem("name"),
+        videoId: this.props.match.params.id,
         message: '',
-        comments: []
+        comments: [],
+        title: ""
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/api/videos/' + this.state.videoId)
-        .then(res => {
-            this.setState({
+    async componentDidMount() {
+        try {
+            let res = await axios.get('http://localhost:5000/api/videos/'+this.state.videoId);
+            await this.setState({
+                title:res.data.title,
                 comments: res.data.comments
             })
-        })
-        .catch(e => {
+
+        } catch(e){
             console.log(e)
-        })
+        }
     }
 
     postComment = async () => {
@@ -53,12 +56,13 @@ class VideoPage extends Component {
                                  username={comment.userId.name}
                                  picture={comment.userId.picture}
                                  message={comment.message}
-                                 postTime={dateParser(comment.postTime, 'ddd h:mm a')}/>
+                                 postTime={dateParser(comment.postTime, 'ddd h:mm a')}
+                                 edited={comment.edited}/>
         }).reverse();
         let userComment;
         if (sessionStorage.getItem("_id") != null) {
             userComment = 
-                <div className="container">
+                <div className="container p-0">
                     <div className="d-flex">
                         <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.message}/>
                         <button className="btn btn-outline-success" onClick={this.postComment}>Post</button>
@@ -68,15 +72,24 @@ class VideoPage extends Component {
             userComment = null;
         }
         return(
-            <div className="container">
-                <h1>Video Title Here</h1>
-                <h2>Comments Section:</h2>
+            <div className="container text-start">
+                <h1 className="my-4">{this.state.title}</h1>
+                <img class="w-100" src="https://via.placeholder.com/267x150" alt="oops"/>
+               
+                <h4 className="mt-5">Comments</h4>
+               
                 <br/>
                 {userComment}
                 <br/>
-                <div className="container">
+               
                     {commentsSection}
-                </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                
             </div>
         )
     }
