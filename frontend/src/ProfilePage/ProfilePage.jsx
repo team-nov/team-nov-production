@@ -48,6 +48,8 @@ class ProfilePage extends Component {
         })
         this.requestJson["_id"] = this.state._id;
 
+        console.log(this.requestJson);
+
         axios.patch('http://localhost:5000/api/users/profile/', this.requestJson)
         .then(res=> {
             if(res.data.success) {
