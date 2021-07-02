@@ -9,6 +9,7 @@ router.get('/', videosController.getVideos);
 router.post('/', videosController.postVideo);
 router.delete('/', videosController.deleteVideo);
 router.patch('/', videosController.patchVideo);
+router.get('/search/:query',videosController.searchVideos);
 router.get('/:videoId', videosController.getVideoById);
 router.post('/:videoId', videosController.postComment);
 router.delete('/:videoId', videosController.deleteComment);
