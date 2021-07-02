@@ -7,7 +7,7 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60b59cb38b45c9910251659b',
+    userId: sessionStorage.getItem("_id"),
     picture: '',
     name: '',
     message: '',
