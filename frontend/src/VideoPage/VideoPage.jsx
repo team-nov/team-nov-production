@@ -83,6 +83,12 @@ class VideoPage extends Component {
                 <br/>
                
                     {commentsSection}
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                 
             </div>
         )
