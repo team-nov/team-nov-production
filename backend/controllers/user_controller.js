@@ -42,6 +42,25 @@ exports.getUserById = (req,res,next) => {
         })
 }
 
+exports.updateProfile = (req, res, next) => {
+    const id = req.body._id
+
+    User
+        .updateOne({_id: id},{$set:req.body})
+        .exec()
+        .then(result=>{
+            res.status(200).json({
+                message:"Updated user with id: "+id,
+                result:result
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error:err
+            })
+        });
+}
+
 exports.postUsers = (req,res,next) => {
     const user = new User({
         _id: new mongoose.Types.ObjectId(),

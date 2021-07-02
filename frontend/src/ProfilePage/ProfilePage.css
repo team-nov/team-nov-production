@@ -1,0 +1,77 @@
+.ProfilePage {
+    margin:auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    /* background-color: coral; */
+    font-family: 'Trebuchet MS';
+}
+
+.ProfileForm {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    min-width: fit-content;
+    flex-direction: column;
+    text-align: left;
+    /* background-color: navajowhite; */
+    justify-content: center;
+    border-radius: 20px;
+    padding: 5%;
+    margin-top: 20px;
+}
+
+.field label {
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-top: 6px;
+}
+
+.field, .error {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.ProfileForm .field input, .field select, .error {
+    background-color: whitesmoke;
+    color: grey; 
+    padding: 0.75em;
+    border: none;
+    border-radius: 5px;
+}
+
+.error {
+    background-color: #ff4545;
+    color: black;
+    display: none;
+}
+
+.ProfileForm .ProfileButton {
+    color: white;
+    background-color: navy;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.field select:hover {
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+}
+
+.ProfileButton:hover {
+    background-color: rgb(93, 93, 255);
+    cursor: pointer;
+}
+
+.ProfileForm ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
