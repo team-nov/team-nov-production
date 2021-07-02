@@ -5,26 +5,29 @@ import React, {Component} from 'react';
 class VideoPage extends Component {
 
     state = {
-        userId: "60b59ba85a6d38aa91d77715",
-        userName: "Aysha",
+        userId: sessionStorage.getItem("_id"),
+        userName: sessionStorage.getItem("name"),
         message: '',
-        comments: []
+        comments: [],
+        title:""
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/api/videos/60c41d5dc2ee4103efaa52c0')
-        .then(res => {
-            this.setState({
+    async componentDidMount() {
+        try{
+            let videoId = this.props.match.params.id;
+            let res = await axios.get('http://localhost:5000/api/videos/'+videoId);
+            await this.setState({
+                title:res.data.title,
                 comments: res.data.comments
             })
-        })
-        .catch((e) => {
+
+        }catch(e){
             console.log(e)
-        })
+        }
     }
 
     postComment = async () => {
-        const res = await axios.post('http://localhost:5000/api/videos/60c41d5dc2ee4103efaa52c0', {
+        const res = await axios.post('http://localhost:5000/api/videos/'+this.props.match.params.id, {
             userId: this.state.userId,
             userName: this.state.userName,
             message: this.state.message
@@ -46,24 +49,20 @@ class VideoPage extends Component {
 
     render(){
         let commentsSection = this.state.comments.map((comment, commentIndex) => {
-            return <li key={commentIndex}>
+            return <li className="list-group-item" key={commentIndex}>
                 {comment.userName}: {comment.message}
             </li>
         })
         return(
-            <div className="container">
-                <h1>Video Title Here</h1>
-                <h2>Comments Section:</h2>
-                <div className="container">
-                    <ul>
+            <div className="container text-start">
+                <h1>{this.state.title}</h1>
+                <img src="https://via.placeholder.com/350x150" alt="oops"/>
+                <h4>Comments Section:</h4>
+                    <ul className="list-group">
                         {commentsSection}
                     </ul>
-                </div>
-                <div className="container">
                     <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.msg}/>
-                </div>
-                <button onClick={this.postComment}>Post Comment</button>
-                <Link className="nav-link" to="/videos">Back</Link>
+                <button class="btn btn-primary" onClick={this.postComment}>Post Comment</button>
             </div>
         )
     }
