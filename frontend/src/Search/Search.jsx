@@ -14,7 +14,7 @@ class Search extends Component{
     }
     getAllResults = async()=>{
         let res = await axios.get(serverUrl+"/videos");
-        await this.setState({results:res.data});
+        await this.setState({results:res.data, suggestions:[]});
         this.resultsToSuggestions(res.data)
     }
     getSearchSuggestions = async()=>{
@@ -23,7 +23,7 @@ class Search extends Component{
     }
     getSearchResults =async()=>{
         let res = await axios.get(serverUrl+"/videos/search/"+this.state.value);
-        this.setState({results:res.data, suggestions:[]})
+        this.setState({results:res.data, suggestions:[],value:""})
     }
     resultsToSuggestions = async(results)=>{
         let suggestions = results.map(res=>res.title)
@@ -83,6 +83,9 @@ class Search extends Component{
                         </div>
                         <div class="input-group-append">
                             <button class="btn btn-primary" onClick={this.onSearchButtonClick}>Search</button>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" onClick={this.getAllResults}>View All Results</button>
                         </div>
                         <ul class="list-group w-75 ">
                             {options}
