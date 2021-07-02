@@ -7,7 +7,7 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60b59ba85a6d38aa91d77715',
+    userId: '60b59cb38b45c9910251659b',
     picture: '',
     name: '',
     message: '',
@@ -40,11 +40,12 @@ class Forum extends Component{
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
-      console.log("UserId: " + this.state.userId);
-      console.log("Discussion Id: " + discussion.userId._id);
-      console.log("Message: " + discussion.message);
+      // console.log("UserId: " + this.state.userId);
+      // console.log("Discussion Id: " + discussion.userId._id);
+      // console.log("Message: " + discussion.message);
       let sameUser = this.state.userId === discussion.userId._id;
       return <Discussion key = {index}
+                         discussionId={discussion._id}
                          userId={discussion.userId}
                          picture={discussion.userId.picture} 
                          username={discussion.userId.name}
@@ -53,8 +54,7 @@ class Forum extends Component{
                          ownDiscussion={sameUser}
                          />
                          
-    })
-    discussion = discussion.reverse()
+    }).reverse()
       
     return (
     <div>

@@ -26,7 +26,8 @@ exports.getOneDiscussion = (req, res, next) => {
 }
 
 exports.patchDiscussion = (req, res, next) => {
-    
+
+    console.log("Discussion ID: " + req);
     toUpdate = Discussion.findById(req.body.discussionId).exec().then((data)=>{
 
         if (data == null) {
@@ -35,7 +36,7 @@ exports.patchDiscussion = (req, res, next) => {
             });
         }
 
-        else if (req.body.userId === data.userId) {
+        else if (req.body.userId._id === data.userId) {
             Discussion
                 .findByIdAndUpdate(req.body.discussionId, { message: req.body.message })
                 .exec()
@@ -59,13 +60,15 @@ exports.deleteDiscussion = (req, res, next) => {
 
     toDelete = Discussion.findById(req.body.discussionId).exec().then((data)=>{
 
+        console.log(data);
+
         if (data == null) {
             res.status(404).json({
                 message_return: "No such discussion."
             });
         }
 
-        else if (req.body.userId === data.userId) {
+        else if (req.body.userId._id === data.userId) {
             Discussion
                 .findByIdAndDelete(req.body.discussionId)
                 .exec()

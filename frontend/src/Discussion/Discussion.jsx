@@ -2,14 +2,18 @@ import React,{Component} from 'react'
 import './Discussion.css'
 import User from '../User/User'
 import { dateParser } from '../utils/DateParser'
+import axios from 'axios'
 
 class Discussion extends Component{
   state = {
+    userId: this.props.userId,
+    discussionId: this.props.discussionId,
     isHidden: false,
     initialPostTime: this.props.postTime,
     currentPostTime: this.props.postTime,
     initialMessage: this.props.message,
     currentMessage: this.props.message,
+    returnMessage: "",
   }
 
   onEditClick=()=>{
@@ -23,10 +27,28 @@ class Discussion extends Component{
   }
 
   onSubmitClick=()=>{
-    this.setState({initialPostTime: dateParser(new Date(), 'ddd h:mm a')})
-    this.setState({currentPostTime: dateParser(new Date(), 'ddd h:mm a')})
-    this.setState({initialMessage: this.state.currentMessage})
-    this.setState({isHidden:!this.state.isHidden})
+    axios.patch('http://localhost:5000/api/discussions', {
+      userId: this.state.userId,
+      discussionId: this.state.discussionId,
+      message: this.state.currentMessage,
+      postTime: new Date(),
+    })
+    .then(()=> {
+      this.setState({initialPostTime: dateParser(new Date(), 'ddd h:mm a')})
+      this.setState({currentPostTime: dateParser(new Date(), 'ddd h:mm a')})
+      this.setState({initialMessage: this.state.currentMessage})
+      this.setState({isHidden:!this.state.isHidden})
+      
+    })
+    .catch((e)=>console.log(e))
+  }
+
+  onDeleteClick=()=>{
+    axios.delete('http://localhost:5000/api/discussions', {
+      discussionId: this.state.discussionId,
+    })
+    .catch((e)=>console.log(e))
+
   }
   
   onClick=()=>{
@@ -37,18 +59,6 @@ class Discussion extends Component{
     this.setState({currentMessage:e.target.value})
   }
 
-  modifyText=(e)=> {
-    console.log( e.target.parentNode.style);
-    //e.target.parentNode.style.display = 'none';
-    e.target.style.display = 'none';
-
-    this.setState({
-      message: 'Changed message',
-      isHidden: !this.state.isHidden
-    });
-  }
-
-
   render(){
     return (
       <div className="discussionContainer">
@@ -57,10 +67,11 @@ class Discussion extends Component{
         <div className="DiscussionMessage" style={{display: this.state.isHidden?"none":"block"}}> {this.state.currentMessage} </div>
         <textarea  className="postTextEntry" onChange={(e)=>{this.edit(e)}} style={{display: !this.state.isHidden?"none":"block"}} value={this.state.currentMessage} rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
         <div className="postTime">{this.state.currentPostTime}</div>
-        <div className="modifyPost">
-          {this.props.ownDiscussion ? (<button className="editButton" onClick={this.onEditClick} style={{display: this.state.isHidden?"none":"block"}}>Edit</button>) : (<></>)}
-          {this.props.ownDiscussion ? (<button className="discardButton" onClick={this.onDiscardClick} style={{display: !this.state.isHidden?"none":"block"}}>Discard</button>) : (<></>)}
-          {this.props.ownDiscussion ? (<button className="submitButton" onClick={this.onSubmitClick} style={{display: !this.state.isHidden?"none":"block"}}>Submit</button>) : (<></>)}
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onEditClick} style={{display: this.state.isHidden?"none":"block"}}>Edit</button>) : (<></>)}
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onDiscardClick} style={{display: !this.state.isHidden?"none":"block"}}>Discard</button>) : (<></>)}
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onSubmitClick} style={{display: !this.state.isHidden?"none":"block"}}>Submit</button>) : (<></>)}
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-danger me-sm-2" onClick={this.onDeleteClick} style={{display: this.state.isHidden?"none":"block"}}>Delete</button>) : (<></>)}
         </div>
         
         
