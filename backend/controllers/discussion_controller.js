@@ -8,6 +8,7 @@ exports.getDiscussions = (req,res,next) => {
     Discussion
         .find()
         .populate('userId')
+        .populate('comments.userId')
         .exec()
         .then((data)=>{
             res.status(200).json(data)
@@ -20,8 +21,11 @@ exports.getOneDiscussion = (req, res, next) => {
 
     Discussion
         .findById(req.params.discussionId)
+        .populate('userId')
+        .populate('comments.userId')
         .exec()
         .then((data)=>{
+            console.log(data)
             res.status(200).json(data)
         })
 }
@@ -89,7 +93,7 @@ exports.postDiscussions = (req,res,next) => {
     const discussion = new Discussion({
         _id: new mongoose.Types.ObjectId(),
         message: req.body.message,
-        userId: req.body.userId,
+        userId: new mongoose.Types.ObjectId(req.body.userId),
         postTime: new Date(),
     });
 
@@ -116,8 +120,6 @@ exports.postComment = async (req, res, next) => {
     const comment = new Comment({
         _id: new mongoose.Types.ObjectId(),
         userId: new mongoose.Types.ObjectId(req.body.userId),
-        userName: req.body.userName,
-        picture: req.body.picture,
         message: req.body.message,
         postTime: new Date(),
     })

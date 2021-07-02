@@ -1,6 +1,7 @@
 const express =require('express');
 const mongoose = require('mongoose');
 const User = require('../models/user_model');
+const bcrypt = require('bcryptjs');
 
 exports.getUsers = (req,res,next) => {
     User.find()
@@ -10,12 +11,34 @@ exports.getUsers = (req,res,next) => {
         })
 }
 
+exports.userLogin = (req, res, next) => {
+    let username = req.body.username
+    console.log(username);
+    User.findOne({username:username})
+        .exec()
+        .then((data)=>{
+            bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
+                if(err) {
+                    res.status(200).json({"success": false})
+                }
+                if(isMatch) {
+                    console.log("Password Matched");
+                    res.status(200).json({"_id": data._id,"name": data.name, "typeOfUser":data.typeOfUser, "success": true});
+                } else {
+                    console.log("Password Did Not Match");
+                    res.status(200).json({"success": false})
+                }
+            });
+        })
+}
+
 exports.getUserById = (req,res,next) => {
     let id = req.params.userId
     User
         .findOne({_id:id})
         .exec()
         .then((data)=>{
+            console.log(data);
             res.status(200).json(data)
         })
 }

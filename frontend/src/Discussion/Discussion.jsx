@@ -15,19 +15,14 @@ class Discussion extends Component{
         <div className="discussionContainer">
           <User username={this.props.username} picture={this.props.picture}/>
           <div className="DiscussionMessage"> 
-          <Link to={{
-            pathname: discRoute,
-            state: {
-              username: this.props.username,
-              picture: this.props.picture,
-            }
-            }}>{this.props.message}</Link>
+          <Link to={discRoute}>{this.props.message}</Link>
           </div>
           <div className="postTime">{this.props.postTime}</div>
         </div>
         <div>
           <CommentEntry 
           discussionId={this.props.id}
+          userId={this.props.userId}
           commentUsername={this.props.username} 
           commentPicture={this.props.picture}>
           </CommentEntry>

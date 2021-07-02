@@ -8,10 +8,18 @@ class CommentEntry extends Component {
         super(props);
         this.state = {
             discussionId: props.discussionId,
-            username : props.commentUsername,
-            picture : props.commentPicture,
+            userId: sessionStorage.getItem("_id"),
+            username : sessionStorage.getItem("name"),
+            picture : '',
             message : '',
         }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:5000/api/users/' + this.state.userId)
+        .then(res=>this.setState(
+            {picture: res.data.picture}))
+        .catch((e)=>console.log(e))
     }
 
     updateCommentInput=(e)=>{
@@ -21,8 +29,6 @@ class CommentEntry extends Component {
     addComment=()=>{
         axios.post(`http://localhost:5000/api/discussions/${this.state.discussionId}`, {
           userId: this.state.userId,
-          userName: this.state.username,
-          picture: this.state.picture,
           message: this.state.message,
         })
         .then(res=>this.setState({discussions: res.data}))

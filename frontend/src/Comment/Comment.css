@@ -16,9 +16,10 @@
   }
   
 .commentMessage {
-  width: 77%;
+  width: fit-content;
   max-height: fit-content;
   margin: 0 0 1em 0.1em;
+  margin-left: 20%;
   float: left;
   font-size: 12pt;
   text-align: left;

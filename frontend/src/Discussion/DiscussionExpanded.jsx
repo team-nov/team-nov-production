@@ -12,40 +12,52 @@ class DiscussionExpanded extends Component {
         discussion: 'null',
         discPicture: '',
         discUsername: '',
+        discUserId: '',
         discussionComments: []
     }
 
     componentDidMount() {
 
         const { id } = this.props.match.params
-        console.log(this.props.match.params);
-        const username = this.props.location.state.username;
-        const picture = this.props.location.state.picture;
-        
+        console.log("expanded is asdfds" + id);
+
         let url_string = `http://localhost:5000/api/discussions/${id}`;
         console.log("url is " + url_string);
 
-        axios.get(`http://localhost:5000/api/discussions/${id}`)
+        axios.get(url_string)
         .then(res => {
             console.log(res.data.message);
+            console.log(res.data.userId.picture);
+            console.log(res.data.userId.name);
             this.setState({
                 discussion: res.data,
                 discussionComments: res.data.comments,
-                discUsername: username,
-                discPicture: picture
+                discUserId: res.data.userId,
+                discPicture: res.data.userId.picture,
+                discUsername: res.data.userId.name
             })
         })
         .catch((e) => {
             console.log(e)
         })
+
+        // axios.get('http://localhost:5000/api/users/' + this.state.discUserId)
+        // .then(res=>this.setState(
+        //     {
+        //         discUsername: res.data.name,
+        //         discPicture: res.data.picture
+        //     }))
+        // .catch((e)=>console.log(e))
+        
     }
 
     render() {
         console.log("helo");
         let comments = this.state.discussionComments.map((comments, index) => {
+            console.log(comments.userId.picture);
             return <Comment key = {index}
-                            picture = {comments.picture} 
-                            username = {comments.userName}
+                            picture = {comments.userId.picture} 
+                            username = {comments.userId.username}
                             message = {comments.message}
                             postTime = {dateParser(comments.postTime, 'ddd h:mm a')}
                             />

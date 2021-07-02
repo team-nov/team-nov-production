@@ -1,7 +1,7 @@
 .userCommentContainer {
   display: flex;
   align-items: flex-start;
-  margin-right: 15px;
+  margin-right: auto;
   max-width: 75px;
 }
   
@@ -14,7 +14,7 @@
 }
   
 .userNameComment {
-  margin: 0 0.5em;
+  margin-right: auto;
   font-size: 12pt;
   font-weight: bold;
 }

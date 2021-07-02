@@ -7,9 +7,9 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60b59ec58bf12a00f949c1e4', //change to sessionStorage later
+    userId: sessionStorage.getItem("_id"), //change to sessionStorage later
     picture: '',
-    name: '',
+    name: sessionStorage.getItem("name"),
     message: '',
     discussions: [],
   }
@@ -17,7 +17,7 @@ class Forum extends Component{
   componentDidMount() {
     axios.get('http://localhost:5000/api/users/' + this.state.userId)
       .then(res=>this.setState(
-        {picture: res.data.picture, name: res.data.name}))
+        {picture: res.data.picture}))
       .catch((e)=>console.log(e))
 
     axios.get('http://localhost:5000/api/discussions')
@@ -43,6 +43,7 @@ class Forum extends Component{
       return <div>
           <Discussion key = {index}
             id={discussion._id}
+            userId={discussion.userId}
             picture={discussion.userId.picture} 
             username={discussion.userId.name}
             message={discussion.message} 
