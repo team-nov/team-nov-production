@@ -38,6 +38,7 @@ exports.getUserById = (req,res,next) => {
         .findOne({_id:id})
         .exec()
         .then((data)=>{
+            console.log(data);
             res.status(200).json(data)
         })
 }

@@ -7,24 +7,24 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60b59ba85a6d38aa91d77715',
+    userId: sessionStorage.getItem("_id"), //change to sessionStorage later
     picture: '',
-    name: '',
+    name: sessionStorage.getItem("name"),
     message: '',
-    discussions: []
+    discussions: [],
   }
 
   componentDidMount() {
     axios.get('http://localhost:5000/api/users/' + this.state.userId)
       .then(res=>this.setState(
-        {picture: res.data.picture, name: res.data.name}))
+        {picture: res.data.picture}))
       .catch((e)=>console.log(e))
 
     axios.get('http://localhost:5000/api/discussions')
       .then(res=>this.setState({discussions: res.data}))
       .catch((e)=>console.log(e))
   }
-  
+
   updateInput=(e)=>{
     this.setState({message:e.target.value});
   }
@@ -40,15 +40,17 @@ class Forum extends Component{
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
-      return <Discussion key = {index}
-                         picture={discussion.userId.picture} 
-                         username={discussion.userId.name}
-                         message={discussion.message} 
-                         postTime={dateParser(discussion.postTime, 'ddd h:mm a')}
-                         />
+      return <div>
+          <Discussion key = {index}
+            id={discussion._id}
+            userId={discussion.userId}
+            picture={discussion.userId.picture} 
+            username={discussion.userId.name}
+            message={discussion.message} 
+            postTime={dateParser(discussion.postTime, 'ddd h:mm a')}/>
+        </div>
     })
     discussion = discussion.reverse()
-      
     return (
     <div>
       <div className="forumContainer">
@@ -58,7 +60,9 @@ class Forum extends Component{
           <button className="postButton" onClick={this.addDiscussion}> Post </button>
         </form>
       </div>
-      <div className="discussions">{discussion}</div>
+      <div className="discussions">
+        {discussion}
+      </div>
     </div>
     )
   }
