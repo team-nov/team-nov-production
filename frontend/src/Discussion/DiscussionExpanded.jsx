@@ -40,15 +40,6 @@ class DiscussionExpanded extends Component {
         .catch((e) => {
             console.log(e)
         })
-
-        // axios.get('http://localhost:5000/api/users/' + this.state.discUserId)
-        // .then(res=>this.setState(
-        //     {
-        //         discUsername: res.data.name,
-        //         discPicture: res.data.picture
-        //     }))
-        // .catch((e)=>console.log(e))
-        
     }
 
     render() {
@@ -57,7 +48,7 @@ class DiscussionExpanded extends Component {
             console.log(comments.userId.picture);
             return <Comment key = {index}
                             picture = {comments.userId.picture} 
-                            username = {comments.userId.username}
+                            username = {comments.userId.name}
                             message = {comments.message}
                             postTime = {dateParser(comments.postTime, 'ddd h:mm a')}
                             />
