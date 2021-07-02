@@ -14,7 +14,7 @@ class Search extends Component{
     }
     getAllResults = async()=>{
         let res = await axios.get(serverUrl+"/videos");
-        await this.setState({results:res.data});
+        await this.setState({results:res.data, suggestions:[]});
         this.resultsToSuggestions(res.data)
     }
     getSearchSuggestions = async()=>{
@@ -23,7 +23,7 @@ class Search extends Component{
     }
     getSearchResults =async()=>{
         let res = await axios.get(serverUrl+"/videos/search/"+this.state.value);
-        this.setState({results:res.data, suggestions:[]})
+        this.setState({results:res.data, suggestions:[],value:""})
     }
     resultsToSuggestions = async(results)=>{
         let suggestions = results.map(res=>res.title)
@@ -56,13 +56,16 @@ class Search extends Component{
             : []
         let videos = this.state.results.map((video,index)=>{
             return (
-            <div class="card col-2 m-3" >
-                <img class="card-img-top" src="https://via.placeholder.com/150" alt="oops"/>
+            <div class="col p-3 ">
+                <a href={"/videos/"+video._id} className="cardLink" >
+            <div class="card text-start h-100" >
+                <img class="card-img-top" src="https://via.placeholder.com/267x150" alt="oops"/>
                 <div class="card-body">
                     <h5 class="card-title">{video.title}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Watch video</a>
+                    <p class="card-text">Video Author</p>
                 </div>
+            </div>
+            </a>
             </div>
           )
         })
@@ -81,6 +84,9 @@ class Search extends Component{
                         <div class="input-group-append">
                             <button class="btn btn-primary" onClick={this.onSearchButtonClick}>Search</button>
                         </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" onClick={this.getAllResults}>View All Results</button>
+                        </div>
                         <ul class="list-group w-75 ">
                             {options}
                         </ul>
@@ -88,10 +94,11 @@ class Search extends Component{
                     
                 </div>
                 
-                <div className="container-fluid">
-                <div className="d-flex flex-row flex-wrap justify-content-around p-5">
-                    {videos}
-                </div>
+                <div className="container-fluid p-5">
+                    <div className=" row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                        {videos}
+                    </div>
+                    
 
                 </div>
             </div>

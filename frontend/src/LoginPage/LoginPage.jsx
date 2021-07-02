@@ -28,7 +28,6 @@ class LoginPage extends Component {
                 console.log(res.data)
                 window.location.href = '/';
             } else {
-                console.log("error");
                 this.showError();
             }
             
@@ -52,11 +51,11 @@ class LoginPage extends Component {
                     </div>
                     <div className='field'>
                         <label>Username: </label>
-                        <input type='text' name='username' placeholder='Enter name' onChange={this.handleChange}></input>
+                        <input type='text' name='username' placeholder='Enter name' onChange={this.handleChange} required></input>
                     </div>
                     <div className='field'>
                         <label>Password: </label>
-                        <input type='password' name='password' placeholder='Enter name' onChange={this.handleChange}></input>
+                        <input type='password' name='password' placeholder='Enter name' onChange={this.handleChange} required></input>
                     </div>
                     <input className='LoginButton' type='submit' value="Login"></input>
                 </form>

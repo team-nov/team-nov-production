@@ -15,8 +15,10 @@ import Forum from './Forum/Forum'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 import RegistrationPage from "./RegistrationPage/RegistrationPage"
+import DiscussionExpanded from './Discussion/DiscussionExpanded';
 import Search from './Search/Search';
 import LoginPage from "./LoginPage/LoginPage"
+import ProfilePage from "./ProfilePage/ProfilePage"
  
 class App extends Component{
   render(){
@@ -27,14 +29,15 @@ class App extends Component{
           <br />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
+            <Route path="/forum/:id" component={DiscussionExpanded}/>
             <Route path="/login" component={LoginPage} />
+            <Route path="/profile" component={ProfilePage}/>
             <Route path="/forum" component={Forum} />
             {/* <Route path="/demo" component={Demo} />
             <Route path="/users" component={UserPost} /> */}
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
-            <Route path="/videos" component={Videos}/> 
-            <Route path="/search" component={Search}/>
+            <Route path="/videos" component={Search}/>
             
             <Route path="/" component={Home} />
           </Switch>

@@ -17,18 +17,22 @@ exports.userLogin = (req, res, next) => {
     User.findOne({username:username})
         .exec()
         .then((data)=>{
-            bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
-                if(err) {
-                    res.status(200).json({"success": false})
-                }
-                if(isMatch) {
-                    console.log("Password Matched");
-                    res.status(200).json({"_id": data._id,"name": data.name, "typeOfUser":data.typeOfUser, "success": true});
-                } else {
-                    console.log("Password Did Not Match");
-                    res.status(200).json({"success": false})
-                }
-            });
+            if(data != null) {
+                bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
+                    if(err) {
+                        res.status(200).json({"success": false})
+                    }
+                    if(isMatch) {
+                        console.log("Password Matched");
+                        res.status(200).json({"_id": data._id,"name": data.name, "typeOfUser":data.typeOfUser, "success": true});
+                    } else {
+                        console.log("Password Did Not Match");
+                        res.status(200).json({"success": false})
+                    }
+                });
+            } else {
+                res.status(200).json({success: false})
+            }
         })
 }
 
@@ -38,8 +42,44 @@ exports.getUserById = (req,res,next) => {
         .findOne({_id:id})
         .exec()
         .then((data)=>{
+            console.log(data);
             res.status(200).json(data)
         })
+}
+
+exports.updateProfile = (req, res, next) => {
+    const id = req.body._id
+
+    var password = req.body.password;
+    
+    bcrypt.genSalt(10, function (saltError, salt) {
+        if(saltError) {
+            return next(saltError);
+        } else {
+            bcrypt.hash(password, salt, function(hashError, hash) {
+                if(hashError) {
+                    return next(hashError)
+                }
+                console.log("hash: " + hash);
+                req.body.password = hash;
+                console.log("req.body.password1: " + req.body.password);
+                console.log(req.body)
+                User
+                    .updateOne({_id: id},{$set:req.body})
+                    .exec()
+                    .then(result=>{
+                        res.status(200).json({
+                            success: true
+                        })
+                    })
+                    .catch(err=>{
+                        res.status(500).json({
+                            error:err
+                        })
+                    });
+            })
+        }
+    })
 }
 
 exports.postUsers = (req,res,next) => {

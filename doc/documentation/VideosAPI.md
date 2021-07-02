@@ -11,6 +11,13 @@
         - type : String
         - The _id of the video
 
+## GET/Search/:query
+- Return video whose titles match query
+- Params
+    - `query`
+        - type : String
+        - The search query
+
 ## POST
 - Creates a new video
 - Params

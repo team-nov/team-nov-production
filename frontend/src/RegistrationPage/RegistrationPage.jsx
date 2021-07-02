@@ -47,27 +47,27 @@ class RegistrationPage extends Component {
                     <h3>Please fill in this form to register your account.</h3>
                     <div className='field'>
                         <label>Name: </label>
-                        <input type='text' name='name' placeholder='Enter name' onChange={this.handleChange}></input>
+                        <input type='text' name='name' placeholder='Enter name' onChange={this.handleChange} required></input>
                     </div>
                     <div className='field'>
                         <label>Email: </label>
-                        <input type='text' name='email' placeholder='Enter email' onChange={this.handleChange}></input>
+                        <input type='text' name='email' placeholder='Enter email' onChange={this.handleChange} required></input>
                     </div>
                     <div className='field'>
                         <label>Picture: </label>
-                        <input type='text' name='picture' placeholder='Enter picture url'onChange={this.handleChange}></input>
+                        <input type='text' name='picture' placeholder='Enter picture url'onChange={this.handleChange} required></input>
                     </div>
                     <div className='field'>
                         <label>Username: </label>
-                        <input type='text' name='username' placeholder='Enter username' onChange={this.handleChange}></input>
+                        <input type='text' name='username' placeholder='Enter username' onChange={this.handleChange} required></input>
                     </div>
                     <div className='field'>
                         <label>Password: </label>
-                        <input type='password' name='password' placeholder='Enter password' onChange={this.handleChange}></input>
+                        <input type='password' name='password' placeholder='Enter password' onChange={this.handleChange} required></input>
                     </div>
                     <div className='field'>
                         <label>Type of User: </label>
-                        <select name='typeOfUser' onChange={this.handleChange}>
+                        <select name='typeOfUser' onChange={this.handleChange} required>
                             <option value=''>--</option>
                             <option value='mentee'>Mentee</option>
                             <option value='mentor'>Mentor</option>
