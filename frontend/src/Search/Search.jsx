@@ -56,9 +56,9 @@ class Search extends Component{
             : []
         let videos = this.state.results.map((video,index)=>{
             return (
-            <div class="col p-3">
+            <div class="col p-3 ">
                 <a href={"/videos/"+video._id} className="cardLink" >
-            <div class="card text-start" >
+            <div class="card text-start h-100" >
                 <img class="card-img-top" src="https://via.placeholder.com/267x150" alt="oops"/>
                 <div class="card-body">
                     <h5 class="card-title">{video.title}</h5>
@@ -92,7 +92,7 @@ class Search extends Component{
                 </div>
                 
                 <div className="container-fluid p-5">
-                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                    <div className=" row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         {videos}
                     </div>
                     
