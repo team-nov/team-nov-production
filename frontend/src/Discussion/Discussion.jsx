@@ -9,6 +9,7 @@ class Discussion extends Component{
     userId: this.props.userId,
     discussionId: this.props.discussionId,
     isHidden: false,
+    discussionHide: false,
     initialPostTime: this.props.postTime,
     currentPostTime: this.props.postTime,
     initialMessage: this.props.message,
@@ -44,8 +45,15 @@ class Discussion extends Component{
   }
 
   onDeleteClick=()=>{
+    console.log("Inputting discussion ID: " + this.state.discussionId);
     axios.delete('http://localhost:5000/api/discussions', {
-      discussionId: this.state.discussionId,
+      data: {
+        discussionId: this.state.discussionId,
+        userId: this.state.userId
+      }
+    })
+    .then(()=> {
+      this.setState({discussionHide:!this.state.discussionHide})
     })
     .catch((e)=>console.log(e))
 
@@ -61,7 +69,7 @@ class Discussion extends Component{
 
   render(){
     return (
-      <div className="discussionContainer">
+      <div className="discussionContainer" style={{display: this.state.discussionHide?"none":"block"}}>
         <User username={this.props.username} picture={this.props.picture}/>
         
         <div className="DiscussionMessage" style={{display: this.state.isHidden?"none":"block"}}> {this.state.currentMessage} </div>

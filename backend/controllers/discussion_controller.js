@@ -27,7 +27,6 @@ exports.getOneDiscussion = (req, res, next) => {
 
 exports.patchDiscussion = (req, res, next) => {
 
-    console.log("Discussion ID: " + req);
     toUpdate = Discussion.findById(req.body.discussionId).exec().then((data)=>{
 
         if (data == null) {
@@ -60,7 +59,6 @@ exports.deleteDiscussion = (req, res, next) => {
 
     toDelete = Discussion.findById(req.body.discussionId).exec().then((data)=>{
 
-        console.log(data);
 
         if (data == null) {
             res.status(404).json({
