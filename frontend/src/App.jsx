@@ -15,6 +15,7 @@ import Forum from './Forum/Forum'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 import RegistrationPage from "./RegistrationPage/RegistrationPage"
+import DiscussionExpanded from './Discussion/DiscussionExpanded';
 import Search from './Search/Search';
 import LoginPage from "./LoginPage/LoginPage"
 import ProfilePage from "./ProfilePage/ProfilePage"
@@ -28,6 +29,7 @@ class App extends Component{
           <br />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
+            <Route path="/forum/:id" component={DiscussionExpanded}/>
             <Route path="/login" component={LoginPage} />
             <Route path="/profile" component={ProfilePage}/>
             <Route path="/forum" component={Forum} />
