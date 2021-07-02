@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, {Component} from 'react';
 import { dateParser } from '../utils/DateParser'
 import './VideoCommentUser.css'
+import VideoComment from './VideoComment'
 
 class VideoPage extends Component {
 
@@ -24,10 +25,6 @@ class VideoPage extends Component {
         })
     }
 
-    componentDidUpdate() {
-        this.render();
-    }
-
     postComment = async () => {
         try {
             const res = await axios.post('http://localhost:5000/api/videos/' + this.state.videoId, {
@@ -47,61 +44,18 @@ class VideoPage extends Component {
         this.setState({message: e.target.value})
     }
 
-    deleteComment = async (videoId, commentId) => {
-        try {
-            const res = await axios.delete('http://localhost:5000/api/videos/' + videoId, {
-                data: {
-                    commentId: commentId
-                }
-            });
-            this.setState({
-                comments: res.data.comments
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    getCommentUser = (username, picture) => {
-        return (
-            <div className="userCommentContainer">
-              <img className="commentProfilePic" src={picture} alt=""/>
-              <span className="userNameComment"> {username} </span>
-            </div>
-          )
-    }
-
-    getComment = (commentIndex, videoId, commentId, username, picture, commentMessage, postTime) => {
-        return (
-            <div key={commentIndex} className="card">
-                <div className="card-body">
-                    <div className="d-flex justify-content-between">
-                        {this.getCommentUser(username, picture)}
-                        {postTime}
-                    </div>
-                    <div className="text-start">
-                        {commentMessage}
-                    </div>
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button className="btn btn-sm btn-outline-secondary me-md-2" type="button">Edit</button>
-                        <button onClick={() => this.deleteComment(videoId, commentId)} className="btn btn-sm btn-outline-danger" type="button">Delete</button>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     render() {
-        const commentsSection = this.state.comments.map((comment, commentIndex) => {
-            return this.getComment( commentIndex, 
-                                    this.state.videoId, 
-                                    comment._id, 
-                                    comment.userId.name, 
-                                    comment.userId.picture, 
-                                    comment.message, 
-                                    dateParser(comment.postTime, 'ddd h:mm a'));
+        const commentsSection = this.state.comments.map((comment) => {
+            return <VideoComment key={comment._id}
+                                 userId={comment.userId._id}
+                                 videoId={this.state.videoId}
+                                 commentId={comment._id}
+                                 username={comment.userId.name}
+                                 picture={comment.userId.picture}
+                                 message={comment.message}
+                                 postTime={dateParser(comment.postTime, 'ddd h:mm a')}/>
         }).reverse();
-        var userComment;
+        let userComment;
         if (sessionStorage.getItem("_id") != null) {
             userComment = 
                 <div className="container">

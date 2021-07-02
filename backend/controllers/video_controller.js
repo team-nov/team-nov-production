@@ -105,7 +105,6 @@ exports.postComment = async (req, res, next) => {
     const comment = new Comment({
         _id: new mongoose.Types.ObjectId(),
         userId: req.body.userId,
-        userName: req.body.userName,
         message: req.body.message,
         postTime: new Date(),
     })
@@ -129,11 +128,10 @@ exports.deleteComment = async (req, res, next) => {
     const commentId = req.body.commentId;
 
     try {
-        const data = await Video.findByIdAndUpdate(videoId, {$pull: {comments: {_id: commentId} }}, {runValidators: true, new: true}).populate('comments.userId')
+        const data = await Video.findByIdAndUpdate(videoId, {$pull: {comments: {_id: commentId} }}, {runValidators: true, new: true})
         res.status(200).json({
             message: "Deleted message with id " + commentId + " from video with id: " + videoId,
-            itemsModified: data.nModified,
-            comments: data.comments
+            itemsModified: data.nModified
         })
     } catch (e) {
         res.status(500).json({
