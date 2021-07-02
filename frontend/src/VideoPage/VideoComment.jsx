@@ -13,7 +13,7 @@ class VideoComment extends Component {
         picture: this.props.picture,
         currentMessage: this.props.message,
         returnMessage: this.props.message,
-        returnPostTime: this.props.postTime,
+        postTime: this.props.postTime,
         isHidden: false,
         editing: false
     }
@@ -28,7 +28,7 @@ class VideoComment extends Component {
 
     deleteComment = async () => {
         try {
-            const res = await axios.delete('http://localhost:5000/api/videos/' + this.state.videoId, {
+            await axios.delete('http://localhost:5000/api/videos/' + this.state.videoId, {
                 data: {
                     commentId: this.state.commentId
                 }
@@ -49,7 +49,7 @@ class VideoComment extends Component {
             })
             this.setState({
                 editing: false,
-                returnPostTime: dateParser(new Date(), 'ddd h:mm a'),
+                postTime: dateParser(new Date(), 'ddd h:mm a'),
                 returnMessage: "Edit: " + this.state.currentMessage
             })
         } catch (e) {
@@ -105,7 +105,7 @@ class VideoComment extends Component {
                             <img className="commentProfilePic" src={this.state.picture} alt=""/>
                             <span className="userNameComment"> {this.state.username} </span>
                         </div>
-                        {this.state.returnPostTime}
+                        {this.state.postTime}
                     </div>
                     {messageBox}
                     {commentButtons}

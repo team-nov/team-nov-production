@@ -147,7 +147,8 @@ exports.patchComment = async (req, res, next) => {
     const commentMsg = req.body.message;
 
     try {
-        const data = await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true}).populate('comments.userId')
+        let data = await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true}).populate('comments.userId')
+        data = await Video.findOneAndUpdate({_id: videoId, "comments._id": commentId}, {$set: {"comments.$.postTime": new Date()}}, {runValidators: true, new: true}).populate('comments.userId')
         res.status(200).json({
             message: "Updated comment with id: " + commentId,
             itemsModified: data.nModified,
