@@ -17,18 +17,22 @@ exports.userLogin = (req, res, next) => {
     User.findOne({username:username})
         .exec()
         .then((data)=>{
-            bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
-                if(err) {
-                    res.status(200).json({"success": false})
-                }
-                if(isMatch) {
-                    console.log("Password Matched");
-                    res.status(200).json({"_id": data._id,"name": data.name, "typeOfUser":data.typeOfUser, "success": true});
-                } else {
-                    console.log("Password Did Not Match");
-                    res.status(200).json({"success": false})
-                }
-            });
+            if(data != null) {
+                bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
+                    if(err) {
+                        res.status(200).json({"success": false})
+                    }
+                    if(isMatch) {
+                        console.log("Password Matched");
+                        res.status(200).json({"_id": data._id,"name": data.name, "typeOfUser":data.typeOfUser, "success": true});
+                    } else {
+                        console.log("Password Did Not Match");
+                        res.status(200).json({"success": false})
+                    }
+                });
+            } else {
+                res.status(200).json({success: false})
+            }
         })
 }
 
@@ -50,8 +54,7 @@ exports.updateProfile = (req, res, next) => {
         .exec()
         .then(result=>{
             res.status(200).json({
-                message:"Updated user with id: "+id,
-                result:result
+                success: true
             })
         })
         .catch(err=>{

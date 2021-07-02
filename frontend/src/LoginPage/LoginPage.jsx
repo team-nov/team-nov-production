@@ -28,7 +28,6 @@ class LoginPage extends Component {
                 console.log(res.data)
                 window.location.href = '/';
             } else {
-                console.log("error");
                 this.showError();
             }
             
