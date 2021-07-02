@@ -40,7 +40,7 @@ class ProfilePage extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        
+        // make a json object containing only the attributes that were modified.
         Object.keys(this.state).map((key) => {
             if(this.state[key] != "") {
                 this.requestJson[key] = this.state[key];
@@ -50,6 +50,7 @@ class ProfilePage extends Component {
 
         console.log(this.requestJson);
 
+        // send the request to update the profile
         axios.patch('http://localhost:5000/api/users/profile/', this.requestJson)
         .then(res=> {
             if(res.data.success) {

@@ -18,6 +18,7 @@ exports.userLogin = (req, res, next) => {
         .exec()
         .then((data)=>{
             if(data != null) {
+                // check if the password matches
                 bcrypt.compare(req.body.password, data.password, function(err, isMatch) {
                     if(err) {
                         res.status(200).json({"success": false})
@@ -52,6 +53,7 @@ exports.updateProfile = (req, res, next) => {
 
     var password = req.body.password;
     
+    // hash the password before updating
     bcrypt.genSalt(10, function (saltError, salt) {
         if(saltError) {
             return next(saltError);
