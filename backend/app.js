@@ -28,7 +28,6 @@ mongoose.connect(
     .catch((err)=>{
         console.log("Connection failed! \n", err)
     })
-
 // enable all CORS headers
 app.use(cors());
 

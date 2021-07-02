@@ -4,9 +4,12 @@ import './Discussion.css'
 import '../Comment/Comment.css'
 import '../Comment/UserComment.css'
 import User from '../User/User'
+<<<<<<< HEAD
 import { dateParser } from '../utils/DateParser'
 import axios from 'axios'
+=======
 import CommentEntry from '../Comment/CommentEntry'
+>>>>>>> develop
 
 class Discussion extends Component{
   state = {
@@ -74,6 +77,23 @@ class Discussion extends Component{
     let discRoute = `/forum/${this.props.id}`;
     console.log("discRoute is " + discRoute);
     return (
+<<<<<<< HEAD
+      <div className="discussionContainer" style={{display: this.state.discussionHide?"none":"block"}}>
+        <User username={this.props.username} picture={this.props.picture}/>
+        
+        <div className="DiscussionMessage" style={{display: this.state.isHidden?"none":"block"}}> {this.state.currentMessage} </div>
+        <textarea  className="postTextEntry" onChange={(e)=>{this.edit(e)}} style={{display: !this.state.isHidden?"none":"block"}} value={this.state.currentMessage} rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
+        <div className="postTime">{this.state.currentPostTime}</div>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onEditClick} style={{display: this.state.isHidden?"none":"block"}}>Edit</button>) : (<></>)}
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onDiscardClick} style={{display: !this.state.isHidden?"none":"block"}}>Discard</button>) : (<></>)}
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-secondary me-sm-2" onClick={this.onSubmitClick} style={{display: !this.state.isHidden?"none":"block"}}>Submit</button>) : (<></>)}
+          {this.props.ownDiscussion ? (<button className="btn btn-outline-danger me-sm-2" onClick={this.onDeleteClick} style={{display: this.state.isHidden?"none":"block"}}>Delete</button>) : (<></>)}
+        </div>
+        
+        
+        
+=======
       <div>
         <div className="discussionContainer">
           <User username={this.props.username} picture={this.props.picture}/>
@@ -90,6 +110,7 @@ class Discussion extends Component{
           commentPicture={this.props.picture}>
           </CommentEntry>
         </div>
+>>>>>>> develop
       </div>
     )
   }
