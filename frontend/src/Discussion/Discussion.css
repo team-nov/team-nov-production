@@ -4,12 +4,11 @@
 
 .discussionContainer {
   padding: 1em;
-  margin: 1em auto;
+  margin: 1em 1em 0 1em;
   min-width: 400px;
-  max-width: 50%;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
 
   border-width: 1px;
