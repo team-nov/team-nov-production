@@ -151,3 +151,20 @@ exports.deleteComment = async (req, res, next) => {
     }
 }
 
+exports.patchComment = async (req, res, next) => {
+    const discussionId = req.params.discussionId;
+    const commentId = req.body.commentId;
+    const commentMsg = req.body.message;
+
+    try {
+        const data = await Discussion.findOneAndUpdate({_id: discussionId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
+        res.status(200).json({
+            message: "Updated comment with id: " + commentId,
+            itemsModified: data.nModified
+        })
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
+}
