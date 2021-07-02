@@ -134,3 +134,20 @@ exports.postComment = async (req, res, next) => {
     }
 }
 
+exports.deleteComment = async (req, res, next) => {
+    const discussionId = req.params.discussionId;
+    const commentId = req.body.commentId;
+
+    try {
+        const data = await Discussion.findByIdAndUpdate(discussionId, {$pull: {comments: {_id: commentId} }}, {runValidators: true, new: true})
+        res.status(200).json({
+            message: "Deleted message with id " + commentId + " from discussion with id: " + discussionId,
+            itemsModified: data.nModified
+        })
+    } catch (e) {
+        res.status(500).json({
+            error: e
+        })
+    }
+}
+
