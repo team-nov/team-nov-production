@@ -29,14 +29,14 @@ exports.getOneDiscussion = (req, res, next) => {
 exports.patchDiscussion = (req, res, next) => {
 
     toUpdate = Discussion.findById(req.body.discussionId).exec().then((data)=>{
-
         if (data == null) {
             res.status(404).json({
                 message_return: "No such discussion."
             });
         }
 
-        else if (req.body.userId._id === data.userId) {
+        else if (req.body.userId._id == data.userId) {
+
             Discussion
                 .findByIdAndUpdate(req.body.discussionId, { message: req.body.message })
                 .exec()
@@ -47,7 +47,8 @@ exports.patchDiscussion = (req, res, next) => {
                 })
         }
     
-        else if (req.body.userId != data.userId) {
+        else if (req.body.userId._id != data.userId) {
+
             res.status(401).json({
                 message_return: "You do not have permission."
             });
@@ -67,7 +68,7 @@ exports.deleteDiscussion = (req, res, next) => {
             });
         }
 
-        else if (req.body.userId._id === data.userId) {
+        else if (req.body.userId._id == data.userId) {
             Discussion
                 .findByIdAndDelete(req.body.discussionId)
                 .exec()

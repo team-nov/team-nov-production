@@ -20,7 +20,7 @@ dmSockets.io(server)
 mongoose.connect(
     // change it back to mongodb+srv://teamnov:teamnov@manage.wwmlv.mongodb.net/TeamNov?retryWrites=true&w=majority
     // before you merge to develop
-    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovBrandon?retryWrites=true&w=majority',
+    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovJahin?retryWrites=true&w=majority',
     {useNewUrlParser:true, useUnifiedTopology:true})
     .then((res)=>{
         console.log("db Connected")
