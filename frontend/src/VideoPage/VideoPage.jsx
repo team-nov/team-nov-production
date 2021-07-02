@@ -1,12 +1,15 @@
-import { Link } from "react-router-dom";
 import axios from 'axios'
 import React, {Component} from 'react';
+import { dateParser } from '../utils/DateParser'
+import './VideoCommentUser.css'
+import VideoComment from './VideoComment'
 
 class VideoPage extends Component {
 
     state = {
         userId: sessionStorage.getItem("_id"),
         userName: sessionStorage.getItem("name"),
+        videoId: this.props.match.params.id,
         message: '',
         comments: [],
         title:""
@@ -14,8 +17,7 @@ class VideoPage extends Component {
 
     async componentDidMount() {
         try{
-            let videoId = this.props.match.params.id;
-            let res = await axios.get('http://localhost:5000/api/videos/'+videoId);
+            let res = await axios.get('http://localhost:5000/api/videos/'+this.state.videoId);
             await this.setState({
                 title:res.data.title,
                 comments: res.data.comments
@@ -27,13 +29,17 @@ class VideoPage extends Component {
     }
 
     postComment = async () => {
-        const res = await axios.post('http://localhost:5000/api/videos/'+this.props.match.params.id, {
+        const res = await axios.post('http://localhost:5000/api/videos/'+this.state.videoId, {
             userId: this.state.userId,
             userName: this.state.userName,
             message: this.state.message
         })
 
         try {
+            const res = await axios.post('http://localhost:5000/api/videos/' + this.state.videoId, {
+                userId: this.state.userId,
+                message: this.state.message
+            })
             this.setState({
                 message: '',
                 comments: res.data.comments
@@ -47,22 +53,42 @@ class VideoPage extends Component {
         this.setState({message: e.target.value})
     }
 
-    render(){
-        let commentsSection = this.state.comments.map((comment, commentIndex) => {
-            return <li className="list-group-item" key={commentIndex}>
-                {comment.userName}: {comment.message}
-            </li>
-        })
+    render() {
+        const commentsSection = this.state.comments.map((comment) => {
+            return <VideoComment key={comment._id}
+                                 userId={comment.userId._id}
+                                 videoId={this.state.videoId}
+                                 commentId={comment._id}
+                                 username={comment.userId.name}
+                                 picture={comment.userId.picture}
+                                 message={comment.message}
+                                 postTime={dateParser(comment.postTime, 'ddd h:mm a')}/>
+        }).reverse();
+        let userComment;
+        if (sessionStorage.getItem("_id") != null) {
+            userComment = 
+                <div className="container p-0">
+                    <div className="d-flex">
+                        <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.message}/>
+                        <button className="btn btn-outline-success" onClick={this.postComment}>Post</button>
+                    </div>
+                </div>;   
+        } else {
+            userComment = null;
+        }
         return(
             <div className="container text-start">
-                <h1>{this.state.title}</h1>
-                <img src="https://via.placeholder.com/960x480" class=" w-100"   alt="oops"/>
-                <h4>Comments Section:</h4>
-                    <ul className="list-group">
-                        {commentsSection}
-                    </ul>
-                    <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.msg}/>
-                <button class="btn btn-primary" onClick={this.postComment}>Post Comment</button>
+                <h1 className="my-4">{this.state.title}</h1>
+                <img class="w-100" src="https://via.placeholder.com/267x150" alt="oops"/>
+               
+                <h4 className="mt-5">Comments</h4>
+               
+                <br/>
+                {userComment}
+                <br/>
+               
+                    {commentsSection}
+                
             </div>
         )
     }
