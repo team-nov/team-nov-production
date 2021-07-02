@@ -10,18 +10,13 @@
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
 
   border-width: 1px;
   border-color: black;
   border-style: solid; 
   border-radius: 5px;
   background-color: rgb(243, 243, 243);
-}
-
-.forumContainer {
-  display: flex;
-  flex-direction: column;
 }
 
 .postInput {
@@ -55,6 +50,9 @@
 }
 
 .discussions {
+  min-width: 50%;
+  display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
+  align-items: center;
 }

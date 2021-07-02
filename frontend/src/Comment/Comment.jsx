@@ -8,7 +8,7 @@ class Comment extends Component {
         this.state = {
             username : props.username,
             picture : props.picture,
-            commentMessage : props.commentMessage,
+            commentMessage : props.message,
             postTime : props.postTime
         }
     }
@@ -16,7 +16,7 @@ class Comment extends Component {
         return (
             <div className="commentContainer">
                 <UserComment username={this.state.username} picture={this.state.picture}/>
-                <div className="commentMessage"> {"Heljlowajer ;lasjdf ;asldkfj  asd;lfkj as;flk ;laksdj f;laskdf jsal;kfj a;sdlfk la;skdfj as;lk ;askdjf dsa;lkfj ;lk a;lksdf j;alsd f"} </div>
+                <div className="commentMessage"> {this.state.commentMessage} </div>
                 <div className="postTimeComment">{this.state.postTime}</div>
             </div>
         )

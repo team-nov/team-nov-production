@@ -7,11 +7,11 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
-    userId: '60b59ba85a6d38aa91d77715',
+    userId: '60b59ec58bf12a00f949c1e4', //change to sessionStorage later
     picture: '',
     name: '',
     message: '',
-    discussions: []
+    discussions: [],
   }
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class Forum extends Component{
       .then(res=>this.setState({discussions: res.data}))
       .catch((e)=>console.log(e))
   }
-  
+
   updateInput=(e)=>{
     this.setState({message:e.target.value});
   }
@@ -40,15 +40,16 @@ class Forum extends Component{
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
-      return <Discussion key = {index}
-                         picture={discussion.userId.picture} 
-                         username={discussion.userId.name}
-                         message={discussion.message} 
-                         postTime={dateParser(discussion.postTime, 'ddd h:mm a')}
-                         />
+      return <div>
+          <Discussion key = {index}
+            id={discussion._id}
+            picture={discussion.userId.picture} 
+            username={discussion.userId.name}
+            message={discussion.message} 
+            postTime={dateParser(discussion.postTime, 'ddd h:mm a')}/>
+        </div>
     })
     discussion = discussion.reverse()
-      
     return (
     <div>
       <div className="forumContainer">
@@ -58,7 +59,9 @@ class Forum extends Component{
           <button className="postButton" onClick={this.addDiscussion}> Post </button>
         </form>
       </div>
-      <div className="discussions">{discussion}</div>
+      <div className="discussions">
+        {discussion}
+      </div>
     </div>
     )
   }

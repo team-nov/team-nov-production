@@ -3,7 +3,7 @@
     margin: 0 1em 1em 1em;
     min-width: 400px;
     max-width: 50%;
-    max-height: 75px;
+    max-height: min-content;
   
     display: flex;
     flex-direction: row ltr;
@@ -16,17 +16,26 @@
   }
   
 .commentMessage {
-  width: inherit;
+  width: 77%;
+  max-height: fit-content;
   margin: 0 0 1em 0.1em;
   float: left;
   font-size: 12pt;
   text-align: left;
+
+  display: block;
+  display: -webkit-box;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow-y: scroll;
+
   direction: ltr;
-  word-break: break-word;
+  word-wrap: break-word;
 }
   
 .postTimeComment{
-  margin-left: 78%;
+  margin-left: auto;
   align-self: flex-end;
   float: right;
 }
