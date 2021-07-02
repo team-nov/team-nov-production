@@ -14,14 +14,15 @@ class VideoComment extends Component {
         currentMessage: this.props.message,
         returnMessage: this.props.message,
         postTime: this.props.postTime,
-        isHidden: false,
-        editing: false
+        edited: this.props.edited,
+        editing: false,
+        isHidden: false
     }
 
     componentDidMount() {
-        if (this.state.currentMessage.startsWith("Edit: ")) {
+        if (this.state.edited) {
             this.setState({
-                currentMessage: this.state.currentMessage.substring(6)
+                postTime: "(edited) " + this.state.postTime
             })
         }
     }
@@ -45,12 +46,12 @@ class VideoComment extends Component {
         try {
             await axios.patch('http://localhost:5000/api/videos/' + this.state.videoId, {
                 commentId: this.state.commentId,
-                message: "Edit: " + this.state.currentMessage
+                message: this.state.currentMessage
             })
             this.setState({
                 editing: false,
-                postTime: dateParser(new Date(), 'ddd h:mm a'),
-                returnMessage: "Edit: " + this.state.currentMessage
+                postTime: "(edited) " + dateParser(new Date(), 'ddd h:mm a'),
+                returnMessage: this.state.currentMessage
             })
         } catch (e) {
             console.log(e)
@@ -65,7 +66,8 @@ class VideoComment extends Component {
 
     discardComment = async () => {
         this.setState({
-            editing: false
+            editing: false,
+            currentMessage: this.state.returnMessage
         })
     }
 

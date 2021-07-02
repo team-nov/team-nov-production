@@ -10,7 +10,6 @@ router.patch('/profile/', usersController.updateProfile)
 router.post('/login/', usersController.userLogin);
 router.get('/:userId',usersController.getUserById);
 router.get('/',usersController.getUsers);
-router.get('/:userId', usersController.getUserById);
 router.post('/',usersController.postUsers);
 
 

@@ -38,6 +38,11 @@ class DmsDemo extends Component {
                 this.login();
             }
         })
+        let userId = sessionStorage.getItem("_id")
+        if(userId){
+            this.setState({userId:userId},()=>this.login())
+
+        }
     }
 
     /**
@@ -63,12 +68,14 @@ class DmsDemo extends Component {
         // get user's dms
         axios.get('http://localhost:5000/api/dms/byUserId/' + this.state.userId)
             .then(res => {
-                // want most recent messages on top
-                let reversedDms = res.data.reverse()
-                // init first dmId
-                let dmId = reversedDms[0]._id
-                console.log(dmId)
-                this.setState({ dms: reversedDms, dmId: dmId })
+                if(res.data.length>0){
+                    // want most recent messages on top
+                    let reversedDms = res.data.reverse()
+                    // init first dmId
+                    let dmId = reversedDms[0]._id
+                    console.log(dmId)
+                    this.setState({ dms: reversedDms, dmId: dmId })
+                }
             })
             .then(() => {
                 // get old messages
@@ -143,10 +150,10 @@ class DmsDemo extends Component {
     }
 
     render() {
-        let messages, dms;
+        let messages=[], dms=[];
 
         // only update message and dms when userId is defined
-        if (this.state.userId) {
+        if (this.state.userId && this.state.messages && this.state.dms) {
             messages = this.state.messages.map((msg, dmsIndex) => {
                 return <div className="message" key={dmsIndex}>
                     <div className="messageProfilePicDiv">
