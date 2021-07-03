@@ -81,10 +81,6 @@ class ProfilePage extends Component {
                         <input type='text' name='picture' value={this.state.picture} onChange={this.handleChange}></input>
                     </div>
                     <div className='field'>
-                        <label>Username: </label>
-                        <input type='text' name='username' value={this.state.username} onChange={this.handleChange}></input>
-                    </div>
-                    <div className='field'>
                         <label>Password: </label>
                         <input type='password' name='password' placeholder="Enter new password" onChange={this.handleChange}></input>
                     </div>
