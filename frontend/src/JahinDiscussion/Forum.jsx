@@ -7,7 +7,11 @@ import { dateParser } from '../utils/DateParser'
 
 class Forum extends Component{
   state = {
+<<<<<<< HEAD
+    userId: sessionStorage.getItem("_id"),
+=======
     userId: sessionStorage.getItem("_id"), //change to sessionStorage later
+>>>>>>> develop
     picture: '',
     name: sessionStorage.getItem("name"),
     message: '',
@@ -40,6 +44,21 @@ class Forum extends Component{
 
   render(){
     let discussion = this.state.discussions.map((discussion, index)=>{
+<<<<<<< HEAD
+      let sameUser = this.state.userId === discussion.userId._id;
+      return <Discussion key = {discussion._id}
+                         discussionId={discussion._id}
+                         userId={discussion.userId}
+                         picture={discussion.userId.picture} 
+                         username={discussion.userId.name}
+                         message={discussion.message} 
+                         postTime={dateParser(discussion.postTime, 'ddd h:mm a')}
+                         ownDiscussion={sameUser}
+                         />
+                         
+    }).reverse()
+      
+=======
       return <div>
           <Discussion key = {index}
             id={discussion._id}
@@ -51,6 +70,7 @@ class Forum extends Component{
         </div>
     })
     discussion = discussion.reverse()
+>>>>>>> develop
     return (
     <div>
       <div className="forumContainer">

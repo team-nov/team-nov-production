@@ -1,0 +1,15 @@
+
+
+.card-img-top {
+  padding: 3px;
+  border-radius: 8px;
+  margin-top: 3px;
+  height: auto;
+}
+
+.profile-pic {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  margin: 10px;
+}
