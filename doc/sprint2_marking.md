@@ -238,11 +238,9 @@ Tracking on Jira Total Mark: 22 / 24
       There is no web link or other reference lending support to the presented diagram.
     - 0 marks = No diagram present or the presented document does not look like a software architecture diagram
 
-    Your Mark: 0
+    Your Mark: 3
     
-    Three Tier? MVC?
-
-  System Design Total: 6 / 10  
+  System Design Total: 9 / 10  
 
 ---
 
