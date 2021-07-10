@@ -9,6 +9,9 @@ class NavigationBar extends Component {
     }
 
     render() {
+
+        var myCompany;
+
         // conditional rendering
         // if user isn't logged in, show Login link
         // else show their name and logout option
@@ -16,7 +19,10 @@ class NavigationBar extends Component {
         var logout;
         if(sessionStorage.getItem("_id") != null) {
             loginLink = <li className="nav-item"><Link className="nav-link" to="/profile">My Profile</Link></li>;
-            logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;       
+            logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;
+
+            myCompany = <li className="nav-item"><Link className="nav-link" to="/company">My Company</Link></li>;
+
         } else {
             loginLink = <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>;
             logout = null;
@@ -56,7 +62,7 @@ class NavigationBar extends Component {
                                 <Link className="nav-link" to="/companies">Company information</Link>
                             </li>
 
-                            
+                            {myCompany}
                             {loginLink}
                             {logout}
                             {/* <li className="nav-item dropdown">

@@ -8,4 +8,5 @@ class CompaniesPage extends Component {
       return(<h1>"Hi welcome to the companies page"</h1>)
   }
 }
+
 export default CompaniesPage
