@@ -29,7 +29,6 @@ class CompanyPage extends Component {
     e.preventDefault();
 
     const company = {
-
       company: this.state.company,
       companyLogo: this.state.companyLogo,
       companyLocation: this.state.companyLocation,
