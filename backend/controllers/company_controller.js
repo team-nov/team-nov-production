@@ -17,7 +17,11 @@ exports.postCompany = async (req, res, next) => {
 
     const company = new Company({
         _id: new mongoose.Types.ObjectId(),
-        title: req.body.title
+        company: req.body.company,
+        company: req.body.company,
+        companyLogo: req.body.companyLogo,
+        companyLocation: req.body.companyLocation,
+        companyDescription: req.body.companyDescription
     });
 
     try {
