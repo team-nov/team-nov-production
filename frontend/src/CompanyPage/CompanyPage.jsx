@@ -70,7 +70,7 @@ class CompanyPage extends Component {
                 <label>Description: </label>
                 <input type='text' name='companyDescription' value={this.state.companyDescription} onChange={this.onChange}></input>
             </div>
-            <input className='CompanyButton' type='submit' value="Save Changes"></input>
+            <input className='CompanyButton' type='submit' value="Submit company information"></input>
         </form>
       </div>
     )
