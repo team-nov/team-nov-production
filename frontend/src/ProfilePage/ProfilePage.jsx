@@ -12,7 +12,8 @@ class ProfilePage extends Component {
             picture:'',
             username:'',
             password:'',
-            typeOfUser:''
+            typeOfUser:'',
+            aboutMe:''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +28,7 @@ class ProfilePage extends Component {
                     email: res.data.email,
                     picture: res.data.picture,
                     username: res.data.username,
+                    aboutMe:res.data.aboutMe,
                     typeOfUser: res.data.typeOfUser })
                 document.getElementsByName('typeOfUser')[0].value = this.state.typeOfUser;
             })
@@ -42,7 +44,7 @@ class ProfilePage extends Component {
         e.preventDefault();
         // make a json object containing only the attributes that were modified.
         Object.keys(this.state).map((key) => {
-            if(this.state[key] != "") {
+            if(this.state[key] !== "") {
                 this.requestJson[key] = this.state[key];
             }
         })
@@ -87,6 +89,10 @@ class ProfilePage extends Component {
                     <div className='field'>
                         <label>Password: </label>
                         <input type='password' name='password' placeholder="Enter new password" onChange={this.handleChange}></input>
+                    </div>
+                    <div className='field'>
+                        <label>About Me: </label>
+                        <textarea name='aboutMe' value={this.state.aboutMe} onChange={this.handleChange}></textarea>
                     </div>
                     <div className='field'>
                         <label>Type of User: </label>

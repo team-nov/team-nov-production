@@ -20,6 +20,7 @@ import Search from './Search/Search';
 import LoginPage from "./LoginPage/LoginPage"
 import ProfilePage from "./ProfilePage/ProfilePage"
 import UserSearch from './UserSearch/UserSearch';
+import UserPage from './UserPage/UserPage';
  
 class App extends Component{
   render(){
@@ -38,6 +39,7 @@ class App extends Component{
             <Route path="/users" component={UserPost} /> */}
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
+            <Route path="/user/:id" component={UserPage} />
             <Route path="/videos" component={Search}/>
             <Route path="/usersearch" component={UserSearch}/>
             

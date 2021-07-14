@@ -15,7 +15,7 @@ class NavigationBar extends Component {
         var loginLink;
         var logout;
         if(sessionStorage.getItem("_id") != null) {
-            loginLink = <li className="nav-item"><Link className="nav-link" to="/profile">My Profile</Link></li>;
+            loginLink = <li className="nav-item"><Link className="nav-link" to={"/user/" + sessionStorage.getItem('_id')}>My Profile</Link></li>;
             logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;       
         } else {
             loginLink = <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>;
