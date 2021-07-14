@@ -93,6 +93,9 @@ class DmsDemo extends Component {
 			from: this.state.userId,
 			message: this.state.message
 		})
+		this.setState({
+			message: ''
+		})
 	}
 
 	/**
