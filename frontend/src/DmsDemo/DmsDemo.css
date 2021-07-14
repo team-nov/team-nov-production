@@ -12,23 +12,6 @@
   font-size: 18px;
 }
 
-.dmsWelcome input {
-  border: none;
-  border-bottom: 3px solid rgb(0, 0, 0);
-}
-
-.dmsWelcome button {
-  margin: 5px;
-  background-color: #b3b6b3;
-  border: 1px black;
-  color: rgb(0, 0, 0);
-  padding: 10px 15px;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 5px;
-  transition-duration: 0.2s;
-}
-
 .dmItem {
   background-color: #6d706d;
   display: flex;
@@ -38,43 +21,6 @@
   padding: 10px 10px 10px 20px;
 }
 
-.dmsHeader h4 {
-  margin-top: -50px;
-  margin-bottom: 10px;
-  margin-right: 5px;
-  margin-left: 150px;
-  font-size: 30px;
-  color: rgb(29, 29, 29);
-  display: flex;
-}
-
-.dmsHeader button {
-  margin: 5px;
-  background-color: #b3b6b3;
-  border: 1px black;
-  color: rgb(0, 0, 0);
-  padding: 10px 15px;
-  text-align: center;
-  display: flex;
-  text-decoration: none;
-  font-size: 13px;
-  border-radius: 12px;
-  transition-duration: 0.5s;
-}
-
-.dmsHeader button:hover {
-  background-color: #5e5d5d;
-  color: rgb(0, 0, 0);
-}
-
-.dmsHeader .newDm input {
-  margin: 3px;
-  background-color: rgb(161, 161, 161);
-  width: 75%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid black;
-}
 
 .dmsSidebar {
   float: left;

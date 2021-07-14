@@ -150,6 +150,17 @@ class DmsDemo extends Component {
     }
 
     render() {
+
+		if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div class="alert alert-danger" role="alert">
+						Please login to access the DMs feature.
+					</div>
+				</div>
+			)
+		}
+
         let messages=[], dms=[];
 
         // only update message and dms when userId is defined
@@ -186,24 +197,25 @@ class DmsDemo extends Component {
             })
         }
         return (
-            <div className='pageDMs'>
-                <div className="dmsWelcome">
-                    <div>
-                        <p className="welcomeText">Welcome {this.state.name}</p>
-                        <img className="profilePic" src={this.state.profilePic} alt=""/>
+            <div className="container">
+                <div className="row justify-content-start">
+                    <h1>Chats</h1>
+					<div className="text-start col-2">
+						<button className="btn btn-secondary" onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>Create new DM</button>
+					</div>
+                    <div className="text-end col-10 newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
+						<div class="input-group">
+							<span class="input-group-text" id="basic-addon1">Recipient ID</span>
+							<input type="text" class="form-control" onChange={(e) => this.updateInput('toId', e)} value={this.state.toId} placeholder="Enter recipient's ID here" required />
+						</div>
+						<div class="input-group">
+							<span class="input-group-text" id="basic-addon1">Message</span>
+							<input type="text" class="form-control" onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage} placeholder="Enter message here" required />
+						</div>
+                        <button className="btn btn-success" onClick={this.createDM}>Send Message</button>
+						<br/><br/>
                     </div>
-                    <input onChange={(e) => this.updateInput('userId', e)} value={this.state.userId} placeholder="Please enter your ID..."/>
-                    <button onClick={this.login}>login</button>
-                </div>
-
-                <div className="dmsHeader">
-                    <h4>Chats</h4>
-                    <button onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>Create new DM</button>
-                    <div className="newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
-                        <input onChange={(e) => this.updateInput('toId', e)} value={this.state.toId} placeholder="Enter recipient's ID here" required />
-                        <input onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage} placeholder="Enter message here" required />
-                        <button onClick={this.createDM}>Send Message</button>
-                    </div>
+					<br/><br/>
                 </div>
                 <div className="dmsSidebar">
                     {dms}
