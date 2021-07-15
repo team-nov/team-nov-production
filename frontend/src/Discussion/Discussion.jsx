@@ -76,13 +76,13 @@ class Discussion extends Component{
     return (
       <div>
         <div className="discussionContainer">
-          <User username={this.props.username} picture={this.props.picture}/>
-          <div className="DiscussionMessage"> 
+          <div className="userContainerDiscussion"> <User username={this.props.username} picture={this.props.picture}/> </div>
+          <text className="DiscussionMessage"> 
           <Link to={discRoute}>{this.props.message}</Link>
-          </div>
+          </text>
           <div className="postTime">{this.props.postTime}</div>
         </div>
-        <div>
+        <div className="commentOnDiscussion">
           <CommentEntry 
           discussionId={this.props.id}
           userId={this.props.userId}
