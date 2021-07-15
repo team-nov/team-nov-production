@@ -21,7 +21,9 @@ class DmsDemo extends Component {
 		recipient: '',
 		messages: [],
 		dms: [],
-		showNewDM: false
+		showNewDM: false,
+		createDMSuccess:true,
+		DMerrorMessage:'Unable to create DM'
 	}
 
 	componentDidMount() {
@@ -113,18 +115,31 @@ class DmsDemo extends Component {
 	/**
 	 * Create a new DM with a user
 	 */
-	createDM = () => {
-		axios.post('http://localhost:5000/api/dms/', {
-			members: [this.state.userId, this.state.toId],
-			messages: []
-		})
-			.then(res => {
+	createDM = async() => {
+		try{
+			let res = await axios.post('http://localhost:5000/api/dms/', {
+				members: [this.state.userId, this.state.toId],
+				messages: []
+			})
+			if(res.status === 201){
+				await this.setState({createDMSuccess:true,showNewDM:false})
 				alert(res.data.message)
 				socket.emit('clientNewDm', {
 					toId: this.state.toId,
 				})
-				this.login()
-			})
+				this.login();
+			}
+			
+		}
+		catch(e){
+			if(e.response.status === 400){
+				this.setState({createDMSuccess:false,DMerrorMessage:e.response.data.message})
+			}
+			else
+				this.setState({createDMSuccess:false,DMerrorMessage:'Error unable to create Dm. Check console log'})
+			console.log(e);
+		}
+		
 	}
 
 	/**
@@ -150,7 +165,23 @@ class DmsDemo extends Component {
 		this.scrollToBottom()
 	}
 
-	handleUserSuggestion = (selectedUser)=>{
+	handleUserSuggestion = async(selectedUser)=>{
+		try{
+			let res = await axios.post('http://localhost:5000/api/dms/checkdmexists', {
+				members: [this.state.userId, selectedUser._id],
+			})
+			if(res.status === 200){
+				await this.setState({createDMSuccess:true})
+			}
+		}
+		catch(e){
+			if(e.response.status === 400){
+				this.setState({createDMSuccess:false,DMerrorMessage:e.response.data.message})
+			}
+			else
+				this.setState({createDMSuccess:false,DMerrorMessage:'Error unable to verify Dm existence. Check console log'})
+			console.log(e);
+		}
 		this.setState({toId:selectedUser._id})
 	}
 
@@ -201,6 +232,13 @@ class DmsDemo extends Component {
 				</div>
 			})
 		}
+		let createDMerrorMsg = !this.state.createDMSuccess
+			? 
+				<div className="alert alert-danger" role="alert">
+					{this.state.DMerrorMessage}
+			  	</div>
+			:
+				[]
 		return (
 			<div className="container">
 				<div className="container d-flex justify-content-center">
@@ -211,7 +249,7 @@ class DmsDemo extends Component {
 				</div>
 				<div className="row">
 					<div className="col-2">
-						<button className="btn btn-secondary" onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>Create new DM</button>
+						<button className="btn btn-secondary" onClick={() => this.setState({ showNewDM: !this.state.showNewDM ,createDMSuccess:true})}>Create new DM</button>
 					</div>
 					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
 						<label for="inputRecipient" className="col-form-label">To:</label>
@@ -223,6 +261,9 @@ class DmsDemo extends Component {
 						<button className="btn btn-success" onClick={this.createDM}>Add</button>
 					</div>
 					<br /><br />
+				</div>
+				<div className="row">
+				{createDMerrorMsg}
 				</div>
 				<div className="row">
 					<div className="dmsSidebar col-2">

@@ -42,8 +42,29 @@ exports.getDmsByUserId = (req,res,next) => {
             res.status(200).json(data)
         })
 }
+exports.checkDmExists = async (req,res,next) => {
+    try{
+        let result = await DM.find({members:{$all:req.body.members}}) 
+        if(result.length>0){
+            res.status(400).json({
+                message:"Dm already exists"
+            })
+        }
+        else{
+            res.status(200).json({
+                message:"Dm does not exist. Safe to create"
+            })
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    }
+}
 
-exports.postDm = (req,res,next) => {
+exports.postDm = async (req,res,next) => {
     let messages
     if(req.body.messages){
         messages = req.body.messages.map((msg)=>{
@@ -62,22 +83,37 @@ exports.postDm = (req,res,next) => {
         members: req.body.members,
         messages: messages,
     });
-
-    dm
-        .save()
-        .then((result)=>{
-            console.log(result)
-            res.status(201).json({
-                message:"Successfully added Dm",
-                dm: dm
+    // duplicate dm
+    try{
+        let result = await DM.find({members:{$all:req.body.members}}) 
+        if(result.length>0){
+            res.status(400).json({
+                message:"Dm already exists"
             })
+            return;
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            error:err
         })
-        .catch(err=>{
-            console.log(err);
-            res.status(500).json({
-                error:err
-            })
-        });
+    }
+
+    try{
+        result = await dm.save()
+        console.log(result)
+        res.status(201).json({
+            message:"Successfully added Dm",
+            dm: dm
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            error:err
+        })
+    }
 }
 
 exports.patchDm = (req,res,next)=>{
