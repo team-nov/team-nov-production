@@ -5,6 +5,7 @@
 .userContainer {
   display: flex;
   align-items: center;
+  margin-right: -5em;
 }
 
 .profilePic {
@@ -16,7 +17,7 @@
 }
 
 .userName {
-  margin: 0 1em;
+  margin: 0 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }

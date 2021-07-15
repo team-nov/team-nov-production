@@ -20,7 +20,9 @@
 
 .DiscussionMessage {
   width: inherit;
-  margin: 1em 3em 0;
+  margin: auto;
+  margin-left: -0.5em;
+  margin-bottom: 0.5em;
   float: left;
   font-size: 1.2em;
   text-align: left;
@@ -29,5 +31,6 @@
 
 .postTime{
   margin-top: 1em;
+  margin-left: auto;
   float: right;
 }
