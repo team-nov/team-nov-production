@@ -3,6 +3,7 @@ import { io } from 'socket.io-client'
 import axios from 'axios'
 import './DmsDemo.css'
 import { dateParser } from '../utils/DateParser'
+import UserSearchComponent from '../UserSearchComponent/UserSearchComponent'
 
 // connect to backend socket
 let socket = io("localhost:5000");
@@ -152,6 +153,10 @@ class DmsDemo extends Component {
 		this.scrollToBottom()
 	}
 
+	handleUserSuggestion = (selectedUser)=>{
+		this.setState({toId:selectedUser._id})
+	}
+
 	render() {
 
 		if (sessionStorage.getItem("_id") == null) {
@@ -213,18 +218,21 @@ class DmsDemo extends Component {
 					</div>
 					<div className="text-end col-10 newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
 						<div class="row">
-							<label for="inputRecipientID" class="col-sm-2 col-form-label">Recipient ID</label>
-							<div class="col-sm-10">
-								<input class="form-control" id="inputRecipientID" onChange={(e) => this.updateInput('toId', e)} value={this.state.toId} placeholder="Enter recipient's ID here" required />
+						<label for="inputRecipient" class="col-sm-2 col-form-label">To </label>
+						<div class="col-sm-10">
+							<UserSearchComponent id="inputRecipient" hideSearchButton={true} onSuggestionClick={(selectedUser)=>this.handleUserSuggestion(selectedUser)}/>
 							</div>
 						</div>
 						<div class="row">
 							<label for="inputMessage" class="col-sm-2 col-form-label">Message</label>
 							<div class="col-sm-10">
-								<input class="form-control" id="inputMessage" onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage} placeholder="Enter message here" required />
+								<div class="d-flex">
+									<input class="form-control" id="inputMessage" onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage} placeholder="Enter message here" required />
+									<button className="btn btn-success" onClick={this.createDM}>Send</button>
+								</div>
 							</div>
 						</div>
-						<button className="btn btn-success" onClick={this.createDM}>Send</button>
+						
 						<br /><br />
 					</div>
 					<br /><br />
