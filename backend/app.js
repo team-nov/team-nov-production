@@ -8,6 +8,7 @@ const videosRoute = require('./routes/video_routes');
 const mongoose = require('mongoose');
 const http = require('http');
 const dmSockets = require('./dmSockets/dmSockets')
+const companyRoute = require('./routes/company_routes');
 
 // create express app
 const app = express();
@@ -21,6 +22,7 @@ mongoose.connect(
     // mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNov[your name]?retryWrites=true&w=majority
 
     'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovColin?retryWrites=true&w=majority',
+    // 'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovSimon?retryWrites=true&w=majority',
     {useNewUrlParser:true, useUnifiedTopology:true})
     .then((res)=>{
         console.log("db Connected")
@@ -43,6 +45,8 @@ app.use('/api/discussions', discussionsRoute);
 
 // use videosRoute on '/api/videos'
 app.use('/api/videos', videosRoute);
+
+app.use('/api/company', companyRoute);
 
 // listen on PORT or 5000
 const port = process.env.PORT || 5000

@@ -37,7 +37,7 @@ class CompanyPage extends Component {
 
     console.log(company);
 
-    axios.post('http://localhost:5000/company', company)
+    axios.post('http://localhost:5000/api/company', company)
       .then(res=> {
           if(res.data.success) {
               alert("submitted form");
