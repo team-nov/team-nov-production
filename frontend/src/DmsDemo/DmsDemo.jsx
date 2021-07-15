@@ -116,10 +116,7 @@ class DmsDemo extends Component {
 	createDM = () => {
 		axios.post('http://localhost:5000/api/dms/', {
 			members: [this.state.userId, this.state.toId],
-			messages: [{
-				from: this.state.userId,
-				message: this.state.toMessage
-			}]
+			messages: []
 		})
 			.then(res => {
 				alert(res.data.message)
@@ -162,7 +159,7 @@ class DmsDemo extends Component {
 		if (sessionStorage.getItem("_id") == null) {
 			return (
 				<div className="container">
-					<div class="alert alert-danger" role="alert">
+					<div className="alert alert-danger" role="alert">
 						Please login to access the DMs feature.
 					</div>
 				</div>
@@ -213,27 +210,17 @@ class DmsDemo extends Component {
 					</p>
 				</div>
 				<div className="row">
-					<div className="text-start col-2">
+					<div className="col-2">
 						<button className="btn btn-secondary" onClick={() => this.setState({ showNewDM: !this.state.showNewDM })}>Create new DM</button>
 					</div>
-					<div className="text-end col-10 newDm" style={{ display: this.state.showNewDM ? "block" : "none" }}>
-						<div class="row">
-						<label for="inputRecipient" class="col-sm-2 col-form-label">To </label>
-						<div class="col-sm-10">
-							<UserSearchComponent id="inputRecipient" hideSearchButton={true} onSuggestionClick={(selectedUser)=>this.handleUserSuggestion(selectedUser)}/>
-							</div>
-						</div>
-						<div class="row">
-							<label for="inputMessage" class="col-sm-2 col-form-label">Message</label>
-							<div class="col-sm-10">
-								<div class="d-flex">
-									<input class="form-control" id="inputMessage" onChange={(e) => this.updateInput('toMessage', e)} value={this.state.toMessage} placeholder="Enter message here" required />
-									<button className="btn btn-success" onClick={this.createDM}>Send</button>
-								</div>
-							</div>
-						</div>
-						
-						<br /><br />
+					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
+						<label for="inputRecipient" className="col-form-label">To:</label>
+					</div>
+					<div className="col-8" style={{ display: this.state.showNewDM ? "block" : "none" }}>
+						<UserSearchComponent id="inputRecipient" hideSearchButton={true} onSuggestionClick={(selectedUser)=>this.handleUserSuggestion(selectedUser)}/>
+					</div>
+					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
+						<button className="btn btn-success" onClick={this.createDM}>Add</button>
 					</div>
 					<br /><br />
 				</div>

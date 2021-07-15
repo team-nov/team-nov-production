@@ -43,8 +43,8 @@ class UserSearchComponent extends Component{
             : []
         return(
             <div className="userSearch d-flex flex-wrap">
-                <div className="input-group w-75">
-                    <div className="w-75">
+                <div className="input-group w-100">
+                    <div className="w-100">
                         <input 
                             className="form-control" 
                             type="search" 
@@ -52,16 +52,10 @@ class UserSearchComponent extends Component{
                             onClick={this.onSearchInputClick} />
                     </div>
                     <button class="btn btn-primary" onClick={this.onSearchButtonClick} style= {{display:this.props.hideSearchButton?"none":"block"}}>Search</button>
-                    <ul class="list-group w-75 " style={{display:this.state.showSuggestions?'flex':'none'}}>
+                    <ul class="list-group w-100" style={{display:this.state.showSuggestions?'flex':'none'}}>
                         {options}
                     </ul>
-                    
                 </div>
-                
-
-                
-                
-
             </div>
         );
     }
