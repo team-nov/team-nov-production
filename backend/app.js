@@ -9,6 +9,7 @@ const interestRoute = require('./routes/interest_routes');
 const mongoose = require('mongoose');
 const http = require('http');
 const dmSockets = require('./dmSockets/dmSockets')
+const companyRoute = require('./routes/company_routes');
 
 // create express app
 const app = express();
@@ -47,6 +48,9 @@ app.use('/api/discussions', discussionsRoute);
 
 // use videosRoute on '/api/videos'
 app.use('/api/videos', videosRoute);
+
+// use companyRoute on '/api/videos'
+app.use('/api/company', companyRoute);
 
 // listen on PORT or 5000
 const port = process.env.PORT || 5000
