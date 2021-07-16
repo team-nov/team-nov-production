@@ -16,7 +16,8 @@ class ProfilePage extends Component {
             aboutMe:'',
             team:'',
             interests:'',
-            allInterests:''
+            allInterests: [],
+            allCompanies: []
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,7 +35,8 @@ class ProfilePage extends Component {
                     username: res.data.username,
                     aboutMe:res.data.aboutMe,
                     typeOfUser: res.data.typeOfUser,
-                    interests: res.data.interests })
+                    interests: res.data.interests,
+                    team: res.data.team })
                 document.getElementsByName('typeOfUser')[0].value = this.state.typeOfUser;
             })
 
@@ -42,6 +44,12 @@ class ProfilePage extends Component {
             .then(res => {
                 this.setState({
                     allInterests: res.data })
+            })
+        
+        axios.get('http://localhost:5000/api/company/')
+            .then(res => {
+                this.setState({
+                    allCompanies: res.data })
             })
     }
 
@@ -115,8 +123,17 @@ class ProfilePage extends Component {
                     <label for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
                 </div>
             }
-            
         }
+
+        var companyList = []
+        for(var i = 0; i < this.state.allCompanies.length; i++) {
+            if(this.state.allCompanies[i].company === this.state.team) {
+                companyList[i] = <option selected>{this.state.allCompanies[i].company}</option>
+            } else {
+                companyList[i] = <option>{this.state.allCompanies[i].company}</option>
+            }
+        }
+
         return(
             <div className="ProfilePage">
                 <form className='ProfileForm' onSubmit={this.handleSubmit}>
@@ -147,6 +164,13 @@ class ProfilePage extends Component {
                     <div className='field'>
                         <label>Interests:</label>
                         {checklist}
+                    </div>
+                    <div className='field'>
+                        <label>Organization: </label>
+                        <select name='team' onChange={this.handleChange}>
+                            <option>N/A</option>
+                            {companyList}
+                        </select>
                     </div>
                     <div className='field'>
                         <label>Type of User: </label>
