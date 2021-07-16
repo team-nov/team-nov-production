@@ -27,7 +27,6 @@ class DiscussionExpanded extends Component {
     componentDidMount() {
 
         const { id } = this.props.match.params
-        console.log("expanded is asdfds" + id);
 
         let url_string = `http://localhost:5000/api/discussions/${id}`;
         console.log("url is " + url_string);
@@ -115,7 +114,6 @@ class DiscussionExpanded extends Component {
     }
 
     render() {
-        console.log("helo");
         let comments = this.state.discussionComments.map((comments, index) => {
             console.log(comments.userId.picture);
             return <Comment key = {comments._id}

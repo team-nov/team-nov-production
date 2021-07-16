@@ -8,6 +8,7 @@ router.get('/',dmsController.getDms);
 router.get('/byUserId/:userId',dmsController.getDmsByUserId);
 router.get('/:dmId',dmsController.getDmById);
 router.post('/',dmsController.postDm);
+router.post('/checkdmexists',dmsController.checkDmExists);
 router.post('/messages',dmsController.postDmMessage);
 router.delete('/messages',dmsController.deleteDmMessage);
 router.delete('/',dmsController.deleteDm);

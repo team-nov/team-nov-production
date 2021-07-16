@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-
+const Interest = require('./interest_model')
 
 // const userSchema = mongoose.Schema({
 //     _id: mongoose.Schema.Types.ObjectId,
@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
     email:{type:String,required:true},
     username:{type:String,required:true},
     password:{type:String,required:true},
+    aboutMe: {type:String},
+    interests: {type:[String], default:[]},
     team:{type:String}, // basically the company/startup the user is affiliated with
     typeOfUser:{type:String,required:true}
 });
