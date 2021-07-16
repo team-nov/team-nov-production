@@ -4,8 +4,8 @@
 
 .discussionContainer {
   position: relative;
-  margin: 2em 1em 0 -2.5em;
-  width: 98.1%;
+  margin: 2em -1em 0 -2.4em;
+  width: 97.8%;
   height: 150px;
 
   display: flex;
@@ -38,6 +38,7 @@
   -webkit-line-clamp: 3; /* number of lines to show */
   -webkit-box-orient: vertical;
   height: fit-content;
+  padding-left: 0em;
   /* width: inherit;
   margin: auto;
   margin-left: -0.5em;
