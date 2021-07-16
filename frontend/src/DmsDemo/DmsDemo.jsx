@@ -14,7 +14,6 @@ class DmsDemo extends Component {
 		message: '',
 		userId: '',
 		toId: '',
-		toMessage: '',
 		profilePic: '',
 		name: '',
 		dmId: '',
@@ -258,7 +257,7 @@ class DmsDemo extends Component {
 						<UserSearchComponent id="inputRecipient" hideSearchButton={true} onSuggestionClick={(selectedUser)=>this.handleUserSuggestion(selectedUser)}/>
 					</div>
 					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
-						<button className="btn btn-success" onClick={this.createDM}>Add</button>
+						<button className={this.state.createDMSuccess?"btn btn-success":"btn btn-success disabled"} onClick={this.createDM} >Add</button>
 					</div>
 					<br /><br />
 				</div>
