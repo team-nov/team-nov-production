@@ -1,17 +1,23 @@
 .commentEntryContainer {
+    position: relative;
     padding: 1em;
     margin: auto;
-    min-width: 400px;
-    max-width: 50%;
+    margin-left: 5.41%;
+    width: 89%;
+    max-height: 15%;
   
     display: flex;
     flex-direction: column;
     justify-content: center;
   
-    border-width: 1px;
-    border-color: black;
+    border-width: 3px;
+    border-color: hotpink;
     border-style: solid; 
     border-radius: 5px;
+    border-top-style: ridge;
+    border-top-width: 1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     background-color: rgb(243, 243, 243);
   }
   
@@ -24,16 +30,20 @@
   .commentEntry {
     resize: none;
     font-size: 1.2em;
+    color: black;
     width: 100%;
+    height: 4em;
+    border: solid hotpink;
   }
   
   .commentButton {
     margin-left: 1em;
     height: 2em;
-    width: 4em;
+    width: 3em;
   
     font-size: 1.1em;
-    color: white;
+    font-weight: bold;
+    color: black;
   
     border-color: crimson;
     border-radius: 20px;
@@ -41,6 +51,28 @@
   }
   
   .commentButton:hover {
+    cursor: pointer;
+    background-color: deeppink;
+  }
+
+  .btn.btn-primary {
+    position: absolute;
+    top: 7%;
+    left: 85.3%;
+    margin-left: 1em;
+    height: 2em;
+    width: 6em;
+  
+    font-size: 1.1em;
+    font-weight: bold;
+    color: black;
+  
+    border-color: crimson;
+    border-radius: 20px;
+    background-color: hotpink;
+  }
+
+  .btn.btn-primary:hover {
     cursor: pointer;
     background-color: deeppink;
   }
