@@ -14,7 +14,7 @@ exports.getUsers = (req,res,next) => {
 exports.searchUsers = async(req,res,next) =>{
     try{
         const myRegex = new RegExp(req.params.query)
-        const data = await User.find({name:{$regex:myRegex}})
+        const data = await User.find({username:{$regex:myRegex}})
         res.status(200).json(data)
     }catch(e){
         res.status(500).json({
