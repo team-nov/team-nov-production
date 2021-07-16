@@ -114,13 +114,13 @@ class ProfilePage extends Component {
                 checklist[i] = 
                 <div>
                     <input type='checkbox' name={this.state.allInterests[i].name} value={this.state.allInterests[i]._id} onChange={this.addInterest}></input>
-                    <label for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
+                    <label class='checklistLabels' for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
                 </div>
             } else {
                 checklist[i] = 
                 <div>
                     <input type='checkbox' name={this.state.allInterests[i].name} value={this.state.allInterests[i]._id} onChange={this.addInterest} checked></input>
-                    <label for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
+                    <label class='checklistLabels' for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
                 </div>
             }
         }
