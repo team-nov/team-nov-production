@@ -12,6 +12,7 @@ class UserPage extends Component {
             username:'',
             typeOfUser:'',
             aboutMe:'',
+            interests:[],
             team: '',
         }
     }
@@ -26,6 +27,7 @@ class UserPage extends Component {
                     username: res.data.username,
                     typeOfUser: res.data.typeOfUser,
                     aboutMe: res.data.aboutMe,
+                    interests: res.data.interests,
                     team: res.data.team })
             })
     }
@@ -34,6 +36,11 @@ class UserPage extends Component {
         var editButton;
         if(this.state._id === sessionStorage.getItem('_id')) {
             editButton = <a class='btn btn-dark' href='/profile'>Edit Profile</a>
+        }
+
+        var interestsList = [];
+        for (var i = 0; i < this.state.interests.length; i++) {
+            interestsList[i] = <li class='list-group-item'>{this.state.interests[i]}</li>
         }
 
         return(
@@ -48,6 +55,11 @@ class UserPage extends Component {
                         {editButton}
                     </div>
                     <div class='col offset-sm-1 col-sm-5'>
+                        <h4 class='text-uppercase text-left'>My Interests</h4>
+                        <ul class='list-group list-group-horizontal'>
+                            {interestsList}
+                        </ul>
+                        <br></br>
                         <h4 class='text-uppercase text-left'>About Me</h4>
                         <p class='text-justify'>{this.state.aboutMe}</p>
                     </div>

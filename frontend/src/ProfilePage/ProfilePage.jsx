@@ -102,7 +102,7 @@ class ProfilePage extends Component {
         // console.log(this.state.allInterests);
         for(var i = 0; i < this.state.allInterests.length; i++) {
             // console.log(this.state.allInterests[i]);
-            if(this.state.interests.indexOf(this.state.allInterests[i].name) == -1) {
+            if(this.state.interests.indexOf(this.state.allInterests[i].name) === -1) {
                 checklist[i] = 
                 <div>
                     <input type='checkbox' name={this.state.allInterests[i].name} value={this.state.allInterests[i]._id} onChange={this.addInterest}></input>
