@@ -46,6 +46,7 @@ app.use('/api/discussions', discussionsRoute);
 // use videosRoute on '/api/videos'
 app.use('/api/videos', videosRoute);
 
+// use companyRoute on '/api/videos'
 app.use('/api/company', companyRoute);
 
 // listen on PORT or 5000

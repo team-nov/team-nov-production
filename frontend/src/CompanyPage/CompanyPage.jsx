@@ -7,7 +7,6 @@ class CompanyPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        // _id:sessionStorage.getItem('_id'),
         company:'',
         companyLogo:'',
         companyLocation:'',
@@ -40,13 +39,13 @@ class CompanyPage extends Component {
     axios.post('http://localhost:5000/api/company', company)
       .then(res=> {
           if(res.data.success) {
-              alert("submitted form");
+              alert("Submitted company information");
           } else {
-              alert("submit failure");
+              alert("Failed to submit company information");
           }
       })
       .catch((error)=> {
-          alert("invalid form");
+          alert("Invalid submission");
       });
   }
 
