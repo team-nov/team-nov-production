@@ -17,3 +17,10 @@
 - params
   - event [Event]
     - Event object that holds user's text input
+
+## onSubmit
+
+- submits the users company information (via post request)
+- params
+  - e [Event]
+    - Event method that is used to prevent default action
