@@ -19,7 +19,9 @@ import DiscussionExpanded from './Discussion/DiscussionExpanded';
 import Search from './Search/Search';
 import LoginPage from "./LoginPage/LoginPage"
 import ProfilePage from "./ProfilePage/ProfilePage"
-import UserSearch from './UserSearch/UserSearch';
+import UserPage from './UserPage/UserPage';
+import CompaniesPage from "./CompaniesPage/CompaniesPage"
+import CompanyPage from "./CompanyPage/CompanyPage"
  
 class App extends Component{
   render(){
@@ -38,8 +40,11 @@ class App extends Component{
             <Route path="/users" component={UserPost} /> */}
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
+            <Route path="/user/:id" component={UserPage} />
+            <Route path="/videos" component={Search}/>            
             <Route path="/videos" component={Search}/>
-            <Route path="/usersearch" component={UserSearch}/>
+            <Route path="/companies" component={CompaniesPage} />
+            <Route path="/company" component={CompanyPage} />
             
             <Route path="/" component={Home} />
           </Switch>

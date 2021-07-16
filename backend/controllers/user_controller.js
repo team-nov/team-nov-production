@@ -14,7 +14,7 @@ exports.getUsers = (req,res,next) => {
 exports.searchUsers = async(req,res,next) =>{
     try{
         const myRegex = new RegExp(req.params.query)
-        const data = await User.find({name:{$regex:myRegex}})
+        const data = await User.find({username:{$regex:myRegex}})
         res.status(200).json(data)
     }catch(e){
         res.status(500).json({
@@ -121,7 +121,7 @@ exports.postUsers = (req,res,next) => {
         picture: req.body.picture,
         username: req.body.username,
         password: req.body.password,
-        typeOfUser: req.body.typeOfUser
+        typeOfUser: req.body.typeOfUser,
     });
 
     user.save()
