@@ -90,7 +90,6 @@ class Comment extends Component {
         let messageBox =
             <div>
                 <div className="text-start" style={{display: this.state.editing?"none":"block"}}> {this.state.currentMessage} </div>
-                <textarea className="postTextEntry" onChange={(e)=>{this.updateComment(e)}} style={{display: !this.state.editing?"none":"block"}} value={this.state.currentMessage} rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
             </div>
 
         let commentButtons;

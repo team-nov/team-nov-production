@@ -39,7 +39,7 @@ exports.patchDiscussion = (req, res, next) => {
             });
         }
 
-        else if (req.body.userId._id == data.userId) {
+        else if (req.body.userId == data.userId) {
 
             Discussion
                 .findByIdAndUpdate(req.body.discussionId, { message: req.body.message })
@@ -51,7 +51,7 @@ exports.patchDiscussion = (req, res, next) => {
                 })
         }
     
-        else if (req.body.userId._id != data.userId) {
+        else if (req.body.userId != data.userId) {
 
             res.status(401).json({
                 message_return: "You do not have permission."
@@ -62,8 +62,12 @@ exports.patchDiscussion = (req, res, next) => {
 }
 
 exports.deleteDiscussion = (req, res, next) => {
+    console.log(req.body.discussionId);
 
     toDelete = Discussion.findById(req.body.discussionId).exec().then((data)=>{
+
+        console.log("Data userId: " + data.userId);
+        console.log("Body userId: " + req.body.userId);
 
 
         if (data == null) {
@@ -72,7 +76,7 @@ exports.deleteDiscussion = (req, res, next) => {
             });
         }
 
-        else if (req.body.userId._id == data.userId) {
+        else if (req.body.userId == data.userId) {
             Discussion
                 .findByIdAndDelete(req.body.discussionId)
                 .exec()

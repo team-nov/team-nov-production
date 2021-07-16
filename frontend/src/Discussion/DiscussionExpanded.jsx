@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import './Discussion.css'
 import '../Comment/Comment.css'
@@ -15,7 +16,12 @@ class DiscussionExpanded extends Component {
         discUsername: '',
         discUserId: '',
         discTypeOfUser: '',
-        discussionComments: []
+        discussionComments: [],
+        initialMessage: '',
+        currentMessage: '',
+        isHidden: false,
+        editing: false,
+        discussionHide: false
     }
 
     componentDidMount() {
@@ -37,13 +43,75 @@ class DiscussionExpanded extends Component {
                 discUserId: res.data.userId,
                 discPicture: res.data.userId.picture,
                 discUsername: res.data.userId.name,
-                discTypeOfUser: res.data.userId.typeofUser
+                discTypeOfUser: res.data.userId.typeofUser,
+                initialMessage: res.data.message,
+                currentMessage: res.data.message
 
             })
         })
         .catch((e) => {
             console.log(e)
         })
+    }
+    
+    deleteDiscussion = async() => {
+        console.log("Discussoin Id: " + this.state.discussion._id);
+        console.log("Current user id: " + this.state.discUserId._id);
+        console.log("Discussion user: " + this.state.discussion.userId._id);
+        try {
+            await axios.delete('http://localhost:5000/api/discussions', {
+                data: {
+                    discussionId: this.state.discussion._id,
+                    userId: this.state.discUserId._id 
+                }
+            });
+            this.setState({
+                discussionHide: true
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    submitDiscussion = async () => {
+        console.log("Discussoin Id: " + this.state.discussion._id);
+        console.log("Current user id: " + this.state.discUserId._id);
+        console.log("Discussion user: " + this.state.discussion.userId._id);
+        try {
+            await axios.patch('http://localhost:5000/api/discussions', {
+                    discussionId: this.state.discussion._id,
+                    message: this.state.currentMessage,
+                    userId: this.state.discUserId._id,
+                    postTime: new Date(),
+
+
+                }
+            );
+            this.setState({
+                editing: false
+            })
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    editDiscussion = async () => {
+        this.setState({
+            editing: true
+        })
+    }
+
+    discardDiscussion = async () => {
+        this.setState({
+            editing: false,
+            currentMessage: this.state.initialMessage
+        })
+
+    }
+
+    updateDiscussion = (e) => {
+        this.setState({currentMessage: e.target.value})
     }
 
     render() {
@@ -63,32 +131,49 @@ class DiscussionExpanded extends Component {
         comments = comments.reverse();
         
         let commentButtons;
-        let messageBox = 
-            <div className = "DiscussionMessage">
-                {this.state.discussion.message}
-            </div>;
+        let messageBox =
+            <div>
+                <div className="DiscussionMessage" style={{display: this.state.editing?"none":"block"}}> {this.state.currentMessage} </div>
+            </div>
         if(sessionStorage.getItem("_id") === this.state.discUserId._id) {
-            commentButtons = 
-                <div className="d-grid gap-0 d-md-flex justify-content-md-end">
-                    <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Edit</button>
-                    <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button">Delete</button>
+            if(this.state.editing) {
+                commentButtons = 
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button onClick={this.submitDiscussion} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Submit</button>
+                    <button onClick={this.discardDiscussion} className="btn btn-sm btn-outline-danger" type="button">Discard</button>
                 </div>;
+                messageBox = <textarea onChange={e => this.updateDiscussion(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.currentMessage}/>
+            }
+            else {
+                commentButtons = 
+                <div className="d-grid gap- d-md-flex justify-content-md-end">
+                    <button onClick={this.editDiscussion} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Edit</button>
+                    <button onClick={this.deleteDiscussion} className="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                </div>;
+
+            }
+        }
+        else {
+            commentButtons = null;
         }
         return (
             <div>
-                <div className="card discussionExpandedContainer">
-                    <div className="card-body ">
-                        <div className="d-flex justify-content-between">
-                            <User username={this.state.discUsername} picture={this.state.discPicture}/>  
-                            <span className="expandedPostTime">{dateParser(this.state.discussion.postTime, 'ddd h:mm a')}</span>
-                        </div> 
-                    </div>
-                    {messageBox}
-                    {commentButtons}
+                <h3 style={{display: this.state.discussionHide?"block":"none"}}><Link to='/forum'>Discussion Deleted, click here to go back to the main page.</Link></h3>
+                <div style={{display: this.state.discussionHide?"none":"block"}}>
+                    <div className="card discussionExpandedContainer">
+                        <div className="card-body ">
+                            <div className="d-flex justify-content-between">
+                                <User username={this.state.discUsername} picture={this.state.discPicture}/>  
+                                <span className="expandedPostTime">{dateParser(this.state.discussion.postTime, 'ddd h:mm a')}</span>
+                            </div> 
+                        </div>
+                        {messageBox}
+                        {commentButtons}
 
+                    </div>
+                    <br></br>
+                    {comments}
                 </div>
-                <br></br>
-                {comments}
             </div>
         )
     }
