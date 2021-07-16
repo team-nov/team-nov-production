@@ -4,8 +4,8 @@
 
 .discussionContainer {
   position: relative;
-  margin: 1em 1em 0 -2.5em;
-  width: 98%;
+  margin: 2em 1em 0 -2.5em;
+  width: 98.1%;
   height: 150px;
 
   display: flex;
@@ -13,10 +13,13 @@
   align-items: flex-start;
   align-content: center;
 
-  border-width: 1px;
-  border-color: black;
+  border-width: 3px;
+  border-color: hotpink;
   border-style: solid; 
   border-radius: 5px;
+  border-bottom-style: hidden;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background-color: rgb(243, 243, 243);
 }
 
@@ -28,6 +31,7 @@
 }
 
 .DiscussionMessage {
+  font-family: 'Trebuchet MS';
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -40,7 +44,7 @@
   margin-bottom: 0.5em;
   float: left; */
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 2%;
   font-size: 1.2em;
   text-align: left;

@@ -12,8 +12,8 @@
   flex-direction: column;
   justify-content: center;
 
-  border-width: 1px;
-  border-color: black;
+  border-width: 5px;
+  border-color: hotpink;
   border-style: solid; 
   border-radius: 5px;
   background-color: rgb(243, 243, 243);
@@ -29,6 +29,7 @@
   resize: none;
   font-size: 1.2em;
   width: 100%;
+  border: solid hotpink;
 }
 
 .postButton {

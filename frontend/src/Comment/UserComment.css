@@ -6,15 +6,17 @@
 }
   
 .commentProfilePic {
-  width: 5%; 
-  height: 5%;
+  width: 10%; 
+  height: 10%;
   min-width: 25px;
   min-height: 25px;
   border-radius: 50%;
+  border: solid thin hotpink;
 }
   
 .userNameComment {
   margin-right: 1em;
   font-size: 12pt;
   font-weight: bold;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
