@@ -1,6 +1,7 @@
 .commentContainer {
     padding: 1em;
     margin: 0 1em 1em 1em;
+    min-width: 400px;
     max-width: 70%;
     max-height: min-content;
   

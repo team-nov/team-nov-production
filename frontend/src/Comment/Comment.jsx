@@ -3,6 +3,7 @@ import UserComment from './UserComment'
 import './Comment.css'
 import axios from 'axios'
 import { dateParser } from '../utils/DateParser'
+import { MdEdit, MdDeleteForever, MdSend, MdDeleteSweep } from 'react-icons/md'
 
 class Comment extends Component {
     constructor(props) {
@@ -97,15 +98,15 @@ class Comment extends Component {
             if (this.state.editing) {
                 commentButtons = 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Submit</button>
-                    <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button">Discard</button>
+                    <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdSend /></button>
+                    <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteSweep /></button>
                 </div>;
-                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.currentMessage}/>
+                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" style={{marginTop: "1em"}} placeholder="Comment here" value={this.state.currentMessage}/>
             } else {
                 commentButtons = 
                 <div className="d-grid gap- d-md-flex justify-content-md-end">
-                    <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Edit</button>
-                    <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                    <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdEdit /></button>
+                    <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteForever /></button>
                 </div>;
             }
         } else {
@@ -119,7 +120,7 @@ class Comment extends Component {
                     <div className="justify-content-between">
                     <UserComment username={this.state.username} picture={this.state.picture}/>
                     {messageBox}
-                    <span className="postTimeComment">{this.state.postTime}</span>
+                    {/* <span className="postTimeComment">{this.state.postTime}</span> */}
                     </div>
                 </div>
                 {commentButtons}

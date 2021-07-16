@@ -8,6 +8,9 @@ import './DiscussionExpanded.css'
 import User from '../User/User'
 import Comment from '../Comment/Comment'
 import { dateParser } from '../utils/DateParser'
+import { MdEdit, MdDeleteForever, MdSend, MdDeleteSweep } from 'react-icons/md'
+
+
 
 class DiscussionExpanded extends Component {
     state = {
@@ -19,6 +22,7 @@ class DiscussionExpanded extends Component {
         discussionComments: [],
         initialMessage: '',
         currentMessage: '',
+        postTime: '',
         isHidden: false,
         editing: false,
         discussionHide: false
@@ -44,7 +48,8 @@ class DiscussionExpanded extends Component {
                 discUsername: res.data.userId.name,
                 discTypeOfUser: res.data.userId.typeofUser,
                 initialMessage: res.data.message,
-                currentMessage: res.data.message
+                currentMessage: res.data.message,
+                postTime: res.data.postTime
 
             })
         })
@@ -82,12 +87,11 @@ class DiscussionExpanded extends Component {
                     message: this.state.currentMessage,
                     userId: this.state.discUserId._id,
                     postTime: new Date(),
-
-
                 }
             );
             this.setState({
-                editing: false
+                editing: false,
+                postTime: new Date()
             })
         } catch (e) {
             console.log(e)
@@ -131,22 +135,22 @@ class DiscussionExpanded extends Component {
         let commentButtons;
         let messageBox =
             <div>
-                <div className="DiscussionMessage" style={{display: this.state.editing?"none":"block"}}> {this.state.currentMessage} </div>
+                <div className="originalPostMessage" style={{display: this.state.editing?"none":"block"}}> {this.state.currentMessage} </div>
             </div>
         if(sessionStorage.getItem("_id") === this.state.discUserId._id) {
             if(this.state.editing) {
                 commentButtons = 
-                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick={this.submitDiscussion} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Submit</button>
-                    <button onClick={this.discardDiscussion} className="btn btn-sm btn-outline-danger" type="button">Discard</button>
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{marginTop: "1em"}}>
+                    <button onClick={this.submitDiscussion} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdSend /></button>
+                    <button onClick={this.discardDiscussion} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteSweep /></button>
                 </div>;
-                messageBox = <textarea onChange={e => this.updateDiscussion(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.currentMessage}/>
+                messageBox = <textarea onChange={e => this.updateDiscussion(e)} type="text" className="form-control" style={{marginLeft: "1em"}} placeholder="Comment here" value={this.state.currentMessage}/>
             }
             else {
                 commentButtons = 
-                <div className="d-grid gap- d-md-flex justify-content-md-end">
-                    <button onClick={this.editDiscussion} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Edit</button>
-                    <button onClick={this.deleteDiscussion} className="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                <div className="d-grid gap- d-md-flex justify-content-md-end" style={{marginTop: "1em"}}>
+                    <button onClick={this.editDiscussion} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdEdit /></button>
+                    <button onClick={this.deleteDiscussion} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteForever /></button>
                 </div>;
 
             }
@@ -162,7 +166,7 @@ class DiscussionExpanded extends Component {
                         <div className="card-body ">
                             <div className="d-flex justify-content-between">
                                 <User username={this.state.discUsername} picture={this.state.discPicture}/>  
-                                <span className="expandedPostTime">{dateParser(this.state.discussion.postTime, 'ddd h:mm a')}</span>
+                                {/* <span className="expandedPostTime">{dateParser(this.state.postTime, 'ddd h:mm a')}</span> */}
                             </div> 
                         </div>
                         {messageBox}
@@ -170,7 +174,7 @@ class DiscussionExpanded extends Component {
 
                     </div>
                     <br></br>
-                    {comments}
+                    <div className="">{comments}</div>
                 </div>
             </div>
         )
