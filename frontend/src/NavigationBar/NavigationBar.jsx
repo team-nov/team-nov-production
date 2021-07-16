@@ -63,6 +63,8 @@ class NavigationBar extends Component {
                             </li>
 
                             {myCompany}
+                            
+                            
                             {loginLink}
                             {logout}
                             {/* <li className="nav-item dropdown">

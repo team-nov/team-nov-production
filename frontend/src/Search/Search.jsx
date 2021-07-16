@@ -81,11 +81,10 @@ class Search extends Component{
                         <div className="w-75">
                             <input className="form-control" type="search" value={this.state.value} onChange={(e)=>this.onSearchInputChange(e)} />
                         </div>
+                        <button class="btn btn-primary " onClick={this.onSearchButtonClick}>Search</button>
+
                         <div class="input-group-append">
-                            <button class="btn btn-primary" onClick={this.onSearchButtonClick}>Search</button>
-                        </div>
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" onClick={this.getAllResults}>View All Results</button>
+                            <button class="btn btn-secondary mx-3" onClick={this.getAllResults}>All Results</button>
                         </div>
                         <ul class="list-group w-75 ">
                             {options}
