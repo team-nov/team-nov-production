@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import { Link } from 'react-router-dom'
 import './Discussion.css'
 import '../Comment/Comment.css'
 import '../Comment/UserComment.css'
@@ -71,14 +70,12 @@ class Discussion extends Component{
   }
 
   render(){
-    let discRoute = `/forum/${this.props.id}`;
-    console.log("discRoute is " + discRoute);
     return (
       <div>
         <div className="discussionContainer">
           <div className="userContainerDiscussion"> <User username={this.props.username} picture={this.props.picture}/> </div>
           <text className="DiscussionMessage"> 
-          <Link to={discRoute}>{this.props.message}</Link>
+          {this.props.message}
           </text>
           <div className="postTime">{this.props.postTime}</div>
         </div>
