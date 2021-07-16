@@ -13,10 +13,14 @@ class ProfilePage extends Component {
             username:'',
             password:'',
             typeOfUser:'',
-            aboutMe:''
+            aboutMe:'',
+            team:'',
+            interests:'',
+            allInterests:''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addInterest = this.addInterest.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -29,9 +33,36 @@ class ProfilePage extends Component {
                     picture: res.data.picture,
                     username: res.data.username,
                     aboutMe:res.data.aboutMe,
-                    typeOfUser: res.data.typeOfUser })
+                    typeOfUser: res.data.typeOfUser,
+                    interests: res.data.interests })
                 document.getElementsByName('typeOfUser')[0].value = this.state.typeOfUser;
             })
+
+        axios.get('http://localhost:5000/api/interests/')
+            .then(res => {
+                this.setState({
+                    allInterests: res.data })
+            })
+    }
+
+    addInterest(event) {
+        let interest = this.state.interests;
+        if(event.target.checked) {
+            if(interest.indexOf(event.target.name) === -1) {
+                interest.push(event.target.name);
+            }
+        } else {
+            console.log(event.target.name);
+            var index = interest.indexOf(event.target.name);
+            if (index !== -1) {
+                interest.splice(index, 1);
+            }
+        }
+
+        this.setState({
+            interests: interest
+        });
+        
     }
 
     handleChange(event) {
@@ -66,7 +97,26 @@ class ProfilePage extends Component {
         });
     }
 
-    render(){
+    render(){     
+        var checklist = [];
+        // console.log(this.state.allInterests);
+        for(var i = 0; i < this.state.allInterests.length; i++) {
+            // console.log(this.state.allInterests[i]);
+            if(this.state.interests.indexOf(this.state.allInterests[i].name) == -1) {
+                checklist[i] = 
+                <div>
+                    <input type='checkbox' name={this.state.allInterests[i].name} value={this.state.allInterests[i]._id} onChange={this.addInterest}></input>
+                    <label for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
+                </div>
+            } else {
+                checklist[i] = 
+                <div>
+                    <input type='checkbox' name={this.state.allInterests[i].name} value={this.state.allInterests[i]._id} onChange={this.addInterest} checked></input>
+                    <label for={this.state.allInterests[i].name}>{this.state.allInterests[i].name}</label>
+                </div>
+            }
+            
+        }
         return(
             <div className="ProfilePage">
                 <form className='ProfileForm' onSubmit={this.handleSubmit}>
@@ -93,6 +143,10 @@ class ProfilePage extends Component {
                     <div className='field'>
                         <label>About Me: </label>
                         <textarea name='aboutMe' value={this.state.aboutMe} onChange={this.handleChange}></textarea>
+                    </div>
+                    <div className='field'>
+                        <label>Interests:</label>
+                        {checklist}
                     </div>
                     <div className='field'>
                         <label>Type of User: </label>

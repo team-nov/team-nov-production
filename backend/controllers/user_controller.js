@@ -121,7 +121,7 @@ exports.postUsers = (req,res,next) => {
         picture: req.body.picture,
         username: req.body.username,
         password: req.body.password,
-        typeOfUser: req.body.typeOfUser
+        typeOfUser: req.body.typeOfUser,
     });
 
     user.save()
