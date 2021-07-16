@@ -43,15 +43,20 @@ class UserPage extends Component {
             interestsList[i] = <li class='list-group-item'>{this.state.interests[i]}</li>
         }
 
+        var organization = "";
+        if (this.state.team !== "N/A") {
+            organization = this.state.team;
+        }
+
         return(
             <div class='container-fluid'>
                 <div class='row'>
                     <div class='col offset-sm-1 col-sm-3'>
                         <img class='img-fluid rounded' src={this.state.picture} alt={this.state.name + " picture"}/>
                         <h1 class='font-weight-bold text-uppercase'>{this.state.name}</h1>
-                        <h4 class='text-uppercase'>{this.state.typeOfUser}</h4>
-                        <h4 class='text-uppercase'>{this.state.email}</h4>
-                        <h4 class='text-uppercase'>{this.state.team}</h4>
+                        <h5 class='text-uppercase'>{this.state.typeOfUser}</h5>
+                        <h5 class='text-uppercase'>{this.state.email}</h5>
+                        <h5 class='text-uppercase'>{organization}</h5>
                         {editButton}
                     </div>
                     <div class='col offset-sm-1 col-sm-5'>

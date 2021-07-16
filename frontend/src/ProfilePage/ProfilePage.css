@@ -41,6 +41,10 @@
     border-radius: 5px;
 }
 
+.checklistLabels {
+    margin-left: 5px;
+}
+
 .error {
     background-color: #ff4545;
     color: black;
