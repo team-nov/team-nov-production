@@ -1,4 +1,6 @@
 import React,{Component} from 'react'
+import { Link } from 'react-router-dom'
+import { MdSend } from 'react-icons/md'
 import axios from 'axios';
 import UserComment from './UserComment'
 import './CommentEntry.css'
@@ -35,13 +37,15 @@ class CommentEntry extends Component {
         .catch((e)=>console.log(e))
     }
 
-    render() { //change to sessionStorage later
+    render() { 
+        let discRoute = `/forum/${this.state.discussionId}`;
         return (
             <div className="commentEntryContainer">
                 <UserComment username={this.state.username} picture={this.state.picture}/>
+                <Link to={discRoute} className="btn btn-primary">See Post</Link>
                 <form className="commentEntryForm">
                     <textarea onChange={(e)=>this.updateCommentInput(e)} value={this.state.message} className="commentEntry" rows="4" cols="100" placeholder="Leave a comment..."></textarea>
-                    <button className="commentButton" onClick={this.addComment}> Post </button>
+                    <button className="commentButton" onClick={this.addComment}> <MdSend /> </button>
                 </form>
             </div>
         )

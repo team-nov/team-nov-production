@@ -2,7 +2,7 @@
     padding: 1em;
     margin: 0 1em 1em 1em;
     min-width: 400px;
-    max-width: 50%;
+    max-width: 70%;
     max-height: min-content;
   
     display: flex;
@@ -23,6 +23,7 @@
   float: left;
   font-size: 12pt;
   text-align: left;
+  color: black;
 
   display: block;
   display: -webkit-box;
@@ -36,7 +37,27 @@
 }
   
 .postTimeComment{
-  margin-left: auto;
-  align-self: flex-end;
-  float: right;
+  position: absolute;
+  top: 2em;
+  right: 1em;
+  text-align: right;
+}
+
+.OriginalPost {
+  padding: 1em;
+  margin: 0 1em 1em 1em;
+  min-width: 400px;
+  max-width: 70%;
+  max-height: min-content;
+
+  display: flex;
+  flex-direction: row ltr;
+  overflow-y: none;
+
+  border-width: 1px;
+  border-color: black;
+  border-style: solid; 
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+
 }

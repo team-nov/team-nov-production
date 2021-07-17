@@ -33,12 +33,16 @@
     margin-bottom: 10px;
 }
 
-.ProfileForm .field input, .field select, .error {
+.ProfileForm .field input, .field select, .error, textarea{
     background-color: whitesmoke;
     color: grey; 
     padding: 0.75em;
     border: none;
     border-radius: 5px;
+}
+
+.checklistLabels {
+    margin-left: 5px;
 }
 
 .error {

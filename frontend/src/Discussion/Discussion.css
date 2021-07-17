@@ -1,33 +1,61 @@
-/* Each component should have its own css file with the name as the component
-   Note Css Styles of parent will apply to their child componentss
-*/
-
 .discussionContainer {
-  padding: 1em;
-  margin: 1em 1em 0 1em;
-  min-width: 400px;
+  position: relative;
+  margin: 2em -1em 0 -2.4em;
+  width: 97.8%;
+  height: 150px;
 
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  align-content: center;
 
-  border-width: 1px;
-  border-color: black;
+  border-width: 3px;
+  border-color: hotpink;
   border-style: solid; 
   border-radius: 5px;
+  border-bottom-style: hidden;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background-color: rgb(243, 243, 243);
 }
 
+.userContainerDiscussion {
+  position: absolute;
+  top: 5%;
+  left: 2%;
+  /* height: 500px; */
+}
+
 .DiscussionMessage {
-  width: inherit;
-  margin: 1em 3em 0;
-  float: left;
+  font-family: 'Trebuchet MS';
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  height: fit-content;
+  padding-left: 0em;
+  /* width: inherit;
+  margin: auto;
+  margin-left: -0.5em;
+  margin-bottom: 0.5em;
+  float: left; */
+  position: absolute;
+  top: 35%;
+  left: 2%;
   font-size: 1.2em;
   text-align: left;
   word-break: break-word;
 }
 
 .postTime{
-  margin-top: 1em;
-  float: right;
+  position: absolute;  
+  top: 0%;
+  right: 0%;
+  margin-top: 0.25em;
+  margin-right: 0.5em;
+}
+
+.commentOnDiscussion {
+  margin-left: -6em;
 }

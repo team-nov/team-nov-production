@@ -1,51 +1,23 @@
-**BOLDED -> IMPORTANT**
+**BOLDED = IMPORTANT**
 
 **User stories:**
 
-
-
-1. **As a Mentee, I want to be able to search and watch e-learning videos anytime so that I can learn at my own pace.**
-    *   **Recorded videos will be accessible within the e-learning section**
-    *   **Users will be able to search from a variety of videos they want to watch and thevideos will have all of the features of a typical video player, such as play, pause, fast forward, slow down, etc...**
-2. **As a user, I want to be able to discuss topics with my fellow users so that we may build relationships.**
-    *   **Create a general discussion forum for mentees to create and reply posts**
-    *   **Allow posts to contain images/video**
-3. **As a user, I want to be able to send direct messages to other users on the platform, so that I may discuss matters privately**
-    *   **Users are able to easily identify, send and receive direct messages to users**
-    *   **Users are able to view all of their conversations in one screen**
-4. **As an unregistered user, I want to be able to register an account, so that I can use the platform**
-    *   **Registration form for new users to fill out their information**
-    *   **If the users fill out the mandatory information, they will receive a verification email**
-    *   **Once the user verifies their email, their account will be created on saved in the database**
-5. As a registered user, I want to be able to share my company information so that I can promote it.
-    *   Company information page is connected to founder’s profile
-    *   founders can edit can customize the information they show 
-6. As a Mentee, I want to be able to view all the workshops I have signed up for in one place so that I can manage my time.
-    *   A Mentee is able to sign up for workshops and click a button to view all the workshops they have signed up for in one place.
-7. As a registered user, I want to be able to conduct a video call with other users so that I can have face-to-face conversations with other users.
-    *  A registered user can click a button and join a video call with other users.
-    *  They can specify with which user they want to join the video call.
-8. As a Mentee, I want to be able to ask and respond to questions regarding workshop content so that I can attain the clarification necessary to my learning
-    *   Create an associated discussion forum when a workshop is created
-    *   Allow students/mentees to post questions and replies
-    *   Allow instructors the ability to remove irrelevant/inappropriate posts
-    *   Allow instructors to post announcements which alert the class
-9. As a mentee, I want a calendar so that I can keep track of workshops and events .
-    *   Users will be able to view their personal calendar that records the lectures and events scheduled for them
-    *   Users can customize their calendars by adding/removing events or reminders
-10. As a Mentee, I want to be able to see my feedback so that I can track my progress.
-    *   Users can access their deliverables and it will display their feedback in details
-11. As a Mentor, I want to talk about my experiences so that I can guide aspiring entrepreneurs.
-    *   Be able to display text on a post that aspiring entrepreneurs can view
-    *   Be able to post a video that aspiring entrepreneurs can view
-12. As a user, I want to be able to create a profile, so that i can receive personalized recommendations
-    *   Users are able to fill out and update their information
-    *   Once user profile is complete, they will receive recommended actions based on their profile data
-13. As a user, I want to be affiliated with my startup on the platform to collaborate with them
-    *   Users team affiliation is visible to other users
-14. As a Mentee, I want to be able to submit my completed deliverables so that my mentor/instructor will be able to evaluate my work.
-    *   Allow students/mentees to upload files, input into text boxes, and perform other methods of submission, such as checkboxes or radio buttons, as needed
-    *   Students/mentees will be able to see if they have successfully submitted their work or if there is anything missing
-15. As a partner, I want to be able to view company information, so that i can find out more about the companies
-    *   Partners can view specific details about companies
-    *   Partners can create an account to access the platform
+1. **(TNOV-24) As a user, I want to be able to create a profile, so that i can receive personalized recommendations.**
+2. **(TNOV-22) As a user, I want to be affiliated with my startup on the platform to collaborate with them.**
+3. **(TNOV-19) As a registered user, I want to be able to share my company information so that I can promote it.**
+4. **(TNOV-73) As a user, I want to view discussion posts on an easy-to-navigate, and elegant interface, so that I may enjoy the browsing experience.**
+5. **(TNOV-74) As a user, I want to view a discussion post and its comments on an easy-to-navigate, and elegant interface, so that I may enjoy the viewing experience.**
+6. **(TNOV-77) As a user, I want to view direct messages on an easy-to-navigate, and elegant interface, so that I may enjoy the messaging experience.**
+7. **(TNOV-79) As a user, I want to be able to search for other users by username so that I can message a specific person**
+8. (TNOV-58) As a user, I want to be able to post an image as part of my discussion posts so that I may express myself better.
+9. (TNOV-78) As a Mentor, I want to upload my lectures onto the site so that other users can watch them.
+10. (TNOV-80) As a user, I want to be able to view the company information of other users
+11. (TNOV-17) As a Mentee, I want to be able to search and watch e-learning videos anytime so that I can learn at my own pace.
+12. (TNOV-28) As a registered user, I want to be able to conduct a video call with other users so that I can have face-to-face conversations with other users.
+13. (TNOV-25) As a Mentor, I want to talk about my experiences so that I can guide aspiring entrepreneurs.
+14. (TNOV-23) As a Mentee, I want to be able to ask and respond to questions regarding workshop content so that I can attain the clarification necessary to my learning.
+15. (TNOV-32) As a Mentee, I want to be able to see my feedback so that I can track my progress
+16. (TNOV-18) As a Mentee, I want to be able to submit my completed deliverables so that my mentor/instructor will be able to evaluate my work.
+17. (TNOV-29) As a Mentee, I want a calendar so that I can keep track of the workshops and events that I am in.
+18. (TNOV-31) As a partner, I want to be able to view company information, so that i can find out more about the companies.
+19. (TNOV-27) As a Mentee, I want to be able to view all the workshops I have signed up for in one place so that I can manage my time.

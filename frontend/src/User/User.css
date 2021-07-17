@@ -13,10 +13,11 @@
   min-width: 30px;
   min-height: 30px;
   border-radius: 50%;
+  border: solid thin pink;
 }
 
 .userName {
-  margin: 0 1em;
+  margin: 0 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }
