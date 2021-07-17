@@ -24,3 +24,4 @@
 
 - creates a discussion post with the users message content (via post request)
 - params
+  - None
