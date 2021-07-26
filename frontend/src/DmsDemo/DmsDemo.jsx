@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { io } from 'socket.io-client'
 import axios from 'axios'
+import './DmsDemo.css'
 import { dateParser } from '../utils/DateParser'
 import UserSearchComponent from '../UserSearchComponent/UserSearchComponent'
 
