@@ -52,7 +52,7 @@ class UserPage extends Component {
             <div class='container-fluid'>
                 <div class='row'>
                     <div class='col offset-sm-1 col-sm-3'>
-                        <img class='img-fluid profilePic' src={this.state.picture} alt={this.state.name + " picture"}/>
+                        <img class='img-fluid userProfilePic' src={this.state.picture} alt={this.state.name + " picture"}/>
                         <h1 class='font-weight-bold text-uppercase'>{this.state.name}</h1>
                         <h5 class='text-uppercase'>{this.state.typeOfUser}</h5>
                         <h5 class='text-uppercase'>{this.state.email}</h5>

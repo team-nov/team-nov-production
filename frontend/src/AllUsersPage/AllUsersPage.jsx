@@ -26,7 +26,9 @@ class AllUsersPage extends Component {
                 <div class="col p-3 " key={index}>
                     <a href={"/user/" + user._id} className="cardLink" >
                         <div class="card text-start h-100" >
-                            <img class="card-img-top" src={user.picture} alt="oops" />
+                            <div class="text-center">
+                                <img class="card-img-top userProfilePic text-center" src={user.picture} alt="oops" />
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">{user.username}</h5>
                                 {[user.team ? <p class="card-text">Member of {user.team}</p> : []]}
