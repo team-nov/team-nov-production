@@ -15,7 +15,7 @@
     text-align: left;
 }
 
-.profilePic {
+.userProfilePic {
     width: 15em;
     height: 15em;
     object-fit: cover;
