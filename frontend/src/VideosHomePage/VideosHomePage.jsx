@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './Search.css'
+import './VideosHomePage.css'
 const serverUrl = "http://localhost:5000/api";
-class Search extends Component{
+class VideosHomePage extends Component{
     state={
         value:"",
         suggestions:[],
@@ -106,4 +106,4 @@ class Search extends Component{
     }
 
 }
-export default Search
+export default VideosHomePage
