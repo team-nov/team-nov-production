@@ -22,6 +22,7 @@ import ProfilePage from "./ProfilePage/ProfilePage"
 import UserPage from './UserPage/UserPage';
 import CompaniesPage from "./CompaniesPage/CompaniesPage"
 import CompanyPage from "./CompanyPage/CompanyPage"
+import AllUsersPage  from './AllUsersPage/AllUsersPage';
  
 class App extends Component{
   render(){
@@ -45,7 +46,7 @@ class App extends Component{
             <Route path="/videos" component={Search}/>
             <Route path="/companies" component={CompaniesPage} />
             <Route path="/company" component={CompanyPage} />
-            
+            <Route path="/allusers" component={AllUsersPage} />
             <Route path="/" component={Home} />
           </Switch>
         </Router>
