@@ -26,7 +26,7 @@ class AllUsersPage extends Component {
                 <div class="col p-3 " key={index}>
                     <a href={"/user/" + user._id} className="cardLink" >
                         <div class="card text-start h-100" >
-                            <div class="text-center">
+                            <div class="text-center p-3">
                                 <img class="card-img-top userProfilePic text-center" src={user.picture} alt="oops" />
                             </div>
                             <div class="card-body">
