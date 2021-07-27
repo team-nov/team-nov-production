@@ -1,7 +1,3 @@
-/* Each component should have its own css file with the name as the component
-   Note Css Styles of parent will apply to their child componentss
-*/
-
 .discussionContainer {
   position: relative;
   margin: 2em -1em 0 -2.4em;
