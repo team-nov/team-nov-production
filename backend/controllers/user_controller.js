@@ -124,18 +124,26 @@ exports.postUsers = (req,res,next) => {
         typeOfUser: req.body.typeOfUser,
     });
 
-    user.save()
-        .then((result)=>{
-            console.log(result)
-            res.status(201).json({
-                message:"Successfully added user",
-                user: user
-            })
+    User.findOne({username:req.body.username})
+        .exec()
+        .then((data)=>{
+            if(!data) {
+                user.save()
+                    .then((result)=>{
+                        console.log(result)
+                        res.status(201).json({
+                            message:"Successfully added user",
+                            user: user
+                        })
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        res.status(500).json({
+                            error:err
+                        })
+                    });
+            } else {
+                res.status(500).json({message:"User already exists!"})
+            }
         })
-        .catch(err=>{
-            console.log(err);
-            res.status(500).json({
-                error:err
-            })
-        });
 }

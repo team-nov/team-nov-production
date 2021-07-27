@@ -254,7 +254,12 @@ class DmsDemo extends Component {
 						<label for="inputRecipient" className="col-form-label">To:</label>
 					</div>
 					<div className="col-8" style={{ display: this.state.showNewDM ? "block" : "none" }}>
-						<UserSearchComponent id="inputRecipient" hideSearchButton={true} onSuggestionClick={(selectedUser)=>this.handleUserSuggestion(selectedUser)}/>
+						<UserSearchComponent 
+							id="inputRecipient" 
+							hideSearchButton={true} 
+							onSuggestionClick={(selectedUser)=>this.handleUserSuggestion(selectedUser)}
+							filter = {(user)=>{return!(user._id===this.state.userId)}}
+							/>
 					</div>
 					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
 						<button className={this.state.createDMSuccess?"btn btn-success":"btn btn-success disabled"} onClick={this.createDM} >Add</button>

@@ -13,7 +13,14 @@ class UserSearchComponent extends Component{
     
     getSearchSuggestions = async()=>{
         let res = await axios.get(serverUrl+"/users/search/"+this.state.value);
-        this.setState({results:res.data});
+        // check for search filter prop
+        // search filter is a function
+        let suggestions = res.data
+        if(this.props.filter){
+            console.log(res.data)
+            suggestions = res.data.filter(this.props.filter)
+        }
+        this.setState({results:suggestions});
     }
     onSearchInputChange = async (e)=>{
         let value =  e.target.value;
