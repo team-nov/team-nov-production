@@ -10,7 +10,7 @@ class CompanyPage extends Component {
         company:'',
         companyLogo:'',
         companyLocation:'',
-        companyDescription:''
+        companyDescription:'',
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -31,7 +31,8 @@ class CompanyPage extends Component {
       company: this.state.company,
       companyLogo: this.state.companyLogo,
       companyLocation: this.state.companyLocation,
-      companyDescription: this.state.companyDescription
+      companyDescription: this.state.companyDescription,
+      founder_id: sessionStorage.getItem('_id')
     }
 
     console.log(company);

@@ -13,7 +13,7 @@ class UserPage extends Component {
             typeOfUser:'',
             aboutMe:'',
             interests:[],
-            team: '',
+            team: [],
         }
     }
 
@@ -43,10 +43,20 @@ class UserPage extends Component {
             interestsList[i] = <li class='list-group-item'>{this.state.interests[i]}</li>
         }
 
-        var organization = "";
-        if (this.state.team !== "N/A") {
-            organization = this.state.team;
+        if(interestsList.length === 0) {
+            interestsList[0] = <h6>This user has no interests.</h6>
         }
+
+        var organization = [];
+        for (var i = 0; i < this.state.team.length; i++) {
+            organization[i] = 
+            <li class='list-group-item'>{this.state.team[i]}</li>
+        }
+
+        if(organization.length === 0) {
+            organization[0] = <h6>This user has no affiliations.</h6>
+        }
+        
 
         return(
             <div class='container-fluid'>
@@ -56,13 +66,17 @@ class UserPage extends Component {
                         <h1 class='font-weight-bold text-uppercase'>{this.state.name}</h1>
                         <h5 class='text-uppercase'>{this.state.typeOfUser}</h5>
                         <h5 class='text-uppercase'>{this.state.email}</h5>
-                        <h5 class='text-uppercase'>{organization}</h5>
                         {editButton}
                     </div>
                     <div class='col offset-sm-1 col-sm-5'>
                         <h4 class='text-uppercase text-left'>My Interests</h4>
                         <ul class='list-group list-group-horizontal'>
                             {interestsList}
+                        </ul>
+                        <br></br>
+                        <h4 class='text-uppercase text-left'>My Affiliations:</h4>
+                        <ul class='list-group list-group-horizontal'>
+                            {organization}
                         </ul>
                         <br></br>
                         <h4 class='text-uppercase text-left'>About Me</h4>

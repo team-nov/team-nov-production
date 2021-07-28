@@ -22,6 +22,7 @@ class CompaniesPage extends Component {
       let companies = this.state.companies.map((company,index)=>{
         return (
         <div class="col p-3 ">
+          <a href={"/company/" + company._id} className="cardLink">
           <div class="card text-start h-100" >
               <img class="card-img-top" src={company.companyLogo} alt="oops"/>
               <div class="card-body">
@@ -30,6 +31,7 @@ class CompaniesPage extends Component {
                   <p class="card-text">{company.companyDescription}</p>
               </div>
           </div>
+          </a>
         </div>
       )
     })

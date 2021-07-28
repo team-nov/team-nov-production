@@ -13,6 +13,17 @@ exports.getCompanies = async (req, res, next) => {
     }
 }
 
+exports.getCompanyById = (req,res,next) => {
+    let id = req.params.companyId
+    Company
+        .findOne({_id:id})
+        .exec()
+        .then((data)=>{
+            console.log(data);
+            res.status(200).json(data)
+        })
+}
+
 exports.postCompany = async (req, res) => {
 
     const company = new Company({
@@ -20,7 +31,8 @@ exports.postCompany = async (req, res) => {
         company: req.body.company,
         companyLogo: req.body.companyLogo,
         companyLocation: req.body.companyLocation,
-        companyDescription: req.body.companyDescription
+        companyDescription: req.body.companyDescription,
+        founder: req.body.founder_id
     });
 
   company.save()
@@ -38,4 +50,23 @@ exports.postCompany = async (req, res) => {
               error:err
           })
       });
+}
+
+exports.updateCompanyInfo = (req, res, next) => {
+    const id = req.body._id
+    console.log(id);
+    Company
+        .updateOne({_id: id},{$set:req.body})
+        .exec()
+        .then(result=>{
+            res.status(200).json({
+                success: true
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(500).json({
+                error:err
+            })
+        });
 }

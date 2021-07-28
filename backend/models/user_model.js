@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     password:{type:String,required:true},
     aboutMe: {type:String},
     interests: {type:[String], default:[]},
-    team:{type:String}, // basically the company/startup the user is affiliated with
+    team:{type:[String], default:[]}, // basically the company/startup the user is affiliated with
     typeOfUser:{type:String,required:true}
 });
 

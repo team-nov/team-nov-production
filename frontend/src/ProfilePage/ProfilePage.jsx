@@ -14,13 +14,14 @@ class ProfilePage extends Component {
             password:'',
             typeOfUser:'',
             aboutMe:'',
-            team:'',
+            team: [],
             interests:'',
             allInterests: [],
             allCompanies: []
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addCompany = this.addCompany.bind(this);
         this.addInterest = this.addInterest.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -51,6 +52,25 @@ class ProfilePage extends Component {
                 this.setState({
                     allCompanies: res.data })
             })
+    }
+
+    addCompany(event) {
+        let team = this.state.team;
+        if(event.target.checked) {
+            if(team.indexOf(event.target.name) === -1) {
+                team.push(event.target.name);
+            }
+        } else {
+            console.log(event.target.name);
+            var index = team.indexOf(event.target.name);
+            if (index !== -1) {
+                team.splice(index, 1);
+            }
+        }
+
+        this.setState({
+            team: team
+        });
     }
 
     addInterest(event) {
@@ -125,14 +145,24 @@ class ProfilePage extends Component {
             }
         }
 
-        var companyList = []
+        var company_checklist = []
         for(var i = 0; i < this.state.allCompanies.length; i++) {
-            if(this.state.allCompanies[i].company === this.state.team) {
-                companyList[i] = <option selected>{this.state.allCompanies[i].company}</option>
+            // console.log(this.state.allInterests[i]);
+            if(this.state.team.indexOf(this.state.allCompanies[i].company) === -1) {
+                company_checklist[i] = 
+                <div>
+                    <input type='checkbox' name={this.state.allCompanies[i].company} value={this.state.allCompanies[i]._id} onChange={this.addCompany}></input>
+                    <label class='checklistLabels' for={this.state.allCompanies[i].company}>{this.state.allCompanies[i].company}</label>
+                </div>
             } else {
-                companyList[i] = <option>{this.state.allCompanies[i].company}</option>
+                company_checklist[i] = 
+                <div>
+                    <input type='checkbox' name={this.state.allCompanies[i].company} value={this.state.allCompanies[i]._id} onChange={this.addCompany} checked></input>
+                    <label class='checklistLabels' for={this.state.allCompanies[i].company}>{this.state.allCompanies[i].company}</label>
+                </div>
             }
         }
+
 
         return(
             <div className="ProfilePage">
@@ -163,10 +193,7 @@ class ProfilePage extends Component {
                     </div>
                     <div className='field'>
                         <label>Organization: </label>
-                        <select name='team' onChange={this.handleChange}>
-                            <option>N/A</option>
-                            {companyList}
-                        </select>
+                        {company_checklist}
                     </div>
                     <div className='field'>
                         <label>Type of User: </label>
