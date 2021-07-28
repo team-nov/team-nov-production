@@ -56,13 +56,14 @@ class ProfilePage extends Component {
 
     addCompany(event) {
         let team = this.state.team;
+        var companyEntry = [event.target.name, event.target.value]
         if(event.target.checked) {
-            if(team.indexOf(event.target.name) === -1) {
-                team.push(event.target.name);
+            if(team.indexOf(companyEntry) === -1) {
+                team.push(companyEntry);
             }
         } else {
-            console.log(event.target.name);
-            var index = team.indexOf(event.target.name);
+            console.log(companyEntry);
+            var index = team.indexOf(companyEntry);
             if (index !== -1) {
                 team.splice(index, 1);
             }
@@ -148,7 +149,9 @@ class ProfilePage extends Component {
         var company_checklist = []
         for(var i = 0; i < this.state.allCompanies.length; i++) {
             // console.log(this.state.allInterests[i]);
-            if(this.state.team.indexOf(this.state.allCompanies[i].company) === -1) {
+            var allCompaniesInfo = [this.state.allCompanies[i].company, this.state.allCompanies[i]._id]
+            console.log(allCompaniesInfo);
+            if(this.state.team.indexOf(allCompaniesInfo) === -1) {
                 company_checklist[i] = 
                 <div>
                     <input type='checkbox' name={this.state.allCompanies[i].company} value={this.state.allCompanies[i]._id} onChange={this.addCompany}></input>

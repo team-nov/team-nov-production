@@ -50,7 +50,7 @@ class UserPage extends Component {
         var organization = [];
         for (var i = 0; i < this.state.team.length; i++) {
             organization[i] = 
-            <li class='list-group-item'>{this.state.team[i]}</li>
+            <a class='nounderline' href={'/company/' + this.state.team[i][1]}><li class='list-group-item'>{this.state.team[i][0]}</li></a>
         }
 
         if(organization.length === 0) {
@@ -63,9 +63,11 @@ class UserPage extends Component {
                 <div class='row'>
                     <div class='col offset-sm-1 col-sm-3'>
                         <img class='img-fluid userProfilePic' src={this.state.picture} alt={this.state.name + " picture"}/>
+                        <br></br><br></br>
                         <h1 class='font-weight-bold text-uppercase'>{this.state.name}</h1>
                         <h5 class='text-uppercase'>{this.state.typeOfUser}</h5>
                         <h5 class='text-uppercase'>{this.state.email}</h5>
+                        <br></br>
                         {editButton}
                     </div>
                     <div class='col offset-sm-1 col-sm-5'>
