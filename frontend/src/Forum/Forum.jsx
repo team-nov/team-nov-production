@@ -4,6 +4,26 @@ import './Forum.css'
 import Discussion from '../Discussion/Discussion'
 import User from '../User/User'
 import { dateParser } from '../utils/DateParser'
+import firebase from "firebase/app";
+import "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAazLY-icEO67sl2FHkiA1MD97mhMGNCqQ",
+  authDomain: "project-team-nov.firebaseapp.com",
+  projectId: "project-team-nov",
+  storageBucket: "project-team-nov.appspot.com",
+  messagingSenderId: "866523261997",
+  appId: "1:866523261997:web:1ece7eedc92753e287dca4",
+  measurementId: "G-JX5S7P355F"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+else {
+  firebase.app(); 
+}
+const storage = firebase.storage();
 
 class Forum extends Component{
   state = {
@@ -12,6 +32,19 @@ class Forum extends Component{
     name: sessionStorage.getItem("name"),
     message: '',
     discussions: [],
+    image: {},
+  }
+
+  handleChange = e => {
+    console.log(e.target.files);
+    if (e.target.files[0]) { 
+      const image = e.target.files[0];
+      console.log(image);
+      this.setState(() => ({ image: image }));
+    }
+    else {
+      this.setState(() => ({ image: {} }));
+    }
   }
 
   componentDidMount() {
@@ -29,13 +62,53 @@ class Forum extends Component{
     this.setState({message:e.target.value});
   }
 
-  addDiscussion=()=>{
+  postDiscussion(imageURL) {
     axios.post('http://localhost:5000/api/discussions', {
       userId: this.state.userId,
       message: this.state.message,
+      imageURL: imageURL
     })
-    .then(res=>this.setState({discussions: res.data}))
+    .then(async(res)=>{
+      if (res.status === 201){
+        let updatedDiscussions = await axios.get('http://localhost:5000/api/discussions');
+        await this.setState({discussions: updatedDiscussions.data});
+      }
+    })
     .catch((e)=>console.log(e))
+  }
+
+  addDiscussion=()=>{
+    if (this.state.image.name) {
+      if (this.state.image.type.substr(0, this.state.image.type.indexOf("/")) !== "image") {
+          alert("Please submit an image type file.");
+          return;
+      }
+      const uploadTask = storage.ref(`discussion_images/${this.state.image.name}`).put(this.state.image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {},
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage.ref("discussion_images")
+                  .child(this.state.image.name)
+                  .getDownloadURL()
+                  .then(url => {
+                      console.log(url);
+                      this.postDiscussion(url);
+                      this.setState({message: ''});
+                      this.setState(() => ({ image: {} }));
+                  });
+        }
+      )
+    }
+    else {
+      this.postDiscussion('');
+      this.setState({message: ''});
+    }
+    document.querySelector(".postTextEntry").value = '';
+    document.querySelector(".uploadButton").value = null;
   }
 
   render(){
@@ -55,10 +128,11 @@ class Forum extends Component{
     <div>
       <div className="forumContainer">
         <User username={this.state.name} picture={this.state.picture}/>
-        <form className="postInput">
+        <div className="postInput">
           <textarea onChange={(e)=>this.updateInput(e)} value={this.state.message} className="postTextEntry" rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
+          <input type="file" onChange={this.handleChange} className="uploadButton"/>
           <button className="postButton" onClick={this.addDiscussion}> Post </button>
-        </form>
+        </div>
       </div>
       <div className="discussions">
         {discussion}
