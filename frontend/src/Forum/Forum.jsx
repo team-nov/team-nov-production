@@ -53,12 +53,24 @@ class Forum extends Component{
     discussion = discussion.reverse()
     return (
     <div className="container-fluid p-5">
-      <div className="forumContainer">
-        <User username={this.state.name} picture={this.state.picture}/>
-        <form className="postInput">
-          <textarea onChange={(e)=>this.updateInput(e)} value={this.state.message} className="postTextEntry" rows="4" cols="100" placeholder="Start a Discussion..."></textarea>
-          <button className="postButton" onClick={this.addDiscussion}> Post </button>
-        </form>
+      <div className="row justify-content-center mb-5">
+        <div className="col-6 card p-0 ">
+            <div className="card-body text-left p-0 ">
+            <div className="card-title p-3"> 
+            <User username={this.state.name} picture={this.state.picture}/>
+            </div>
+            <div className="bg-light p-3">
+              <form >
+                <div className="input-group">
+                <textarea onChange={(e)=>this.updateInput(e)} value={this.state.message} className="form-control" rows="4" cols="100" placeholder="Start a Discussion..." required></textarea>
+                </div>
+              </form>
+              <div className="row justify-content-end p-3"> 
+                <button className="btn btn-primary col-lg-2 col-sm-3" onClick={this.addDiscussion}> Post </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
       {discussion}

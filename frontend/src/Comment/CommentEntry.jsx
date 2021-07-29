@@ -55,8 +55,8 @@ class CommentEntry extends Component {
                     </div>
                 </form>
                 <div className="row justify-content-end pt-3">                
-                    <Link to={discRoute} className="btn btn-primary col-2">View Comments</Link>
-                    <button className="btn btn-primary mx-3 col-2" onClick={this.addComment}> <MdSend /> </button>
+                    <Link to={discRoute} className="btn btn-primary col-lg-3 col-md-5 col-sm-5">View Comments</Link>
+                    <button className="btn btn-primary mx-3 col-lg-2 col-sm-3" onClick={this.addComment}> <MdSend /> </button>
                 </div>
             </div>
         )
