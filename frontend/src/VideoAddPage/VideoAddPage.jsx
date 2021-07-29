@@ -54,16 +54,14 @@ class VideoAddPage extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-		console.log(this.state.title)
-		console.log(this.state.interests)
-
 		try {
-            await axios.post('http://localhost:5000/api/videos', {
+            const res = await axios.post('http://localhost:5000/api/videos', {
 				author: this.state.userId,
 				title: this.state.title,
 				link: this.state.link,
 				interests: this.state.interests
             })
+			alert(res.data.message)
         } catch (e) {
             console.log(e)
         }
@@ -105,7 +103,7 @@ class VideoAddPage extends Component {
                         <label>Interests:</label>
                         {checklist}
                     </div>
-                    <input className='VideoAddButton' type='submit' value="Save Changes"></input>
+                    <input className='VideoAddButton' type='submit' value="Submit"></input>
                 </form>
             </div>
         )

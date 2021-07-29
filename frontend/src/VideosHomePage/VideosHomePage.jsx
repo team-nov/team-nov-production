@@ -80,14 +80,22 @@ class VideosHomePage extends Component{
                 })
             : []
         let videos = this.state.results.map((video,index)=>{
-			console.log(video);
+			let interestsList = [];
+			for (var i = 0; i < video.interests.length; i++) {
+				interestsList[i] = <li class='list-group-item'>{video.interests[i]}</li>
+			}
             return (
-            <div key={index} className="col p-3 ">
+            <div key={index} className="col p-3">
                 <a href={"/videos/"+video._id} className="cardLink" >
             <div className="card text-start h-100" >
 				<div className="vidContainer">
 					<iframe className="video" src={video.link.replace("watch?v=", "embed/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 				</div>
+				<div class='p-3 col'>
+                    <ul class='list-group list-group-horizontal'>
+                        {interestsList}
+                    </ul>
+                </div>
                 <div className="card-body">
                     <h5 className="card-title">{video.title}</h5>
 					<div className="d-flex">
