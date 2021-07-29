@@ -48,21 +48,68 @@ class VideosHomePage extends Component{
         else
             this.getSearchResults();
     }
+	deleteVideo = async(e, videoId) => {
+		e.preventDefault();
+		console.log(videoId);
+		try {
+            await axios.delete('http://localhost:5000/api/videos', {
+				data: {
+					videoId: videoId
+				}
+            })
+			window.location.reload();
+        } catch (err) {
+            console.log(err)
+        }
+	}
+	convertLinkToThumbnail = (link) => {
+		const id = link.substring(link.indexOf("v=") + 2);
+		return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+	}
     render(){
+
+		if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the videos.
+					</div>
+				</div>
+			)
+		}
+
         let options = this.state.value 
             ? this.state.suggestions.map((suggest,index)=>{
-                return <li class="list-group-item" style={{textAlign:'left'}}key={index} onClick={(e)=>this.onSuggestionClick(e)}>{suggest}</li>
+                return <li className="list-group-item" style={{textAlign:'left'}}key={index} onClick={(e)=>this.onSuggestionClick(e)}>{suggest}</li>
                 })
             : []
         let videos = this.state.results.map((video,index)=>{
+
+			let interestsList = [];
+			for (var i = 0; i < video.interests.length; i++) {
+				interestsList[i] = <li class='list-group-item'>{video.interests[i]}</li>
+			}
             return (
-            <div class="col p-3 ">
+            <div key={index} className="col p-3">
                 <a href={"/videos/"+video._id} className="cardLink" >
-            <div class="card text-start h-100" >
-                <img class="card-img-top" src="https://via.placeholder.com/267x150" alt="oops"/>
-                <div class="card-body">
-                    <h5 class="card-title">{video.title}</h5>
-                    <p class="card-text">Video Author</p>
+            <div className="card text-start h-100" >
+				<div className="vidContainer">
+					<img className="video" src={this.convertLinkToThumbnail(video.link)} alt="video"></img>
+				</div>
+				<div class='d-flex justify-content-between align-items-center p-3 col'>
+                    <ul class='list-group list-group-horizontal'>
+                        {interestsList}
+                    </ul>
+					<button type="button" class="btn-close" onClick={(e)=>this.deleteVideo(e, video._id)}></button>
+                </div>
+                <div className="card-body">
+                    <h4 className="card-title">{video.title}</h4>
+					<div className="d-flex">
+						<div>
+							<img className="authorProfilePic" src={video.author.picture} alt=""/>
+                        	<span className="authorName"> {video.author.name} </span>
+						</div>
+                    </div>
                 </div>
             </div>
             </a>
@@ -81,12 +128,10 @@ class VideosHomePage extends Component{
                         <div className="w-75">
                             <input className="form-control" type="search" value={this.state.value} onChange={(e)=>this.onSearchInputChange(e)} />
                         </div>
-                        <button class="btn btn-primary " onClick={this.onSearchButtonClick}>Search</button>
-
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary mx-3" onClick={this.getAllResults}>All Results</button>
-                        </div>
-                        <ul class="list-group w-75 ">
+                        <button className="btn btn-success" onClick={this.onSearchButtonClick}>Search</button>
+						<button className="btn btn-secondary mx-3" onClick={this.getAllResults}>All Results</button>
+						<a className="btn btn-secondary" href="/addvideo" onClick={this.getAllResults}>Add Video</a>
+                        <ul className="list-group w-75 ">
                             {options}
                         </ul>
                     </div>

@@ -55,19 +55,19 @@ class CompanyPage extends Component {
         <form className='CompanyForm' onSubmit={this.onSubmit}>
             <div className='field'>
                 <label>Company Name: </label>
-                <input type='text' name='company' value={this.state.company} onChange={this.onChange}></input>
+                <input type='text' name='company' value={this.state.company} onChange={this.onChange} required></input>
             </div>
             <div className='field'>
                 <label>Logo: </label>
-                <input type='text' name='companyLogo' value={this.state.companyLogo} onChange={this.onChange}></input>
+                <input type='text' name='companyLogo' value={this.state.companyLogo} onChange={this.onChange} required></input>
             </div>
             <div className='field'>
                 <label>Location: </label>
-                <input type='text' name='companyLocation' value={this.state.companyLocation} onChange={this.onChange}></input>
+                <input type='text' name='companyLocation' value={this.state.companyLocation} onChange={this.onChange} required></input>
             </div>
             <div className='field'>
                 <label>Description: </label>
-                <input type='text' name='companyDescription' value={this.state.companyDescription} onChange={this.onChange}></input>
+                <input type='text' name='companyDescription' value={this.state.companyDescription} onChange={this.onChange} required></input>
             </div>
             <input className='CompanyButton' type='submit' value="Submit company information"></input>
         </form>
