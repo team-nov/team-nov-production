@@ -52,7 +52,7 @@ class Forum extends Component{
     })
     discussion = discussion.reverse()
     return (
-    <div>
+    <div className="container-fluid p-5">
       <div className="forumContainer">
         <User username={this.state.name} picture={this.state.picture}/>
         <form className="postInput">
@@ -60,9 +60,9 @@ class Forum extends Component{
           <button className="postButton" onClick={this.addDiscussion}> Post </button>
         </form>
       </div>
-      <div className="discussions">
-        {discussion}
-      </div>
+      
+      {discussion}
+     
     </div>
     )
   }

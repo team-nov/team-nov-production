@@ -55,7 +55,7 @@
     background-color: deeppink;
   }
 
-  .btn.btn-primary {
+  /*.btn.btn-primary {
     position: absolute;
     top: 7%;
     left: 85.3%;
@@ -70,9 +70,11 @@
     border-color: crimson;
     border-radius: 20px;
     background-color: hotpink;
-  }
+  }*/
 
-  .btn.btn-primary:hover {
+  /*.btn.btn-primary:hover {
     cursor: pointer;
     background-color: deeppink;
-  }
+  }*/
+
+  

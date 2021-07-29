@@ -71,21 +71,30 @@ class Discussion extends Component{
 
   render(){
     return (
-      <div>
-        <div className="discussionContainer">
-          <div className="userContainerDiscussion"> <User username={this.props.username} picture={this.props.picture}/> </div>
-          <text className="DiscussionMessage"> 
-          {this.props.message}
-          </text>
-          <div className="postTime">{this.props.postTime}</div>
+      <div className="container-fluid">
+        <div className="row justify-content-center mb-5">
+          <div className="col-6 card p-0">
+            <div className="card-body text-left">
+              <div className="card-title"> 
+                <User username={this.props.username} picture={this.props.picture}/> 
+              </div>
+              <text className="card-text text-left"> 
+              {this.props.message}
+              </text>
+              <div className="postTime">{this.props.postTime}</div>
+            </div>
+          
+        
+        
+            <CommentEntry 
+            discussionId={this.props.id}
+            userId={this.props.userId}
+            commentUsername={this.props.username} 
+            commentPicture={this.props.picture}>
+            </CommentEntry>
+        
         </div>
-        <div className="commentOnDiscussion">
-          <CommentEntry 
-          discussionId={this.props.id}
-          userId={this.props.userId}
-          commentUsername={this.props.username} 
-          commentPicture={this.props.picture}>
-          </CommentEntry>
+
         </div>
       </div>
     )

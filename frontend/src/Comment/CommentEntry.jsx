@@ -33,20 +33,31 @@ class CommentEntry extends Component {
           userId: this.state.userId,
           message: this.state.message,
         })
-        .then(res=>this.setState({discussions: res.data}))
-        .catch((e)=>console.log(e))
+        .then(res=>{
+            this.setState({discussions: res.data})
+            alert("Comment added succesfully. click see post to view comments")
+        })
+        .catch((e)=>{
+            console.log(e)
+            alert("unable to add comment check console log")
+        })
     }
 
     render() { 
         let discRoute = `/forum/${this.state.discussionId}`;
         return (
-            <div className="commentEntryContainer">
+            <div className="bg-light p-3">
                 <UserComment username={this.state.username} picture={this.state.picture}/>
-                <Link to={discRoute} className="btn btn-primary">See Post</Link>
-                <form className="commentEntryForm">
-                    <textarea onChange={(e)=>this.updateCommentInput(e)} value={this.state.message} className="commentEntry" rows="4" cols="100" placeholder="Leave a comment..."></textarea>
-                    <button className="commentButton" onClick={this.addComment}> <MdSend /> </button>
+               
+                <form className="pt-3">
+                    <div className="input-group">
+                    <textarea className="form-control" onChange={(e)=>this.updateCommentInput(e)} value={this.state.message} rows="4" cols="100" placeholder="Leave a comment..." required></textarea>
+                    </div>
                 </form>
+                <div className="row justify-content-end pt-3">                
+                    <Link to={discRoute} className="btn btn-primary col-2">View Comments</Link>
+                    <button className="btn btn-primary mx-3 col-2" onClick={this.addComment}> <MdSend /> </button>
+                </div>
             </div>
         )
     }
