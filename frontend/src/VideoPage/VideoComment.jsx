@@ -9,7 +9,7 @@ class VideoComment extends Component {
         userId: this.props.userId,
         videoId: this.props.videoId,
         commentId: this.props.commentId,
-        username: this.props.username,
+        name: this.props.name,
         picture: this.props.picture,
         currentMessage: this.props.message,
         returnMessage: this.props.message,
@@ -105,7 +105,7 @@ class VideoComment extends Component {
                     <div className="d-flex justify-content-between">
                         <div className="userCommentContainer">
                             <img className="commentProfilePic" src={this.state.picture} alt=""/>
-                            <span className="userNameComment"> {this.state.username} </span>
+                            <span className="nameComment"> {this.state.name} </span>
                         </div>
                         {this.state.postTime}
                     </div>

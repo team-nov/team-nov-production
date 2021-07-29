@@ -22,6 +22,7 @@ import CompaniesPage from "./CompaniesPage/CompaniesPage"
 import CompanyPage from "./CompanyPage/CompanyPage"
 import AllUsersPage  from './AllUsersPage/AllUsersPage';
 import VideosHomePage from './VideosHomePage/VideosHomePage';
+import VideoAddPage from './VideoAddPage/VideoAddPage';
  
 class App extends Component{
   render(){
@@ -41,7 +42,8 @@ class App extends Component{
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
             <Route path="/user/:id" component={UserPage} />
-            <Route path="/videos" component={VideosHomePage}/>            
+            <Route path="/videos" component={VideosHomePage}/>   
+			<Route path="/addvideo" component={VideoAddPage} />         
             <Route path="/companies" component={CompaniesPage} />
             <Route path="/company" component={CompanyPage} />
             <Route path="/allusers" component={AllUsersPage} />
