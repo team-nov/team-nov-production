@@ -1,3 +1,8 @@
+.cardLink,.cardLink:hover{
+  color: inherit;
+  text-decoration:none;
+}
+
 .discussionContainer {
   position: relative;
   margin: 2em -1em 0 -2.4em;

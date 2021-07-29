@@ -73,7 +73,7 @@ class Discussion extends Component{
   render(){
     let discRoute = `/forum/${this.state.discussionId}`;
     return (
-      <Link to={discRoute}>
+      <Link className="cardLink" to={discRoute}>
         <div className="row justify-content-center mb-5">
           <div className="col-6 card p-0">
             <div className="card-body text-left">
