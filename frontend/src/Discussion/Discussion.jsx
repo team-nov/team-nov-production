@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import { Link } from 'react-router-dom'
 import './Discussion.css'
 import '../Comment/Comment.css'
 import '../Comment/UserComment.css'
@@ -10,7 +11,7 @@ import CommentEntry from '../Comment/CommentEntry'
 class Discussion extends Component{
   state = {
     userId: this.props.userId,
-    discussionId: this.props.discussionId,
+    discussionId: this.props.id,
     isHidden: false,
     discussionHide: false,
     initialPostTime: this.props.postTime,
@@ -70,8 +71,9 @@ class Discussion extends Component{
   }
 
   render(){
+    let discRoute = `/forum/${this.state.discussionId}`;
     return (
-      
+      <Link to={discRoute}>
         <div className="row justify-content-center mb-5">
           <div className="col-6 card p-0">
             <div className="card-body text-left">
@@ -83,19 +85,11 @@ class Discussion extends Component{
               </text>
               <div className="postTime p-3">{this.props.postTime}</div>
             </div>
-          
-        
-        
-            <CommentEntry 
-            discussionId={this.props.id}
-            userId={this.props.userId}
-            commentUsername={this.props.username} 
-            commentPicture={this.props.picture}>
-            </CommentEntry>
-        
+            
         </div>
 
         </div>
+        </Link>
       
     )
   }

@@ -34,8 +34,11 @@ class Forum extends Component{
       userId: this.state.userId,
       message: this.state.message,
     })
+    .then(axios.get('http://localhost:5000/api/discussions')
     .then(res=>this.setState({discussions: res.data}))
+    .catch((e)=>console.log(e)))
     .catch((e)=>console.log(e))
+
   }
 
   render(){

@@ -24,23 +24,34 @@ class CommentEntry extends Component {
         .catch((e)=>console.log(e))
     }
 
+    componentDidUpdate(newState) {
+        if (this.state.discussionId !== newState.discussionId) {
+            this.setState({
+                discussionId: newState.discussionId
+            })
+        }
+    }
+
     updateCommentInput=(e)=>{
         this.setState({message:e.target.value});
     }
 
     addComment=()=>{
+        console.log("user: " + this.state.userId);
+        console.log("discussion: " + this.state.discussionId);
         axios.post(`http://localhost:5000/api/discussions/${this.state.discussionId}`, {
           userId: this.state.userId,
           message: this.state.message,
         })
         .then(res=>{
             this.setState({discussions: res.data})
-            alert("Comment added succesfully. click see post to view comments")
+            alert("Comment added succesfully.")
         })
         .catch((e)=>{
             console.log(e)
             alert("unable to add comment check console log")
         })
+        this.props.updateComments();
     }
 
     render() { 
@@ -55,7 +66,6 @@ class CommentEntry extends Component {
                     </div>
                 </form>
                 <div className="row justify-content-end pt-3">                
-                    <Link to={discRoute} className="btn btn-primary col-lg-3 col-md-5 col-sm-5">View Comments</Link>
                     <button className="btn btn-primary mx-3 col-lg-2 col-sm-3" onClick={this.addComment}> <MdSend /> </button>
                 </div>
             </div>
