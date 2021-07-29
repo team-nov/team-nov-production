@@ -62,6 +62,10 @@ class VideosHomePage extends Component{
             console.log(err)
         }
 	}
+	convertLinkToThumbnail = (link) => {
+		const id = link.substring(link.indexOf("v=") + 2);
+		return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+	}
     render(){
 
 		if (sessionStorage.getItem("_id") == null) {
@@ -80,6 +84,7 @@ class VideosHomePage extends Component{
                 })
             : []
         let videos = this.state.results.map((video,index)=>{
+
 			let interestsList = [];
 			for (var i = 0; i < video.interests.length; i++) {
 				interestsList[i] = <li class='list-group-item'>{video.interests[i]}</li>
@@ -89,21 +94,21 @@ class VideosHomePage extends Component{
                 <a href={"/videos/"+video._id} className="cardLink" >
             <div className="card text-start h-100" >
 				<div className="vidContainer">
-					<iframe className="video" src={video.link.replace("watch?v=", "embed/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+					<img className="video" src={this.convertLinkToThumbnail(video.link)} alt="video"></img>
 				</div>
-				<div class='p-3 col'>
+				<div class='d-flex justify-content-between align-items-center p-3 col'>
                     <ul class='list-group list-group-horizontal'>
                         {interestsList}
                     </ul>
+					<button type="button" class="btn-close" onClick={(e)=>this.deleteVideo(e, video._id)}></button>
                 </div>
                 <div className="card-body">
-                    <h5 className="card-title">{video.title}</h5>
+                    <h4 className="card-title">{video.title}</h4>
 					<div className="d-flex">
 						<div>
 							<img className="authorProfilePic" src={video.author.picture} alt=""/>
                         	<span className="authorName"> {video.author.name} </span>
 						</div>
-						<button type="button" className="btn btn-danger" onClick={(e)=>this.deleteVideo(e, video._id)}>X</button>
                     </div>
                 </div>
             </div>

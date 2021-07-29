@@ -93,11 +93,11 @@ class VideoAddPage extends Component {
 					<h1>Add Video</h1>
                     <div className='field'>
                         <label>Title: </label>
-                        <input type='text' name='title' value={this.state.title} onChange={this.handleChange}></input>
+                        <input type='text' name='title' value={this.state.title} onChange={this.handleChange} required/>
                     </div>
 					<div className='field'>
                         <label>Video link: </label>
-                        <input type='text' name='link' value={this.state.link} onChange={this.handleChange}></input>
+                        <input type='text' name='link' value={this.state.link} onChange={this.handleChange} required/>
                     </div>
                     <div className='field'>
                         <label>Interests:</label>
