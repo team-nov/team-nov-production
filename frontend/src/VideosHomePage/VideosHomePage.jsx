@@ -48,13 +48,39 @@ class VideosHomePage extends Component{
         else
             this.getSearchResults();
     }
+	deleteVideo = async(e, videoId) => {
+		e.preventDefault();
+		console.log(videoId);
+		try {
+            await axios.delete('http://localhost:5000/api/videos', {
+				data: {
+					videoId: videoId
+				}
+            })
+			window.location.reload();
+        } catch (err) {
+            console.log(err)
+        }
+	}
     render(){
+
+		if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the videos.
+					</div>
+				</div>
+			)
+		}
+
         let options = this.state.value 
             ? this.state.suggestions.map((suggest,index)=>{
                 return <li className="list-group-item" style={{textAlign:'left'}}key={index} onClick={(e)=>this.onSuggestionClick(e)}>{suggest}</li>
                 })
             : []
         let videos = this.state.results.map((video,index)=>{
+			console.log(video);
             return (
             <div key={index} className="col p-3 ">
                 <a href={"/videos/"+video._id} className="cardLink" >
@@ -64,7 +90,13 @@ class VideosHomePage extends Component{
 				</div>
                 <div className="card-body">
                     <h5 className="card-title">{video.title}</h5>
-                    <p className="card-text">Uploaded by: {video.author.name}</p>
+					<div className="d-flex">
+						<div>
+							<img className="authorProfilePic" src={video.author.picture} alt=""/>
+                        	<span className="authorName"> {video.author.name} </span>
+						</div>
+						<button type="button" className="btn btn-danger" onClick={(e)=>this.deleteVideo(e, video._id)}>X</button>
+                    </div>
                 </div>
             </div>
             </a>
