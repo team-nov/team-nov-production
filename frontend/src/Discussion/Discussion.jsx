@@ -19,6 +19,7 @@ class Discussion extends Component{
     initialMessage: this.props.message,
     currentMessage: this.props.message,
     returnMessage: "",
+    imageURL: ""
   }
 
   onEditClick=()=>{

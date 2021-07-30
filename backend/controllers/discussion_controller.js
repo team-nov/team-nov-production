@@ -100,6 +100,7 @@ exports.postDiscussions = (req,res,next) => {
         _id: new mongoose.Types.ObjectId(),
         message: req.body.message,
         userId: new mongoose.Types.ObjectId(req.body.userId),
+        imageURL: req.body.imageURL,
         postTime: new Date(),
     });
 
