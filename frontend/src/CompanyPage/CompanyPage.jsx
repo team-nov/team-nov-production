@@ -10,7 +10,7 @@ class CompanyPage extends Component {
         company:'',
         companyLogo:'',
         companyLocation:'',
-        companyDescription:''
+        companyDescription:'',
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -31,7 +31,8 @@ class CompanyPage extends Component {
       company: this.state.company,
       companyLogo: this.state.companyLogo,
       companyLocation: this.state.companyLocation,
-      companyDescription: this.state.companyDescription
+      companyDescription: this.state.companyDescription,
+      founder_id: sessionStorage.getItem('_id')
     }
 
     console.log(company);
@@ -50,6 +51,16 @@ class CompanyPage extends Component {
   }
 
   render(){
+    if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the company creation.
+					</div>
+				</div>
+			)
+		}
+
     return(
       <div className="CompanyPage">
         <form className='CompanyForm' onSubmit={this.onSubmit}>

@@ -19,9 +19,20 @@ class CompaniesPage extends Component {
   }
 
   render() {
+    if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the companies information.
+					</div>
+				</div>
+			)
+		}
+
       let companies = this.state.companies.map((company,index)=>{
         return (
         <div className="col p-3 ">
+          <a href={"/company/" + company._id} className="cardLink">
           <div className="card text-start h-100" >
               <img className="card-img-top" src={company.companyLogo} alt="oops"/>
               <div className="card-body">
@@ -30,6 +41,7 @@ class CompaniesPage extends Component {
                   <p className="card-text">{company.companyDescription}</p>
               </div>
           </div>
+          </a>
         </div>
       )
     })

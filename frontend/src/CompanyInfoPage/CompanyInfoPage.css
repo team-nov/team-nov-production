@@ -1,0 +1,23 @@
+.UserPage {
+    margin:auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    /* background-color: coral; */
+    font-family: 'Trebuchet MS';
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.userProfilePic {
+    width: 15em;
+    height: 15em;
+    object-fit: cover;
+    border-radius: 50%;
+}

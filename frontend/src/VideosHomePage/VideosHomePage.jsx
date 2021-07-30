@@ -100,7 +100,7 @@ class VideosHomePage extends Component{
                     <ul class='list-group list-group-horizontal'>
                         {interestsList}
                     </ul>
-					<button type="button" class="btn-close" onClick={(e)=>this.deleteVideo(e, video._id)}></button>
+					{sessionStorage.getItem('_id') === video.author._id ? <button type="button" class="btn-close" onClick={(e)=>this.deleteVideo(e, video._id)}></button> : null}
                 </div>
                 <div className="card-body">
                     <h4 className="card-title">{video.title}</h4>

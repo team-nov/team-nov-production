@@ -20,9 +20,6 @@ class NavigationBar extends Component {
         if(sessionStorage.getItem("_id") != null) {
             loginLink = <li className="nav-item"><Link className="nav-link" to={"/user/" + sessionStorage.getItem('_id')}>My Profile</Link></li>;
             logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;       
-
-            myCompany = <li className="nav-item"><Link className="nav-link" to="/company">My Company</Link></li>;
-
         } else {
             loginLink = <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>;
             logout = null;
@@ -64,10 +61,9 @@ class NavigationBar extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/allusers">Users</Link>
                             </li>
-
-                            {myCompany}
-                            
-                            
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/newCompany">Create Organization</Link>
+                            </li>                          
                             {loginLink}
                             {logout}
                             {/* <li className="nav-item dropdown">
