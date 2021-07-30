@@ -49,3 +49,8 @@
     max-width: 70% !important; 
     max-height: min-content;
 }
+
+.discussion-image {
+    max-width: 100%;
+    margin: 19px 19px 0;
+}

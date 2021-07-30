@@ -107,7 +107,6 @@ class Forum extends Component{
       this.postDiscussion('');
       this.setState({message: ''});
     }
-    document.querySelector(".postTextEntry").value = '';
     document.querySelector(".uploadButton").value = null;
   }
 
