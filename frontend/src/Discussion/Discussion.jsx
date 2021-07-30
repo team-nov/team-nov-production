@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import { Link } from 'react-router-dom'
 import './Discussion.css'
 import '../Comment/Comment.css'
 import '../Comment/UserComment.css'
@@ -10,7 +11,7 @@ import CommentEntry from '../Comment/CommentEntry'
 class Discussion extends Component{
   state = {
     userId: this.props.userId,
-    discussionId: this.props.discussionId,
+    discussionId: this.props.id,
     isHidden: false,
     discussionHide: false,
     initialPostTime: this.props.postTime,
@@ -71,24 +72,26 @@ class Discussion extends Component{
   }
 
   render(){
+    let discRoute = `/forum/${this.state.discussionId}`;
     return (
-      <div>
-        <div className="discussionContainer">
-          <div className="userContainerDiscussion"> <User username={this.props.username} picture={this.props.picture}/> </div>
-          <text className="DiscussionMessage"> 
-          {this.props.message}
-          </text>
-          <div className="postTime">{this.props.postTime}</div>
+      <Link className="cardLink" to={discRoute}>
+        <div className="row justify-content-center mb-5">
+          <div className="col-6 card p-0">
+            <div className="card-body text-left">
+              <div className="card-title"> 
+                <User username={this.props.username} picture={this.props.picture}/> 
+              </div>
+              <text className="card-text text-left"> 
+              {this.props.message}
+              </text>
+              <div className="postTime p-3">{this.props.postTime}</div>
+            </div>
+            
         </div>
-        <div className="commentOnDiscussion">
-          <CommentEntry 
-          discussionId={this.props.id}
-          userId={this.props.userId}
-          commentUsername={this.props.username} 
-          commentPicture={this.props.picture}>
-          </CommentEntry>
+
         </div>
-      </div>
+        </Link>
+      
     )
   }
 }

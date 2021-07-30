@@ -24,29 +24,51 @@ class CommentEntry extends Component {
         .catch((e)=>console.log(e))
     }
 
+    componentDidUpdate(newState) {
+        if (this.state.discussionId !== newState.discussionId) {
+            this.setState({
+                discussionId: newState.discussionId
+            })
+        }
+    }
+
     updateCommentInput=(e)=>{
         this.setState({message:e.target.value});
     }
 
     addComment=()=>{
+        console.log("user: " + this.state.userId);
+        console.log("discussion: " + this.state.discussionId);
         axios.post(`http://localhost:5000/api/discussions/${this.state.discussionId}`, {
           userId: this.state.userId,
           message: this.state.message,
         })
-        .then(res=>this.setState({discussions: res.data}))
-        .catch((e)=>console.log(e))
+        .then(res=>{
+            this.setState({discussions: res.data})
+            alert("Comment added succesfully.")
+            this.props.updateComments();
+        })
+        .catch((e)=>{
+            console.log(e)
+            alert("unable to add comment check console log")
+        })
+        
     }
 
     render() { 
         let discRoute = `/forum/${this.state.discussionId}`;
         return (
-            <div className="commentEntryContainer">
+            <div className="bg-light p-3">
                 <UserComment username={this.state.username} picture={this.state.picture}/>
-                <Link to={discRoute} className="btn btn-primary">See Post</Link>
-                <form className="commentEntryForm">
-                    <textarea onChange={(e)=>this.updateCommentInput(e)} value={this.state.message} className="commentEntry" rows="4" cols="100" placeholder="Leave a comment..."></textarea>
-                    <button className="commentButton" onClick={this.addComment}> <MdSend /> </button>
+               
+                <form className="pt-3">
+                    <div className="input-group">
+                    <textarea className="form-control" onChange={(e)=>this.updateCommentInput(e)} value={this.state.message} rows="4" cols="100" placeholder="Leave a comment..." required></textarea>
+                    </div>
                 </form>
+                <div className="row justify-content-end pt-3">                
+                    <button className="btn btn-primary mx-3 col-lg-2 col-sm-3" onClick={this.addComment}> <MdSend /> </button>
+                </div>
             </div>
         )
     }

@@ -21,7 +21,7 @@ dmSockets.io(server)
 mongoose.connect(
     // mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNov[your name]?retryWrites=true&w=majority
 
-    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovColin?retryWrites=true&w=majority',
+    'mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNovShammo?retryWrites=true&w=majority',
     {useNewUrlParser:true, useUnifiedTopology:true})
     .then((res)=>{
         console.log("db Connected")

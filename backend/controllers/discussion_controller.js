@@ -130,7 +130,6 @@ exports.postComment = async (req, res, next) => {
         message: req.body.message,
         postTime: new Date(),
     })
-
     try {
         const data = await Discussion.findByIdAndUpdate(discussionId, {$push: {comments: comment}}, {runValidators: true, new: true})
         res.status(201).json({

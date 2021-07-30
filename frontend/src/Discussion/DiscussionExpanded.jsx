@@ -9,39 +9,42 @@ import User from '../User/User'
 import Comment from '../Comment/Comment'
 import { dateParser } from '../utils/DateParser'
 import { MdEdit, MdDeleteForever, MdSend, MdDeleteSweep } from 'react-icons/md'
-
-
+import CommentEntry from '../Comment/CommentEntry'
 
 class DiscussionExpanded extends Component {
-    state = {
-        discussion: 'null',
-        discPicture: '',
-        discUsername: '',
-        discUserId: '',
-        discTypeOfUser: '',
-        discussionComments: [],
-        initialMessage: '',
-        currentMessage: '',
-        postTime: '',
-        isHidden: false,
-        editing: false,
-        discussionHide: false
+    constructor(props) {
+        super(props)
+        this.handler = this.handler.bind(this);
+        this.state = {
+            discussion: 'null',
+            discussionId: '',
+            discPicture: '',
+            discUsername: '',
+            discUserId: '',
+            discTypeOfUser: '',
+            discussionComments: [],
+            initialMessage: '',
+            currentMessage: '',
+            postTime: '',
+            commentPicture: '',
+            isHidden: false,
+            editing: false,
+            discussionHide: false,
+            
+        }
     }
 
     componentDidMount() {
 
-        const { id } = this.props.match.params
+        const { id } = this.props.match.params;
 
         let url_string = `http://localhost:5000/api/discussions/${id}`;
-        console.log("url is " + url_string);
 
         axios.get(url_string)
         .then(res => {
-            console.log(res.data.message);
-            console.log(res.data.userId.picture);
-            console.log(res.data.userId.name);
             this.setState({
                 discussion: res.data,
+                discussionId: res.data._id,
                 discussionComments: res.data.comments,
                 discUserId: res.data.userId,
                 discPicture: res.data.userId.picture,
@@ -52,10 +55,34 @@ class DiscussionExpanded extends Component {
                 postTime: res.data.postTime
 
             })
+            console.log(res.data._id);
         })
         .catch((e) => {
             console.log(e)
         })
+
+        axios.get('http://localhost:5000/api/users/' + sessionStorage.getItem("_id"))
+      .then(res=>this.setState(
+        {commentPicture: res.data.picture}))
+      .catch((e)=>console.log(e))
+    }
+
+    handler() {
+        const { id } = this.props.match.params;
+
+        let url_string = `http://localhost:5000/api/discussions/${id}`;
+
+        axios.get(url_string)
+        .then(res => {
+            this.setState({
+                discussionComments: res.data.comments,
+            })
+            console.log(res.data._id);
+        })
+        .catch((e) => {
+            console.log(e)
+        })
+        
     }
     
     deleteDiscussion = async() => {
@@ -158,6 +185,7 @@ class DiscussionExpanded extends Component {
         else {
             commentButtons = null;
         }
+        console.log("expanded id: " + this.state.discussion._id);
         return (
             <div>
                 <h3 style={{display: this.state.discussionHide?"block":"none"}}><Link to='/forum'>Discussion Deleted, click here to go back to the main page.</Link></h3>
@@ -173,6 +201,18 @@ class DiscussionExpanded extends Component {
                         {commentButtons}
 
                     </div>
+                    <div className="commentEntryContainer">
+          
+            <CommentEntry 
+            discussionId={this.state.discussionId}
+            userId={sessionStorage.getItem("_id")}
+            commentUsername={sessionStorage.getItem("name")} 
+            commentPicture={this.state.commentPicture}
+            updateComments={this.handler}>
+            </CommentEntry>
+        
+                </div>
+
                     <br></br>
                     <div className="">{comments}</div>
                 </div>
