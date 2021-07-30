@@ -1,4 +1,7 @@
-
+.commentEntryContainer {
+    width: 60%;
+    border: black;
+}
 
 .discussionExpandedContainer {
     padding: 1em;
