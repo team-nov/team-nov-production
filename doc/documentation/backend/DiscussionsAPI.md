@@ -19,6 +19,8 @@
     - `userId`
         - type: String
         - The _id of the user creating the post
+    - `imageURL`
+        - The URL of an image uploaded to discussion
 
 ## POST/:discussionId
 - Creates a new comment in the discussion with _id of discussionId
