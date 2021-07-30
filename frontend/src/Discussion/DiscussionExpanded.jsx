@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './Discussion.css'
 import '../Comment/Comment.css'
@@ -30,7 +31,8 @@ class DiscussionExpanded extends Component {
             isHidden: false,
             editing: false,
             discussionHide: false,
-            imageURL: ''
+            imageURL: '',
+            edited: ''
             
         }
     }
@@ -39,10 +41,14 @@ class DiscussionExpanded extends Component {
 
         const { id } = this.props.match.params;
 
+
         let url_string = `http://localhost:5000/api/discussions/${id}`;
 
         axios.get(url_string)
         .then(res => {
+            console.log("Res: " + res.data.edited);
+
+
             this.setState({
                 discussion: res.data,
                 discussionId: res.data._id,
@@ -53,10 +59,20 @@ class DiscussionExpanded extends Component {
                 discTypeOfUser: res.data.userId.typeofUser,
                 initialMessage: res.data.message,
                 currentMessage: res.data.message,
-                postTime: res.data.postTime,
-                imageURL: res.data.imageURL
+                postTime: dateParser(res.data.postTime, 'ddd h:mm a'),
+                imageURL: res.data.imageURL,
+                edited: res.data.edited,
 
             })
+
+
+            if (this.state.edited) {
+                console.log("Yes?");
+                this.setState({
+                    postTime: "(edited) " + this.state.postTime
+                })
+            }
+
             console.log(res.data._id);
         })
         .catch((e) => {
@@ -98,12 +114,15 @@ class DiscussionExpanded extends Component {
                     userId: this.state.discUserId._id 
                 }
             });
+
             this.setState({
                 discussionHide: true
             })
+        
         } catch (e) {
             console.log(e)
         }
+        
     }
 
     submitDiscussion = async () => {
@@ -116,11 +135,12 @@ class DiscussionExpanded extends Component {
                     message: this.state.currentMessage,
                     userId: this.state.discUserId._id,
                     postTime: new Date(),
+                    edited: true,
                 }
             );
             this.setState({
                 editing: false,
-                postTime: new Date()
+                postTime: "(edited) " + dateParser(new Date(), 'ddd h:mm a')
             })
         } catch (e) {
             console.log(e)
@@ -146,6 +166,7 @@ class DiscussionExpanded extends Component {
         this.setState({currentMessage: e.target.value})
     }
 
+
     render() {
         let comments = this.state.discussionComments.map((comments, index) => {
             console.log(comments.userId.picture);
@@ -157,9 +178,14 @@ class DiscussionExpanded extends Component {
                             message = {comments.message}
                             postTime = {dateParser(comments.postTime, 'ddd h:mm a')}
                             discussionId = {this.state.discussion._id}
+                            edited = {comments.edited}
                             />
         })
         comments = comments.reverse();
+
+        if(this.state.discussionHide) {
+            setTimeout(()=>{ this.props.history.push('/forum') }, 2000);
+        }
         
         let commentButtons;
         let messageBox =
@@ -190,13 +216,13 @@ class DiscussionExpanded extends Component {
         console.log("expanded id: " + this.state.discussion._id);
         return (
             <div className="container">
-                <h3 style={{display: this.state.discussionHide?"block":"none"}}><Link to='/forum'>Discussion Deleted, click here to go back to the main page.</Link></h3>
+                <h3 style={{display: this.state.discussionHide?"block":"none"}}><Link to='/forum'>Discussion Deleted, redirecting to the main page...</Link></h3>
                 <div style={{display: this.state.discussionHide?"none":"block"}}>
                     <div className="card discussionExpandedContainer">
                         <div className="card-body ">
                             <div className="d-flex justify-content-between">
-                                <User username={this.state.discUsername} picture={this.state.discPicture}/>  
-                                {/* <span className="expandedPostTime">{dateParser(this.state.postTime, 'ddd h:mm a')}</span> */}
+                                <User username={this.state.discUsername} picture={this.state.discPicture}/>
+                                <span className="expandedPostTime">{this.state.postTime}</span>
                             </div> 
                         </div>
                         {messageBox}
@@ -213,9 +239,7 @@ class DiscussionExpanded extends Component {
             commentPicture={this.state.commentPicture}
             updateComments={this.handler}>
             </CommentEntry>
-        
                 </div>
-
                     <br></br>
                     <div className="">{comments}</div>
                 </div>

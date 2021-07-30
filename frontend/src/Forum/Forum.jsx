@@ -129,6 +129,7 @@ class Forum extends Component{
             picture={discussion.userId.picture} 
             username={discussion.userId.name}
             message={discussion.message} 
+            edited={discussion.edited}
             postTime={dateParser(discussion.postTime, 'ddd h:mm a')}/>
         </div>
     })

@@ -42,7 +42,7 @@ exports.patchDiscussion = (req, res, next) => {
         else if (req.body.userId == data.userId) {
 
             Discussion
-                .findByIdAndUpdate(req.body.discussionId, { message: req.body.message })
+                .findByIdAndUpdate(req.body.discussionId, { message: req.body.message, postTime: req.body.postTime, edited: req.body.edited })
                 .exec()
                 .then((data)=>{
                     res.status(200).json({
@@ -164,8 +164,11 @@ exports.patchComment = async (req, res, next) => {
     const discussionId = req.params.discussionId;
     const commentId = req.body.commentId;
     const commentMsg = req.body.message;
+    const edited = req.body.edited;
 
     try {
+        await Discussion.findOneAndUpdate({_id: discussionId, "comments._id": commentId}, {$set: {"comments.$.postTime": new Date()}}, {runValidators: true, new: true})
+        await Discussion.findOneAndUpdate({_id: discussionId, "comments._id": commentId}, {$set: {"comments.$.edited": edited}}, {runValidators: true, new: true})
         const data = await Discussion.findOneAndUpdate({_id: discussionId, "comments._id": commentId}, {$set: {"comments.$.message": commentMsg}}, {runValidators: true, new: true})
         res.status(200).json({
             message: "Updated comment with id: " + commentId,
