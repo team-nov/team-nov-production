@@ -21,14 +21,14 @@ class CompaniesPage extends Component {
   render() {
       let companies = this.state.companies.map((company,index)=>{
         return (
-        <div class="col p-3 ">
+        <div className="col p-3 ">
           <a href={"/company/" + company._id} className="cardLink">
-          <div class="card text-start h-100" >
-              <img class="card-img-top" src={company.companyLogo} alt="oops"/>
-              <div class="card-body">
-                  <h4 class="card-title">{company.company}</h4>
-                  <h6 class="card-description">{company.companyLocation}</h6>
-                  <p class="card-text">{company.companyDescription}</p>
+          <div className="card text-start h-100" >
+              <img className="card-img-top" src={company.companyLogo} alt="oops"/>
+              <div className="card-body">
+                  <h4 className="card-title">{company.company}</h4>
+                  <h6 className="card-description">{company.companyLocation}</h6>
+                  <p className="card-text">{company.companyDescription}</p>
               </div>
           </div>
           </a>
@@ -36,15 +36,19 @@ class CompaniesPage extends Component {
       )
     })
 
-    return(
-      <div>
-        <div className="container-fluid p-5">
-          <div className=" row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-            {companies}
-          </div>
-        </div>
-      </div>
-    )
+    if (companies.length === 0) {
+		return(<h1>No companies added yet</h1>)
+	} else {
+		return(
+		  <div>
+			<div className="container-fluid p-5">
+			  <div className=" row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+				{companies}
+			  </div>
+			</div>
+		  </div>
+		)
+	}
   }
 
 

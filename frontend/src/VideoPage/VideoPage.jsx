@@ -8,7 +8,8 @@ class VideoPage extends Component {
 
     state = {
         userId: sessionStorage.getItem("_id"),
-        userName: sessionStorage.getItem("name"),
+        authorName: '',
+		link: '',
         videoId: this.props.match.params.id,
         message: '',
         comments: [],
@@ -18,8 +19,10 @@ class VideoPage extends Component {
     async componentDidMount() {
         try {
             let res = await axios.get('http://localhost:5000/api/videos/'+this.state.videoId);
-            await this.setState({
-                title:res.data.title,
+            this.setState({
+				link: res.data.link,
+				authorName: res.data.author.name,
+                title: res.data.title,
                 comments: res.data.comments
             })
 
@@ -53,7 +56,7 @@ class VideoPage extends Component {
                                  userId={comment.userId._id}
                                  videoId={this.state.videoId}
                                  commentId={comment._id}
-                                 username={comment.userId.name}
+                                 name={comment.userId.name}
                                  picture={comment.userId.picture}
                                  message={comment.message}
                                  postTime={dateParser(comment.postTime, 'ddd h:mm a')}
@@ -74,22 +77,21 @@ class VideoPage extends Component {
         return(
             <div className="container text-start">
                 <h1 className="my-4">{this.state.title}</h1>
-                <img class="w-100" src="https://via.placeholder.com/267x150" alt="oops"/>
-               
+				<div className="vidContainer">
+					<iframe className="video" src={this.state.link.replace("watch?v=", "embed/")} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+				</div>
+
+				<h3 className="mt-3">Uploaded by: {this.state.authorName}</h3>
+                               
                 <h4 className="mt-5">Comments</h4>
                
                 <br/>
                 {userComment}
                 <br/>
                
+			   	<div className="mb-5">
                     {commentsSection}
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                
+				</div>
             </div>
         )
     }
