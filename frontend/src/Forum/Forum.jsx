@@ -111,6 +111,16 @@ class Forum extends Component{
   }
 
   render(){
+    if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the forum.
+					</div>
+				</div>
+			)
+		}
+
     let discussion = this.state.discussions.map((discussion, index)=>{
       return <div>
           <Discussion key = {index}
