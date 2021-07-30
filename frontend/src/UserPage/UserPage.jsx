@@ -33,6 +33,16 @@ class UserPage extends Component {
     }
 
     render() {
+        if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to view this page.
+					</div>
+				</div>
+			)
+		}
+
         var editButton;
         if(this.state._id === sessionStorage.getItem('_id')) {
             editButton = <a class='btn btn-dark' href='/profile'>Edit Profile</a>
@@ -60,6 +70,7 @@ class UserPage extends Component {
 
         return(
             <div class='container-fluid'>
+                <br></br>
                 <div class='row'>
                     <div class='col offset-sm-1 col-sm-3'>
                         <img class='img-fluid userProfilePic' src={this.state.picture} alt={this.state.name + " picture"}/>

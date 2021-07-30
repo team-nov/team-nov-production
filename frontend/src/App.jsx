@@ -32,7 +32,6 @@ class App extends Component{
       <div className="App">
         <Router>
           <NavigationBar />
-          <br />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
             <Route path="/forum/:id" component={DiscussionExpanded}/>

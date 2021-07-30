@@ -10,23 +10,34 @@ class NavigationBar extends Component {
 
     render() {
 
-        var myCompany;
+        let myCompany;
 
         // conditional rendering
         // if user isn't logged in, show Login link
         // else show their name and logout option
-        var loginLink;
-        var logout;
+        let registerLink;
+        let loginLink;
+        let logout;
+        let loggedInLinks;
         if(sessionStorage.getItem("_id") != null) {
+            registerLink = null;
+            loggedInLinks = [<li className="nav-item"><Link className="nav-link" to="/forum">Forum</Link></li>,       
+                            <li className="nav-item"><Link className="nav-link" to="/dms">DMs</Link></li>,
+                            <li className="nav-item"><Link className="nav-link" to="/videos">Videos</Link></li>,
+                            <li className="nav-item"><Link className="nav-link" to="/companies">Company information</Link></li>,
+                            <li className="nav-item"><Link className="nav-link" to="/allusers">Users</Link></li>,
+                            <li className="nav-item"><Link className="nav-link" to="/newCompany">Create Organization</Link></li>]      
             loginLink = <li className="nav-item"><Link className="nav-link" to={"/user/" + sessionStorage.getItem('_id')}>My Profile</Link></li>;
             logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;       
         } else {
+            loggedInLinks = null;
+            registerLink = <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
             loginLink = <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>;
             logout = null;
         }
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <Link to="/" className="navbar-brand">African Impact</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,57 +45,13 @@ class NavigationBar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/register">Register</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/forum">Forum</Link>
-                            </li>
-                            {/* <li className="nav-item">
-                                <Link className="nav-link" to="/demo">Demo</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/users">Users</Link>
-                            </li> */}
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/dms">DMs</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/videos">Videos</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/companies">Company information</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/allusers">Users</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/newCompany">Create Organization</Link>
-                            </li>                          
+                            {loggedInLinks}
+                        </ul>
+                        <ul className="navbar-nav">
+                            {registerLink}        
                             {loginLink}
                             {logout}
-                            {/* <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                </Link>
-                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><Link className="dropdown-item" to="/">Action</Link></li>
-                                    <li><Link className="dropdown-item" to="/">Another action</Link></li>
-                                    <li><hr className="dropdown-divider"/></li>
-                                    <li><Link className="dropdown-item" to="/">Something else here</Link></li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link disabled" to="/" tabIndex="-1" aria-disabled="true">Disabled</Link>
-                            </li> */}
                         </ul>
-                        {/* <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form> */}
                     </div>
                 </div>
             </nav>

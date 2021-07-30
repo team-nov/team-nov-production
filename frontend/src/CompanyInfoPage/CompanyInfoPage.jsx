@@ -37,6 +37,16 @@ class CompanyInfoPage extends Component {
     }
 
     render() {
+        if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to view this page.
+					</div>
+				</div>
+			)
+		}
+
         var editButton;
         if(this.state.founder === sessionStorage.getItem('_id')) {
             editButton = <a class='btn btn-dark' href={'/editCompany/' + this.state._id}>Edit Company Information</a>
