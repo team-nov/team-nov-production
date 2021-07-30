@@ -13,7 +13,7 @@ exports.getUsers = (req,res,next) => {
 
 exports.searchUsers = async(req,res,next) =>{
     try{
-        const myRegex = new RegExp(req.params.query)
+        const myRegex = new RegExp(req.params.query, 'i')
         const data = await User.find({username:{$regex:myRegex}})
         res.status(200).json(data)
     }catch(e){

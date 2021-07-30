@@ -25,13 +25,13 @@
   align-items: flex-end;
 }
 
-.postTextEntry {
+/*.postTextEntry {
   resize: none;
   font-size: 1.2em;
   color: black;
   width: 100%;
   border: solid hotpink;
-}
+}*/
 
 .postButton {
   margin-left: 1em;
@@ -61,3 +61,5 @@
   align-content: center;
   margin-left: 6em;
 }
+
+

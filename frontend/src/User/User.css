@@ -8,12 +8,10 @@
 }
 
 .profilePic {
-  width: 7%; 
-  height: 7%;
-  min-width: 30px;
-  min-height: 30px;
+  width: 2.5em;
+  height: 2.5em;
   border-radius: 50%;
-  border: solid thin pink;
+  object-fit: cover;
 }
 
 .userName {
