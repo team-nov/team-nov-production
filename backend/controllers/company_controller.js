@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Company = require('../models/company_model');
+const User = require('../models/user_model');
 
 exports.getCompanies = async (req, res, next) => {
     try {
@@ -34,6 +35,20 @@ exports.postCompany = async (req, res) => {
         companyDescription: req.body.companyDescription,
         founder: req.body.founder_id
     });
+
+    let userTeam = [];
+    let newCompany = {company: company.company, id: company._id}
+    console.log(newCompany);
+
+    User
+        .findOne({_id:req.body.founder_id})
+        .exec()
+        .then((data)=>{
+            console.log(userTeam);
+            User
+            .updateOne({_id: req.body.founder_id},{$push:{team: newCompany}})
+            .exec()
+        })
 
   company.save()
       .then((result)=>{

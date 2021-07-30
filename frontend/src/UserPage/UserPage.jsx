@@ -50,7 +50,7 @@ class UserPage extends Component {
         var organization = [];
         for (var i = 0; i < this.state.team.length; i++) {
             organization[i] = 
-            <a class='nounderline' href={'/company/' + this.state.team[i][1]}><li class='list-group-item'>{this.state.team[i][0]}</li></a>
+            <a class='nounderline' href={'/company/' + this.state.team[i].id}><li class='list-group-item'>{this.state.team[i].company}</li></a>
         }
 
         if(organization.length === 0) {

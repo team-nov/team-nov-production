@@ -51,6 +51,16 @@ class CompanyPage extends Component {
   }
 
   render(){
+    if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the company creation.
+					</div>
+				</div>
+			)
+		}
+
     return(
       <div className="CompanyPage">
         <form className='CompanyForm' onSubmit={this.onSubmit}>

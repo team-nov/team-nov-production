@@ -9,6 +9,12 @@ const Interest = require('./interest_model')
 //     picture:{type:String, default:"s"}
 // });
 
+const teamSchema = new mongoose.Schema({
+    company: {type: String},
+    id: {type: String}
+});
+
+
 const userSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name:{type:String,required:true},
@@ -18,7 +24,7 @@ const userSchema = new mongoose.Schema({
     password:{type:String,required:true},
     aboutMe: {type:String},
     interests: {type:[String], default:[]},
-    team:{type:[[String]], default:[]}, // basically the company/startup the user is affiliated with
+    team:{type:[teamSchema], default:[]}, // basically the company/startup the user is affiliated with
     typeOfUser:{type:String,required:true}
 });
 

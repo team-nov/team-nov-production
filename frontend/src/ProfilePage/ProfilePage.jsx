@@ -56,17 +56,19 @@ class ProfilePage extends Component {
 
     addCompany(event) {
         let team = this.state.team;
-        var companyEntry = [event.target.name, event.target.value]
+        let companyEntry = {company: event.target.name, id: event.target.value}
         if(event.target.checked) {
             if(team.indexOf(companyEntry) === -1) {
                 team.push(companyEntry);
             }
         } else {
-            console.log(companyEntry);
-            var index = team.indexOf(companyEntry);
+            console.log("removing");
+            let index = team.map(function(e) {return e.id}).indexOf(companyEntry.id)
+            console.log(index);
             if (index !== -1) {
                 team.splice(index, 1);
             }
+            console.log(team);
         }
 
         this.setState({
@@ -82,7 +84,7 @@ class ProfilePage extends Component {
             }
         } else {
             console.log(event.target.name);
-            var index = interest.indexOf(event.target.name);
+            let index = interest.indexOf(event.target.name);
             if (index !== -1) {
                 interest.splice(index, 1);
             }
@@ -103,7 +105,7 @@ class ProfilePage extends Component {
     handleSubmit(e) {
         e.preventDefault();
         // make a json object containing only the attributes that were modified.
-        Object.keys(this.state).map((key) => {
+        Object.keys(this.state).forEach((key) => {
             if(this.state[key] !== "") {
                 this.requestJson[key] = this.state[key];
             }
@@ -127,9 +129,9 @@ class ProfilePage extends Component {
     }
 
     render(){     
-        var checklist = [];
+        let checklist = [];
         // console.log(this.state.allInterests);
-        for(var i = 0; i < this.state.allInterests.length; i++) {
+        for(let i = 0; i < this.state.allInterests.length; i++) {
             // console.log(this.state.allInterests[i]);
             if(this.state.interests.indexOf(this.state.allInterests[i].name) === -1) {
                 checklist[i] = 
@@ -146,12 +148,14 @@ class ProfilePage extends Component {
             }
         }
 
-        var company_checklist = []
-        for(var i = 0; i < this.state.allCompanies.length; i++) {
+        let company_checklist = []
+        for(let i = 0; i < this.state.allCompanies.length; i++) {
             // console.log(this.state.allInterests[i]);
-            var allCompaniesInfo = [this.state.allCompanies[i].company, this.state.allCompanies[i]._id]
+            let allCompaniesInfo = {company: this.state.allCompanies[i].company, id: this.state.allCompanies[i]._id}
             console.log(allCompaniesInfo);
-            if(this.state.team.indexOf(allCompaniesInfo) === -1) {
+            console.log(this.state.team);
+            let pos = this.state.team.map(function(e) {return e.id}).indexOf(allCompaniesInfo.id)
+            if(pos === -1) {
                 company_checklist[i] = 
                 <div>
                     <input type='checkbox' name={this.state.allCompanies[i].company} value={this.state.allCompanies[i]._id} onChange={this.addCompany}></input>

@@ -19,6 +19,16 @@ class CompaniesPage extends Component {
   }
 
   render() {
+    if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						Please login to access the companies information.
+					</div>
+				</div>
+			)
+		}
+
       let companies = this.state.companies.map((company,index)=>{
         return (
         <div className="col p-3 ">
