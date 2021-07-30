@@ -57,6 +57,7 @@ class Comment extends Component {
                 commentId: this.state.commentId,
                 message: this.state.currentMessage,
                 postTime: new Date(),
+                edited: true,
             })
             this.setState({
                 editing: false,
@@ -120,7 +121,7 @@ class Comment extends Component {
                     <div className="justify-content-between">
                     <UserComment username={this.state.username} picture={this.state.picture}/>
                     {messageBox}
-                    {/* <span className="postTimeComment">{this.state.postTime}</span> */}
+                    <span className="postTimeComment">{this.state.postTime}</span>
                     </div>
                 </div>
                 {commentButtons}
