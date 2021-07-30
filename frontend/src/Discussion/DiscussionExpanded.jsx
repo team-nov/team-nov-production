@@ -30,6 +30,7 @@ class DiscussionExpanded extends Component {
             isHidden: false,
             editing: false,
             discussionHide: false,
+            imageURL: ''
             
         }
     }
@@ -52,7 +53,8 @@ class DiscussionExpanded extends Component {
                 discTypeOfUser: res.data.userId.typeofUser,
                 initialMessage: res.data.message,
                 currentMessage: res.data.message,
-                postTime: res.data.postTime
+                postTime: res.data.postTime,
+                imageURL: res.data.imageURL
 
             })
             console.log(res.data._id);
@@ -187,7 +189,7 @@ class DiscussionExpanded extends Component {
         }
         console.log("expanded id: " + this.state.discussion._id);
         return (
-            <div>
+            <div className="container">
                 <h3 style={{display: this.state.discussionHide?"block":"none"}}><Link to='/forum'>Discussion Deleted, click here to go back to the main page.</Link></h3>
                 <div style={{display: this.state.discussionHide?"none":"block"}}>
                     <div className="card discussionExpandedContainer">
@@ -198,6 +200,7 @@ class DiscussionExpanded extends Component {
                             </div> 
                         </div>
                         {messageBox}
+                        { this.state.imageURL ? <img src={this.state.imageURL} className="discussion-image"></img> : null }
                         {commentButtons}
 
                     </div>
