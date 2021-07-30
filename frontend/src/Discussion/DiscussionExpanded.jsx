@@ -239,9 +239,7 @@ class DiscussionExpanded extends Component {
             commentPicture={this.state.commentPicture}
             updateComments={this.handler}>
             </CommentEntry>
-        
                 </div>
-
                     <br></br>
                     <div className="">{comments}</div>
                 </div>

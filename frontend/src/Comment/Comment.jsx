@@ -41,7 +41,7 @@ class Comment extends Component {
                 }
             });
             this.setState({
-                discussionHide: true
+                commentHide: true
             })
         } catch (e) {
             console.log(e)
