@@ -46,12 +46,13 @@ class CommentEntry extends Component {
         .then(res=>{
             this.setState({discussions: res.data})
             alert("Comment added succesfully.")
+            this.props.updateComments();
         })
         .catch((e)=>{
             console.log(e)
             alert("unable to add comment check console log")
         })
-        this.props.updateComments();
+        
     }
 
     render() { 
