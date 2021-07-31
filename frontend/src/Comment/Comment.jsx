@@ -89,7 +89,7 @@ class Comment extends Component {
 
 
     render() {
-        let messageBox = <div className="text-start" style={{ display: this.state.editing ? "none" : "block" }}> {this.state.currentMessage} </div>
+        let messageBox = <div className="text-start my-2" style={{ display: this.state.editing ? "none" : "block" }}> {this.state.currentMessage} </div>
 
         let commentButtons;
         if (sessionStorage.getItem("_id") === this.state.userId) {
@@ -99,7 +99,7 @@ class Comment extends Component {
                         <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdSend /></button>
                         <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteSweep /></button>
                     </div>;
-                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.currentMessage} />
+                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control my-2" placeholder="Comment here" value={this.state.currentMessage} />
             } else {
                 commentButtons =
                     <div className="d-grid gap- d-md-flex justify-content-md-end">
