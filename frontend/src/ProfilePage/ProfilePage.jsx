@@ -129,6 +129,17 @@ class ProfilePage extends Component {
     }
 
     render(){     
+        if (sessionStorage.getItem("_id") != null) {
+			return (
+				<div className="container">
+                    <br></br>
+					<div className="alert alert-danger" role="alert">
+						You are already logged in.
+					</div>
+				</div>
+			)
+		}
+
         let checklist = [];
         // console.log(this.state.allInterests);
         for(let i = 0; i < this.state.allInterests.length; i++) {
