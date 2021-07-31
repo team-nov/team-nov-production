@@ -55,6 +55,7 @@ class CompanyInfoPage extends Component {
 
         return(
             <div class='container-fluid'>
+                <br></br>
                 <div class='row'>
                     <div class='col offset-sm-1 col-sm-3'>
                         <img class='img-fluid userProfilePic' src={this.state.logo} alt={this.state.name + " picture"}/>
