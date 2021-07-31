@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, {Component} from 'react';
 import './VideoCommentUser.css'
 import { dateParser } from '../utils/DateParser'
+import { MdEdit, MdDeleteForever, MdSend, MdDeleteSweep } from 'react-icons/md'
 
 class VideoComment extends Component {
 
@@ -9,7 +10,7 @@ class VideoComment extends Component {
         userId: this.props.userId,
         videoId: this.props.videoId,
         commentId: this.props.commentId,
-        username: this.props.username,
+        name: this.props.name,
         picture: this.props.picture,
         currentMessage: this.props.message,
         returnMessage: this.props.message,
@@ -78,22 +79,22 @@ class VideoComment extends Component {
     render() {
         let commentButtons;
         let messageBox = 
-            <div className="text-start">
+            <div className="text-start my-2">
                 {this.state.returnMessage}
             </div>;
         if (sessionStorage.getItem("_id") === this.state.userId) {
             if (this.state.editing) {
                 commentButtons = 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Submit</button>
-                    <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button">Discard</button>
+                    <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdSend /></button>
+                    <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteSweep /></button>
                 </div>;
-                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.currentMessage}/>
+                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control my-2" placeholder="Comment here" value={this.state.currentMessage}/>
             } else {
                 commentButtons = 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button">Edit</button>
-                    <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                    <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdEdit /></button>
+                    <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteForever /></button>
                 </div>;
             }
         } else {
@@ -105,7 +106,7 @@ class VideoComment extends Component {
                     <div className="d-flex justify-content-between">
                         <div className="userCommentContainer">
                             <img className="commentProfilePic" src={this.state.picture} alt=""/>
-                            <span className="userNameComment"> {this.state.username} </span>
+                            <span className="nameComment"> {this.state.name} </span>
                         </div>
                         {this.state.postTime}
                     </div>

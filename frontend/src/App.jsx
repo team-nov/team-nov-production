@@ -9,19 +9,22 @@ import './App.css'
 import DmsDemo from './DmsDemo/DmsDemo'
 // import Demo from './Demo/Demo'
 // import UserPost from './UserPost/UserPost'
-import Videos from './Videos/Videos'
 import VideoPage from './VideoPage/VideoPage'
 import Forum from './Forum/Forum'
 import NavigationBar from "./NavigationBar/NavigationBar"
 import Home from "./Home/Home"
 import RegistrationPage from "./RegistrationPage/RegistrationPage"
 import DiscussionExpanded from './Discussion/DiscussionExpanded';
-import Search from './Search/Search';
 import LoginPage from "./LoginPage/LoginPage"
 import ProfilePage from "./ProfilePage/ProfilePage"
 import UserPage from './UserPage/UserPage';
 import CompaniesPage from "./CompaniesPage/CompaniesPage"
 import CompanyPage from "./CompanyPage/CompanyPage"
+import AllUsersPage  from './AllUsersPage/AllUsersPage';
+import VideosHomePage from './VideosHomePage/VideosHomePage';
+import CompanyInfoPage from './CompanyInfoPage/CompanyInfoPage';
+import EditCompany from './EditCompany/EditCompany';
+import VideoAddPage from './VideoAddPage/VideoAddPage';
  
 class App extends Component{
   render(){
@@ -29,7 +32,6 @@ class App extends Component{
       <div className="App">
         <Router>
           <NavigationBar />
-          <br />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
             <Route path="/forum/:id" component={DiscussionExpanded}/>
@@ -41,11 +43,14 @@ class App extends Component{
             <Route path="/dms" component={DmsDemo} />
             <Route path="/videos/:id" component={VideoPage} />
             <Route path="/user/:id" component={UserPage} />
-            <Route path="/videos" component={Search}/>            
-            <Route path="/videos" component={Search}/>
+            <Route path="/company/:id" component={CompanyInfoPage} />
+            <Route path="/editCompany/:id" component={EditCompany} />
+            <Route path="/videos" component={VideosHomePage}/>            
+            <Route path="/videos" component={VideosHomePage}/>   
+			      <Route path="/addvideo" component={VideoAddPage} />         
             <Route path="/companies" component={CompaniesPage} />
-            <Route path="/company" component={CompanyPage} />
-            
+            <Route path="/newCompany" component={CompanyPage} />
+            <Route path="/allusers" component={AllUsersPage} />
             <Route path="/" component={Home} />
           </Switch>
         </Router>

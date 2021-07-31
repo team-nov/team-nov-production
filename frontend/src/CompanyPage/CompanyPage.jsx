@@ -10,7 +10,7 @@ class CompanyPage extends Component {
         company:'',
         companyLogo:'',
         companyLocation:'',
-        companyDescription:''
+        companyDescription:'',
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -31,7 +31,8 @@ class CompanyPage extends Component {
       company: this.state.company,
       companyLogo: this.state.companyLogo,
       companyLocation: this.state.companyLocation,
-      companyDescription: this.state.companyDescription
+      companyDescription: this.state.companyDescription,
+      founder_id: sessionStorage.getItem('_id')
     }
 
     console.log(company);
@@ -50,24 +51,35 @@ class CompanyPage extends Component {
   }
 
   render(){
+    if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+          <br></br>
+					<div className="alert alert-danger" role="alert">
+						Please login to access the company creation.
+					</div>
+				</div>
+			)
+		}
+
     return(
       <div className="CompanyPage">
         <form className='CompanyForm' onSubmit={this.onSubmit}>
             <div className='field'>
                 <label>Company Name: </label>
-                <input type='text' name='company' value={this.state.company} onChange={this.onChange}></input>
+                <input type='text' name='company' value={this.state.company} onChange={this.onChange} required></input>
             </div>
             <div className='field'>
                 <label>Logo: </label>
-                <input type='text' name='companyLogo' value={this.state.companyLogo} onChange={this.onChange}></input>
+                <input type='text' name='companyLogo' value={this.state.companyLogo} onChange={this.onChange} required></input>
             </div>
             <div className='field'>
                 <label>Location: </label>
-                <input type='text' name='companyLocation' value={this.state.companyLocation} onChange={this.onChange}></input>
+                <input type='text' name='companyLocation' value={this.state.companyLocation} onChange={this.onChange} required></input>
             </div>
             <div className='field'>
                 <label>Description: </label>
-                <input type='text' name='companyDescription' value={this.state.companyDescription} onChange={this.onChange}></input>
+                <input type='text' name='companyDescription' value={this.state.companyDescription} onChange={this.onChange} required></input>
             </div>
             <input className='CompanyButton' type='submit' value="Submit company information"></input>
         </form>

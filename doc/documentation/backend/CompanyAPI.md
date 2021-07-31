@@ -4,6 +4,13 @@
 
 - Returns an array of all companies in the DB
 
+## GET/:companyId
+- Returns a single company with _id of companyId
+- Params
+    - `companyId`
+        - type : String
+        - The _id of a Company
+
 ## POST
 
 - Creates a new company

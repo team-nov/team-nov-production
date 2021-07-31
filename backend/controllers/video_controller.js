@@ -6,7 +6,7 @@ const Comment = require('../models/comment_model');
 exports.getVideos = async (req, res, next) => {
 
     try {
-        const data = await Video.find()
+        const data = await Video.find().populate('author')
         res.status(200).json(data)
     } catch (e) {
         res.status(500).json({
@@ -19,7 +19,7 @@ exports.getVideos = async (req, res, next) => {
 exports.searchVideos = async (req,res,next) =>{
     try{
         console.log("\/"+req.params.query+"\/");
-        const myRegex = new RegExp(req.params.query)
+        const myRegex = new RegExp(req.params.query, 'i')
         const data = await Video.find({title:{$regex:myRegex}})
         res.status(200).json(data)
     } catch(e){
@@ -31,9 +31,14 @@ exports.searchVideos = async (req,res,next) =>{
 
 exports.postVideo = async (req, res, next) => {
 
+	console.log(req.body)
+
     const video = new Video({
         _id: new mongoose.Types.ObjectId(),
-        title: req.body.title
+		author: req.body.author,
+        title: req.body.title,
+		link: req.body.link,
+		interests: req.body.interests
     });
 
     try {
@@ -89,7 +94,7 @@ exports.getVideoById = async (req, res, next) => {
     const videoId = req.params.videoId;
 
     try {
-        const data = await Video.findById(videoId).populate('comments.userId')
+        const data = await Video.findById(videoId).populate('comments.userId').populate('author')
         res.status(200).json(data)
     } catch (e) {
         res.status(500).json({
