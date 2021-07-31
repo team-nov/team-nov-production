@@ -40,6 +40,7 @@ class CompanyInfoPage extends Component {
         if (sessionStorage.getItem("_id") == null) {
 			return (
 				<div className="container">
+                    <br></br>
 					<div className="alert alert-danger" role="alert">
 						Please login to view this page.
 					</div>

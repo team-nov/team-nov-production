@@ -168,6 +168,17 @@ class DiscussionExpanded extends Component {
 
 
     render() {
+        if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+                    <br></br>
+					<div className="alert alert-danger" role="alert">
+						Please login to access this discussion.
+					</div>
+				</div>
+			)
+		}
+
         let comments = this.state.discussionComments.map((comments, index) => {
             console.log(comments.userId.picture);
             return <Comment key = {comments._id}
