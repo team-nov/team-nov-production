@@ -6,7 +6,7 @@ class UserComment extends Component{
     return (
       <div className="userCommentContainer">
         <img className="commentProfilePic" src={this.props.picture} alt=""/>
-        <span className="userNameComment"> {this.props.username} </span>
+        <span className="nameComment"> {this.props.username} </span>
       </div>
     )
   }

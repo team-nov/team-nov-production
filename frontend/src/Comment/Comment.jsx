@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import UserComment from './UserComment'
 import './Comment.css'
 import axios from 'axios'
@@ -12,11 +12,11 @@ class Comment extends Component {
             commentId: props.commentsId,
             userId: props.userId,
             discussionId: props.discussionId,
-            username : props.username,
-            picture : props.picture,
-            initialMessage : props.message,
+            username: props.username,
+            picture: props.picture,
+            initialMessage: props.message,
             currentMessage: props.message,
-            postTime : props.postTime,
+            postTime: props.postTime,
             isHidden: false,
             editing: false,
             edited: this.props.edited,
@@ -84,47 +84,43 @@ class Comment extends Component {
     }
 
     updateComment = (e) => {
-        this.setState({currentMessage: e.target.value})
+        this.setState({ currentMessage: e.target.value })
     }
 
 
     render() {
-        let messageBox =
-            <div>
-                <div className="text-start" style={{display: this.state.editing?"none":"block"}}> {this.state.currentMessage} </div>
-            </div>
+        let messageBox = <div className="text-start" style={{ display: this.state.editing ? "none" : "block" }}> {this.state.currentMessage} </div>
 
         let commentButtons;
-        if(sessionStorage.getItem("_id")=== this.state.userId) {
+        if (sessionStorage.getItem("_id") === this.state.userId) {
             if (this.state.editing) {
-                commentButtons = 
-                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdSend /></button>
-                    <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteSweep /></button>
-                </div>;
-                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" style={{marginTop: "1em"}} placeholder="Comment here" value={this.state.currentMessage}/>
+                commentButtons =
+                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button onClick={this.submitComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdSend /></button>
+                        <button onClick={this.discardComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteSweep /></button>
+                    </div>;
+                messageBox = <textarea onChange={e => this.updateComment(e)} type="text" className="form-control" placeholder="Comment here" value={this.state.currentMessage} />
             } else {
-                commentButtons = 
-                <div className="d-grid gap- d-md-flex justify-content-md-end">
-                    <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdEdit /></button>
-                    <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteForever /></button>
-                </div>;
+                commentButtons =
+                    <div className="d-grid gap- d-md-flex justify-content-md-end">
+                        <button onClick={this.editComment} className="btn btn-sm btn-outline-secondary me-md-2" type="button"><MdEdit /></button>
+                        <button onClick={this.deleteComment} className="btn btn-sm btn-outline-danger" type="button"><MdDeleteForever /></button>
+                    </div>;
             }
         } else {
             commentButtons = null;
         }
 
-
         return (
-            <div className="card commentContainer" style={{display: this.state.commentHide?"none":"block"}}>
+            <div className="card" style={{ display: this.state.commentHide ? "none" : "block" }}>
                 <div className="card-body">
-                    <div className="justify-content-between">
-                    <UserComment username={this.state.username} picture={this.state.picture}/>
-                    {messageBox}
-                    <span className="postTimeComment">{this.state.postTime}</span>
+                    <div className="d-flex justify-content-between">
+                        <UserComment username={this.state.username} picture={this.state.picture} />
+                        {this.state.postTime}
                     </div>
+                    {messageBox}
+                    {commentButtons}
                 </div>
-                {commentButtons}
             </div>
         )
     }

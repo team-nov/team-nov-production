@@ -1,22 +1,9 @@
-.commentEntryContainer {
-    width: 60%;
-    border: black;
-}
-
 .discussionExpandedContainer {
-    padding: 1em;
-    margin: 1em 1em 1em 1em;
-    max-width: 70%;
+    max-width: 100%;
+    max-height: 30em;
 
     display: flex;
     flex-direction: column;
-
-    border-width: 1px;
-    border-color: black;
-    border-style: solid; 
-    border-radius: 5px;
-    background-color: rgb(223, 223, 223);
-
 }
 
 .originalPostMessage {
@@ -27,8 +14,6 @@
     -webkit-line-clamp: 3; /* number of lines to show */
     -webkit-box-orient: vertical;
     height: fit-content;
-    padding-left: 0em;
-    margin: 0 1em 0;
 
     float: left;
     font-size: 1.2em;
@@ -36,21 +21,12 @@
     word-break: break-word;
 }
 
-.expandedPostTime {
-    position: absolute;
-    top: 2em;
-    right: 1em;
-    text-align: right;
-}
-
-
 .expandedComment {
     min-width: 70% !important;
-    max-width: 70% !important; 
+    max-width: 100% !important; 
     max-height: min-content;
 }
 
 .discussion-image {
-    max-width: 100%;
-    margin: 19px 19px 0;
+    object-fit: contain;
 }
