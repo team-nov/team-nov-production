@@ -129,12 +129,12 @@ class ProfilePage extends Component {
     }
 
     render(){     
-        if (sessionStorage.getItem("_id") != null) {
+        if (sessionStorage.getItem("_id") == null) {
 			return (
 				<div className="container">
                     <br></br>
 					<div className="alert alert-danger" role="alert">
-						You are already logged in.
+						Please login to access this page.
 					</div>
 				</div>
 			)
