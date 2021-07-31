@@ -71,6 +71,7 @@ class VideosHomePage extends Component{
 		if (sessionStorage.getItem("_id") == null) {
 			return (
 				<div className="container">
+                    <br></br>
 					<div className="alert alert-danger" role="alert">
 						Please login to access the videos.
 					</div>
@@ -123,14 +124,15 @@ class VideosHomePage extends Component{
         return(
 
             <div>
+                <br></br>
                 <div className="row justify-content-center">
                     <div className="input-group w-75">
                         <div className="w-75">
-                            <input className="form-control" type="search" value={this.state.value} onChange={(e)=>this.onSearchInputChange(e)} />
+                            <input className="form-control rounded-0 m-1" type="search" value={this.state.value} onChange={(e)=>this.onSearchInputChange(e)} />
                         </div>
-                        <button className="btn btn-success" onClick={this.onSearchButtonClick}>Search</button>
-						<button className="btn btn-secondary mx-3" onClick={this.getAllResults}>All Results</button>
-						<a className="btn btn-secondary" href="/addvideo" onClick={this.getAllResults}>Add Video</a>
+                        <button className="btn btn-success m-1" onClick={this.onSearchButtonClick}>Search</button>
+						<button className="btn btn-secondary mx-3 m-1" onClick={this.getAllResults}>All Results</button>
+						<a className="btn btn-secondary m-1" href="/addvideo" onClick={this.getAllResults}>Add Video</a>
                         <ul className="list-group w-75 ">
                             {options}
                         </ul>

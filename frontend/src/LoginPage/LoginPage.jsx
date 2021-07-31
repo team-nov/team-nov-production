@@ -26,7 +26,7 @@ class LoginPage extends Component {
                 sessionStorage.setItem("_id", res.data._id);    
                 sessionStorage.setItem("name", res.data.name);
                 console.log(res.data)
-                window.location.href = '/';
+                window.location.href = '/forum';
             } else {
                 this.showError();
             }
@@ -43,6 +43,16 @@ class LoginPage extends Component {
     }
 
     render(){
+        if (sessionStorage.getItem("_id") != null) {
+			return (
+				<div className="container">
+					<div className="alert alert-danger" role="alert">
+						You are already logged in.
+					</div>
+				</div>
+			)
+		}
+
         return(
             <div className="LoginPage">
                 <form className='LoginForm' onSubmit={this.handleSubmit}>

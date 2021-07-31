@@ -1,0 +1,26 @@
+.homeButtons {
+    margin-top: 5em;
+}
+
+.homeInfo {
+    margin-top: 12em;
+    color: white;
+}
+
+.homeInfo h1 {
+    font-size: 5em;
+}
+
+.homeInfo p {
+    font-size: 1.5em;
+}
+
+.homeContainer {
+    position:fixed;
+    padding:0;
+    margin:0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url("https://images.squarespace-cdn.com/content/v1/5959429eff7c50228e412bf1/1534964949970-IM009IWWM2FC0PXFYIQC/AII+WEB+BACK+%286%29.jpg");
+    background-size: cover;
+}

@@ -37,6 +37,17 @@ class CompanyInfoPage extends Component {
     }
 
     render() {
+        if (sessionStorage.getItem("_id") == null) {
+			return (
+				<div className="container">
+                    <br></br>
+					<div className="alert alert-danger" role="alert">
+						Please login to view this page.
+					</div>
+				</div>
+			)
+		}
+
         var editButton;
         if(this.state.founder === sessionStorage.getItem('_id')) {
             editButton = <a class='btn btn-dark' href={'/editCompany/' + this.state._id}>Edit Company Information</a>
@@ -44,6 +55,7 @@ class CompanyInfoPage extends Component {
 
         return(
             <div class='container-fluid'>
+                <br></br>
                 <div class='row'>
                     <div class='col offset-sm-1 col-sm-3'>
                         <img class='img-fluid userProfilePic' src={this.state.logo} alt={this.state.name + " picture"}/>

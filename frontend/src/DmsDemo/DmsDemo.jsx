@@ -189,6 +189,7 @@ class DmsDemo extends Component {
 		if (sessionStorage.getItem("_id") == null) {
 			return (
 				<div className="container">
+					<br></br>
 					<div className="alert alert-danger" role="alert">
 						Please login to access the DMs feature.
 					</div>
@@ -240,6 +241,7 @@ class DmsDemo extends Component {
 				[]
 		return (
 			<div className="container">
+				<br></br>
 				<div className="container d-flex justify-content-center">
 					<img className="pic" src={this.state.profilePic} alt="" />
 					<p className="display-6">
@@ -248,7 +250,7 @@ class DmsDemo extends Component {
 				</div>
 				<div className="row">
 					<div className="col-2">
-						<button className="btn btn-secondary" onClick={() => this.setState({ showNewDM: !this.state.showNewDM ,createDMSuccess:true})}>Create new DM</button>
+						<button className="btn btn-primary mb-1" onClick={() => this.setState({ showNewDM: !this.state.showNewDM ,createDMSuccess:true})}>Create new DM</button>
 					</div>
 					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
 						<label for="inputRecipient" className="col-form-label">To:</label>
@@ -281,7 +283,7 @@ class DmsDemo extends Component {
 						<div className="messageBox d-flex">
 							<textarea className="dmMessageBox form-control" onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder="Enter your DM here..." />
 							{/* <input onChange={(e) => this.updateInput('message', e)} value={this.state.message} placeholder= "Enter your DM here..." /> */}
-							<button className="dmMessageButton btn btn-outline-secondary" onClick={this.submitMessage}>Send</button>
+							<button className="dmMessageButton btn btn-success" onClick={this.submitMessage}>Send</button>
 						</div>
 					</div>
 				</div>
