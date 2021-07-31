@@ -250,7 +250,7 @@ class DmsDemo extends Component {
 				</div>
 				<div className="row">
 					<div className="col-2">
-						<button className="btn btn-primary mb-1" onClick={() => this.setState({ showNewDM: !this.state.showNewDM ,createDMSuccess:true})}>Create new DM</button>
+						<button className="btn btn-outline-success mb-1" onClick={() => this.setState({ showNewDM: !this.state.showNewDM ,createDMSuccess:true})}>Create new DM</button>
 					</div>
 					<div className="col-1" style={{ display: this.state.showNewDM ? "block" : "none" }}>
 						<label for="inputRecipient" className="col-form-label">To:</label>
