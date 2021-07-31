@@ -7,7 +7,8 @@ const discussionSchema = mongoose.Schema({
     message:{type: String, required:true},
     postTime: {type: String, required: true},
     comments: {type: [Comment.schema], default: []},
-    imageURL: {type: String}
+    imageURL: {type: String},
+    edited: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Discussion', discussionSchema);

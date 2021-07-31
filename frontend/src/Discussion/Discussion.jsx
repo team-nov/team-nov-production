@@ -14,12 +14,22 @@ class Discussion extends Component{
     discussionId: this.props.id,
     isHidden: false,
     discussionHide: false,
-    initialPostTime: this.props.postTime,
-    currentPostTime: this.props.postTime,
+    postTime: this.props.postTime,
     initialMessage: this.props.message,
     currentMessage: this.props.message,
     returnMessage: "",
-    imageURL: ""
+    imageURL: "",
+    edited: this.props.edited,
+  }
+
+  componentDidMount() {
+    console.log("D Edited: " + this.state.edited);
+    if (this.state.edited) {
+        this.setState({
+            postTime: "(edited) " + this.props.postTime,
+        })
+    }
+  
   }
 
   onEditClick=()=>{
@@ -84,7 +94,7 @@ class Discussion extends Component{
               <text className="card-text text-left"> 
               {this.props.message}
               </text>
-              <div className="postTime p-3">{this.props.postTime}</div>
+              <div className="postTime p-3">{this.state.postTime}</div>
             </div>
             
         </div>
