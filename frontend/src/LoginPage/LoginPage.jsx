@@ -45,11 +45,12 @@ class LoginPage extends Component {
     render(){
         if (sessionStorage.getItem("_id") != null) {
 			return (
-				<div className="container">
-					<div className="alert alert-danger" role="alert">
-						You are already logged in.
-					</div>
-				</div>
+                <div className="container">
+                    <br></br>
+                    <div className="alert alert-danger" role="alert">
+                        You are already logged in.
+                    </div>
+                </div>
 			)
 		}
 
