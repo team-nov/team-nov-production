@@ -7,7 +7,7 @@ class Home extends Component {
 
             <div className="bg-image homeContainer">
                 <div className="container text-center homeInfo">
-                    <h1 className="font-weight-bold">African Impact</h1>
+                    <h1 className="font-weight-bold">AfriConnect</h1>
                     <p>"The best way to predict the future of Africa is to create it"</p>
                 </div>
                 <div className="container text-center homeButtons">
