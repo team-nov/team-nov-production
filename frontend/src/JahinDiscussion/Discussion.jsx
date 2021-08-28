@@ -35,7 +35,7 @@ class Discussion extends Component{
   }
 
   onSubmitClick=()=>{
-    axios.patch('http://localhost:5000/api/discussions', {
+    axios.patch(process.env.REACT_APP_HOST+'/api/discussions', {
       userId: this.state.userId,
       discussionId: this.state.discussionId,
       message: this.state.currentMessage,
@@ -52,7 +52,7 @@ class Discussion extends Component{
   }
 
   onDeleteClick=()=>{
-    axios.delete('http://localhost:5000/api/discussions', {
+    axios.delete(process.env.REACT_APP_HOST+'/api/discussions', {
       data: {
         discussionId: this.state.discussionId,
         userId: this.state.userId

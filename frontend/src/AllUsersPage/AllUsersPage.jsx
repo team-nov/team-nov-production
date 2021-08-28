@@ -1,55 +1,59 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import './AllUsersPage.css'
+import React, { Component } from "react";
+import axios from "axios";
+import "./AllUsersPage.css";
 
-const serverUrl = "http://localhost:5000/api";
+const serverUrl = process.env.REACT_APP_HOST;
 
 class AllUsersPage extends Component {
-
     state = {
-        users: []
-    }
+        users: [],
+    };
 
     componentDidMount() {
-        axios.get(serverUrl + "/users")
-            .then(users => {
-                console.log(users.data)
-                this.setState({ users: users.data})
+        axios
+            .get(serverUrl + "/users")
+            .then((users) => {
+                console.log(users.data);
+                this.setState({ users: users.data });
             })
             .catch((error) => {
                 console.log(error);
-            })
+            });
     }
 
     render() {
         if (sessionStorage.getItem("_id") == null) {
-			return (
-				<div className="container">
+            return (
+                <div className="container">
                     <br></br>
-					<div className="alert alert-danger" role="alert">
-						Please login to access the user information.
-					</div>
-				</div>
-			)
-		}
+                    <div className="alert alert-danger" role="alert">
+                        Please login to access the user information.
+                    </div>
+                </div>
+            );
+        }
 
         let users = this.state.users.map((user, index) => {
-        let gen = "";
-        
-        if (user.team.length >= 1) {
-            gen += "Member of " + user.team[0].company
-        }
+            let gen = "";
 
-        if (user.team.length > 1) {
-            gen += " and more...";
-        }
+            if (user.team.length >= 1) {
+                gen += "Member of " + user.team[0].company;
+            }
+
+            if (user.team.length > 1) {
+                gen += " and more...";
+            }
 
             return (
                 <div class="col p-3 " key={index}>
-                    <a href={"/user/" + user._id} className="cardLink" >
-                        <div class="card text-start h-100" >
+                    <a href={"/user/" + user._id} className="cardLink">
+                        <div class="card text-start h-100">
                             <div class="text-center p-3">
-                                <img class="card-img-top userThumb text-center" src={user.picture} alt="oops" />
+                                <img
+                                    class="card-img-top userThumb text-center"
+                                    src={user.picture}
+                                    alt="oops"
+                                />
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{user.username}</h5>
@@ -58,11 +62,10 @@ class AllUsersPage extends Component {
                         </div>
                     </a>
                 </div>
-            )
-        })
+            );
+        });
 
-        if (users.length === 0)
-            users = <h1>No Results found</h1>
+        if (users.length === 0) users = <h1>No Results found</h1>;
 
         return (
             <div>
@@ -73,9 +76,8 @@ class AllUsersPage extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }
 
-export default AllUsersPage
+export default AllUsersPage;
