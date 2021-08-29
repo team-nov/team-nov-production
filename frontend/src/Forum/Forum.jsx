@@ -182,7 +182,6 @@ class Forum extends Component {
                                         type="file"
                                         onChange={this.handleChange}
                                         className="uploadButton"
-                                        style={{display: "none"}}
                                     />
                                     <button
                                         className="btn btn-primary col-lg-2 col-sm-3"
