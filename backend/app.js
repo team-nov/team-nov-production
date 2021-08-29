@@ -21,12 +21,10 @@ dmSockets.io(server);
 console.log(process.env.HOST);
 // connect to mongodb
 mongoose
-    .connect(
-        // mongodb+srv://teamnov:teamnov@cluster0.pe4eq.mongodb.net/TeamNov[your name]?retryWrites=true&w=majority
-
-        process.env.MONGOURI,
-        { useNewUrlParser: true, useUnifiedTopology: true }
-    )
+    .connect(process.env.MONGOURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then((res) => {
         console.log("db Connected");
     })

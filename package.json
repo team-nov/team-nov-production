@@ -1,5 +1,8 @@
 {
-  "dependencies": {
-    "firebase": "^8.7.1"
-  }
+    "dependencies": {
+        "firebase": "^8.7.1"
+    },
+    "scripts": {
+        "build": "cd backend && npm install && npm start"
+    }
 }
