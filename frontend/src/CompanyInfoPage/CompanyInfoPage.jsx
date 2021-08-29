@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./CompanyInfoPage.css";
+import { Link } from "react-router-dom";
 
 class CompanyInfoPage extends Component {
     constructor(props) {
@@ -30,7 +31,9 @@ class CompanyInfoPage extends Component {
 
                 axios
                     .get(
-                        process.env.REACT_APP_HOST + "/api/users/" + this.state.founder
+                        process.env.REACT_APP_HOST +
+                            "/api/users/" +
+                            this.state.founder
                     )
                     .then((res) => {
                         this.setState({
@@ -55,9 +58,12 @@ class CompanyInfoPage extends Component {
         var editButton;
         if (this.state.founder === sessionStorage.getItem("_id")) {
             editButton = (
-                <a class="btn btn-dark" href={"/editCompany/" + this.state._id}>
+                <Link
+                    class="btn btn-dark"
+                    to={"/editCompany/" + this.state._id}
+                >
                     Edit Company Information
-                </a>
+                </Link>
             );
         }
 

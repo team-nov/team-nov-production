@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 class Home extends Component {
     componentDidMount() {
@@ -17,20 +18,20 @@ class Home extends Component {
                 </div>
                 <div className="container text-center homeButtons">
                     <p>
-                        <a
+                        <Link
                             className="btn btn-primary w-25 rounded"
-                            href="/login"
+                            to="/login"
                         >
                             Login
-                        </a>
+                        </Link>
                     </p>
                     <p>
-                        <a
+                        <Link
                             className="btn btn-success w-25 rounded"
-                            href="/register"
+                            to="/register"
                         >
                             Register
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./AllUsersPage.css";
+import { Link } from "react-router-dom";
 
-const serverUrl = process.env.REACT_APP_HOST + '/api';
+const serverUrl = process.env.REACT_APP_HOST + "/api";
 
 class AllUsersPage extends Component {
     state = {
@@ -46,7 +47,7 @@ class AllUsersPage extends Component {
 
             return (
                 <div class="col p-3 " key={index}>
-                    <a href={"/user/" + user._id} className="cardLink">
+                    <Link to={"/user/" + user._id} className="cardLink">
                         <div class="card text-start h-100">
                             <div class="text-center p-3">
                                 <img
@@ -60,7 +61,7 @@ class AllUsersPage extends Component {
                                 <p class="card-text">{gen}</p>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             );
         });

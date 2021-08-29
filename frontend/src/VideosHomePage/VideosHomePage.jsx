@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./VideosHomePage.css";
+import { Link } from "react-router-dom";
 const serverUrl = process.env.REACT_APP_HOST + "/api";
 class VideosHomePage extends Component {
     state = {
@@ -101,7 +102,7 @@ class VideosHomePage extends Component {
             }
             return (
                 <div key={index} className="col p-3">
-                    <a href={"/videos/" + video._id} className="cardLink">
+                    <Link to={"/videos/" + video._id} className="cardLink">
                         <div className="card text-start h-100">
                             <div className="vidContainer">
                                 <img
@@ -144,7 +145,7 @@ class VideosHomePage extends Component {
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
             );
         });
@@ -176,13 +177,13 @@ class VideosHomePage extends Component {
                         >
                             All Results
                         </button>
-                        <a
+                        <Link
                             className="btn btn-secondary m-1"
-                            href="/addvideo"
+                            to="/addvideo"
                             onClick={this.getAllResults}
                         >
                             Add Video
-                        </a>
+                        </Link>
                         <ul className="list-group w-75 ">{options}</ul>
                     </div>
                 </div>
