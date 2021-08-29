@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./AllUsersPage.css";
 
-const serverUrl = process.env.REACT_APP_HOST;
+const serverUrl = process.env.REACT_APP_HOST + '/api';
 
 class AllUsersPage extends Component {
     state = {

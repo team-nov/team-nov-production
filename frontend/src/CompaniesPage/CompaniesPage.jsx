@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import axios from 'axios'
 
-const serverUrl = "http://localhost:5000/api";
+const serverUrl = process.env.REACT_APP_HOST + '/api';
 
 class CompaniesPage extends Component {
   state={

@@ -1,6 +1,9 @@
 import React,{Component} from 'react'
 import axios from 'axios'
 import './UserPage.css'
+
+const serverUrl = process.env.REACT_APP_HOST + '/api';
+
 class UserPage extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +21,7 @@ class UserPage extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/users/' + this.state._id)
+        axios.get(serverUrl + '/users/' + this.state._id)
             .then(res => {
                 this.setState({
                     name: res.data.name, 

@@ -8,6 +8,8 @@ import { dateParser } from "../utils/DateParser";
 import axios from "axios";
 import CommentEntry from "../Comment/CommentEntry";
 
+const serverUrl = process.env.REACT_APP_HOST + '/api';
+
 class Discussion extends Component {
     state = {
         userId: this.props.userId,
@@ -64,7 +66,7 @@ class Discussion extends Component {
 
     onDeleteClick = () => {
         axios
-            .delete("http://localhost:5000/api/discussions", {
+            .delete(serverUrl + "/discussions", {
                 data: {
                     discussionId: this.state.discussionId,
                     userId: this.state.userId,

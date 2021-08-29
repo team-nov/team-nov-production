@@ -12,7 +12,10 @@ import { dateParser } from "../utils/DateParser";
 import { MdEdit, MdDeleteForever, MdSend, MdDeleteSweep } from "react-icons/md";
 import CommentEntry from "../Comment/CommentEntry";
 
+const serverUrl = process.env.REACT_APP_HOST + '/api';
+
 class DiscussionExpanded extends Component {
+
     constructor(props) {
         super(props);
         this.handler = this.handler.bind(this);
@@ -39,7 +42,7 @@ class DiscussionExpanded extends Component {
     componentDidMount() {
         const { id } = this.props.match.params;
 
-        let url_string = `http://localhost:5000/api/discussions/${id}`;
+        let url_string = serverUrl + `/discussions/${id}`;
 
         axios
             .get(url_string)
@@ -87,7 +90,7 @@ class DiscussionExpanded extends Component {
     handler() {
         const { id } = this.props.match.params;
 
-        let url_string = `http://localhost:5000/api/discussions/${id}`;
+        let url_string = serverUrl + `/discussions/${id}`;
 
         axios
             .get(url_string)
@@ -107,7 +110,7 @@ class DiscussionExpanded extends Component {
         console.log("Current user id: " + this.state.discUserId._id);
         console.log("Discussion user: " + this.state.discussion.userId._id);
         try {
-            await axios.delete("http://localhost:5000/api/discussions", {
+            await axios.delete(serverUrl + "/discussions", {
                 data: {
                     discussionId: this.state.discussion._id,
                     userId: this.state.discUserId._id,
@@ -127,7 +130,7 @@ class DiscussionExpanded extends Component {
         console.log("Current user id: " + this.state.discUserId._id);
         console.log("Discussion user: " + this.state.discussion.userId._id);
         try {
-            await axios.patch("http://localhost:5000/api/discussions", {
+            await axios.patch(serverUrl + "/discussions", {
                 discussionId: this.state.discussion._id,
                 message: this.state.currentMessage,
                 userId: this.state.discUserId._id,
