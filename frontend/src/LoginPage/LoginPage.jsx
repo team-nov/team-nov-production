@@ -31,8 +31,8 @@ class LoginPage extends Component {
                     sessionStorage.setItem("_id", res.data._id);
                     sessionStorage.setItem("name", res.data.name);
                     console.log(res.data);
-                    this.props.history.push('/forum')
-                    window.location.reload();
+                    this.props.history.push("/forum");
+                    //window.location.reload();
                 } else {
                     this.showError();
                 }
