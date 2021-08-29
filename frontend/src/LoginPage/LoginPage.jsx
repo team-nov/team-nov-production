@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./LoginPage.css";
-console.log(process.env.REACT_APP_HOST);
+// console.log(process.env.REACT_APP_HOST);
 class LoginPage extends Component {
     constructor(props) {
         super(props);

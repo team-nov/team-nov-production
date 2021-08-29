@@ -10,8 +10,9 @@ const mongoose = require("mongoose");
 const http = require("http");
 const dmSockets = require("./dmSockets/dmSockets");
 const companyRoute = require("./routes/company_routes");
-const dotenv = require("dotenv");
-dotenv.config();
+// uncomment this when you load.env files
+// const dotenv = require("dotenv");
+// dotenv.config();
 
 // create express app
 const app = express();

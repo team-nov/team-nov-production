@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class Home extends Component {
     componentDidMount() {
-        console.log(process.env.REACT_APP_HOST);
+        // console.log(process.env.REACT_APP_HOST);
     }
     render() {
         return (

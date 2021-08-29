@@ -26,8 +26,7 @@ import CompanyInfoPage from "./CompanyInfoPage/CompanyInfoPage";
 import EditCompany from "./EditCompany/EditCompany";
 import VideoAddPage from "./VideoAddPage/VideoAddPage";
 
-import dotenv from "dotenv";
-console.log(process.env.REACT_APP_HOST);
+// console.log(process.env.REACT_APP_HOST);
 class App extends Component {
     render() {
         return (
