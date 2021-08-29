@@ -5,6 +5,8 @@ import axios from "axios";
 import UserComment from "./UserComment";
 import "./CommentEntry.css";
 
+const serverUrl = process.env.REACT_APP_HOST + '/api';
+
 class CommentEntry extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +21,7 @@ class CommentEntry extends Component {
 
     componentDidMount() {
         axios
-            .get(process.env.REACT_APP_HOST + "/api/users/" + this.state.userId)
+            .get(serverUrl + "/users/" + this.state.userId)
             .then((res) => this.setState({ picture: res.data.picture }))
             .catch((e) => console.log(e));
     }
@@ -41,7 +43,7 @@ class CommentEntry extends Component {
         console.log("discussion: " + this.state.discussionId);
         axios
             .post(
-                `http://localhost:5000/api/discussions/${this.state.discussionId}`,
+                serverUrl + `/discussions/${this.state.discussionId}`,
                 {
                     userId: this.state.userId,
                     message: this.state.message,

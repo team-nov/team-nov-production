@@ -54,7 +54,7 @@ class EditCompany extends Component {
         // send the request to update the profile
         axios
             .patch(
-                "http://localhost:5000/api/company/updateCompany/",
+                process.env.REACT_APP_HOST + "/api/company/updateCompany/",
                 this.requestJson
             )
             .then((res) => {

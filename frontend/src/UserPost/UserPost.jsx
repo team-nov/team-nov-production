@@ -44,13 +44,13 @@ class UserPost extends Component {
 
     showPosts = () => {
         axios
-            .get("http://localhost:5000/api/discussions")
+            .get(process.env.REACT_APP_HOST + "/api/discussions")
             .then((res) => this.setState({ db: res.data }));
     };
 
     addPost = () => {
         axios
-            .post("http://localhost:5000/api/discussions", {
+            .post(process.env.REACT_APP_HOST + "/api/discussions", {
                 name: this.state.name,
                 picture: this.state.picture,
                 message: this.state.message,

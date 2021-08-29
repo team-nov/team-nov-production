@@ -131,7 +131,7 @@ class ProfilePage extends Component {
 
         // send the request to update the profile
         axios
-            .patch("http://localhost:5000/api/users/profile/", this.requestJson)
+            .patch(process.env.REACT_APP_HOST + "/api/users/profile/", this.requestJson)
             .then((res) => {
                 if (res.data.success) {
                     alert("submitted form");

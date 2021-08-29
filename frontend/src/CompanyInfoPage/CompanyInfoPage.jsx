@@ -30,7 +30,7 @@ class CompanyInfoPage extends Component {
 
                 axios
                     .get(
-                        "http://localhost:5000/api/users/" + this.state.founder
+                        process.env.REACT_APP_HOST + "/api/users/" + this.state.founder
                     )
                     .then((res) => {
                         this.setState({
