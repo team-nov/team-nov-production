@@ -1,11 +1,20 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 class NavigationBar extends Component {
     // clears the session storage and refreshes the page.
+    constructor(props) {
+        super(props);
+
+        this.handleLogOut = this.handleLogOut.bind(this);
+    }
+
     handleLogOut() {
         sessionStorage.clear();
-        window.location.href = '/';
+        // this.props.history.push('/');
+        // const { history } = this.props;
+        this.props.history.push("/");
+        window.location.reload();
     }
 
     render() {
@@ -28,7 +37,7 @@ class NavigationBar extends Component {
                             <li className="nav-item"><Link className="nav-link" to="/allusers">Users</Link></li>,
                             <li className="nav-item"><Link className="nav-link" to="/newCompany">Create Organization</Link></li>]      
             loginLink = <li className="nav-item"><Link className="nav-link" to={"/user/" + sessionStorage.getItem('_id')}>My Profile</Link></li>;
-            logout = <li className="nav-item"><Link className="nav-link" to='/' onClick={this.handleLogOut}>Logout</Link></li>;       
+            logout = <li className="nav-item"><Link className="nav-link" to="/" onClick={this.handleLogOut}>Logout</Link></li>;       
         } else {
             loggedInLinks = null;
             registerLink = <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
@@ -59,4 +68,4 @@ class NavigationBar extends Component {
     }
 }
 
-export default NavigationBar
+export default withRouter(NavigationBar)
