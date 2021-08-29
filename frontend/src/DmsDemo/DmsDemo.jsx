@@ -6,7 +6,7 @@ import { dateParser } from "../utils/DateParser";
 import UserSearchComponent from "../UserSearchComponent/UserSearchComponent";
 
 // connect to backend socket
-let socket = io("localhost:5000");
+let socket = io(process.env.REACT_APP_HOST);
 
 class DmsDemo extends Component {
     messagesEndRef = React.createRef();
@@ -72,7 +72,11 @@ class DmsDemo extends Component {
 
         // get user's dms
         axios
-            .get("http://localhost:5000/api/dms/byUserId/" + this.state.userId)
+            .get(
+                process.env.REACT_APP_HOST +
+                    "/api/dms/byUserId/" +
+                    this.state.userId
+            )
             .then((res) => {
                 if (res.data.length > 0) {
                     // want most recent messages on top
@@ -108,7 +112,7 @@ class DmsDemo extends Component {
      */
     getOldMessages = () => {
         axios
-            .get("http://localhost:5000/api/dms/" + this.state.dmId)
+            .get(process.env.REACT_APP_HOST + "/api/dms/" + this.state.dmId)
             .then((res) => {
                 console.log(res.data.messages);
                 this.setState({ messages: res.data.messages });
@@ -120,10 +124,13 @@ class DmsDemo extends Component {
      */
     createDM = async () => {
         try {
-            let res = await axios.post("http://localhost:5000/api/dms/", {
-                members: [this.state.userId, this.state.toId],
-                messages: [],
-            });
+            let res = await axios.post(
+                process.env.REACT_APP_HOST + "/api/dms/",
+                {
+                    members: [this.state.userId, this.state.toId],
+                    messages: [],
+                }
+            );
             if (res.status === 201) {
                 await this.setState({
                     createDMSuccess: true,
