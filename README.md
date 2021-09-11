@@ -3,7 +3,7 @@
 ### Set up environment variables
 
 Need two `.env` files. One in `/backend/` and one in `/frontend/`
-You can find these in the private repo.
+You can find these in the [private repo](https://github.com/team-nov/project-team-nov/tree/main/envFiles).
 For the backend make sure you uncomment the `dotenv` import and change the `HOST` environment variable to `http://localhost:5000`
 
 To start frontend
