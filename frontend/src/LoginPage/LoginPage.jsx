@@ -8,6 +8,7 @@ class LoginPage extends Component {
         this.state = {
             username: "",
             password: "",
+            loading: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -21,6 +22,7 @@ class LoginPage extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        this.setState({ loading: true });
         axios
             .post(process.env.REACT_APP_HOST + "/api/users/login/", {
                 username: this.state.username,
@@ -58,41 +60,49 @@ class LoginPage extends Component {
                 </div>
             );
         }
+        let loading = this.state.loading ? (
+            <h4>Loading, please wait ...</h4>
+        ) : (
+            []
+        );
 
         return (
-            <div className="LoginPage">
-                <form className="LoginForm" onSubmit={this.handleSubmit}>
-                    <div className="error">
-                        <label>
-                            Could not log in! Incorrect Login Credentials!
-                        </label>
-                    </div>
-                    <div className="field">
-                        <label>Username: </label>
+            <div>
+                <div className="LoginPage">
+                    <form className="LoginForm" onSubmit={this.handleSubmit}>
+                        <div className="error">
+                            <label>
+                                Could not log in! Incorrect Login Credentials!
+                            </label>
+                        </div>
+                        <div className="field">
+                            <label>Username: </label>
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="Enter name"
+                                onChange={this.handleChange}
+                                required
+                            ></input>
+                        </div>
+                        <div className="field">
+                            <label>Password: </label>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter name"
+                                onChange={this.handleChange}
+                                required
+                            ></input>
+                        </div>
                         <input
-                            type="text"
-                            name="username"
-                            placeholder="Enter name"
-                            onChange={this.handleChange}
-                            required
+                            className="LoginButton"
+                            type="submit"
+                            value="Login"
                         ></input>
-                    </div>
-                    <div className="field">
-                        <label>Password: </label>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Enter name"
-                            onChange={this.handleChange}
-                            required
-                        ></input>
-                    </div>
-                    <input
-                        className="LoginButton"
-                        type="submit"
-                        value="Login"
-                    ></input>
-                </form>
+                    </form>
+                </div>
+                {loading}
             </div>
         );
     }

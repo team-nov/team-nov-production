@@ -10,7 +10,8 @@ const mongoose = require("mongoose");
 const http = require("http");
 const dmSockets = require("./dmSockets/dmSockets");
 const companyRoute = require("./routes/company_routes");
-// uncomment this when you load.env files
+// uncomment this when you want to run locally
+// remeber to change HOST to http://localhost:5000
 // const dotenv = require("dotenv");
 // dotenv.config();
 
